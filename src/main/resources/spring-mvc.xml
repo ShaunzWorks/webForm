@@ -25,8 +25,7 @@
         </property>  
     </bean>  
     <!-- Spring mvc annotation support like for POJO. mvc:annotation-driven -->  
-    <bean  
-        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
         <property name="messageConverters">  
             <list>  
                 <ref bean="mappingJacksonHttpMessageConverter" />
@@ -50,6 +49,10 @@
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
             <property name="paramName" value="lang"/>
         </bean>
+        <mvc:interceptor>
+     		<mvc:mapping path="/**" />
+     		<bean class="com.shaunz.webform.web.common.HomePageInterceptor" />
+   		</mvc:interceptor>
     </mvc:interceptors>
     
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
@@ -64,6 +67,8 @@
         <property name="maxUploadSize" value="10485760000" />    
         <property name="maxInMemorySize" value="40960" />    
     </bean>
+    
+    <bean id="shaunzApplicationListener" class="com.shaunz.framework.common.listener.ShaunzApplicationListener" />
     
     <!-- quartz -->
     <!-- <import resource="quartz-jobs.xml" /> -->

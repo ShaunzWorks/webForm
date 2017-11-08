@@ -5,121 +5,148 @@
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ShaunzPhotoShare</title>
-	<meta name="description" content="ShaunzPhotoShare" />
-	<meta name="keywords" content="ShaunzPhotoShare" />
-	<meta name="author" content="Shaun Deng" />
-	<link rel="shortcut icon" href="${ctxPath}/staticResources/webresources/projectResources/img/favicon.ico">
-	<link rel="stylesheet" type="text/css" href="${projectResPath}/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" href="${projectResPath}/css/flickity.css" />
-	<link rel="stylesheet" type="text/css" href="${projectResPath}/css/main.css" />
-	<script src="${projectResPath}/js/modernizr.custom.js"></script>
-	<!--  
-	<script type="text/javascript" src="${webResPath}/js/jquery.min.js"></script>
-	!--  BOOTSTRAP --
-	<link rel="stylesheet" type="text/css" href="${webResPath}/css/bootstrap.min.css">
-	<script type="text/javascript" src="${webResPath}/js/bootstrap.min.js"></script>
-	!--  PAGINATION plugin --
-	<link rel="stylesheet" type="text/css" href="${webResPath}/js/pagination/jquery.bs_pagination.min.css">
-	<script type="text/javascript" src="${webResPath}/js/pagination/jquery.bs_pagination.min.js"></script>
-	<script type="text/javascript" src="${webResPath}/js/pagination/bs_pagination/localization/en.min.js">
-		$(function() {
-		  $("#demo_pag1").bs_pagination({
-		    totalPages: 100
-		  });
-		 
-		});
-	</script>
-	JQUERY -->
+	<title>${applicationScope.homePageObject.projectNm}</title>
+	<meta name="description" content="${applicationScope.homePageObject.description}" />
+	<meta name="keywords" content="${applicationScope.homePageObject.keywords}" />
+	<meta name="author" content="Shaun Xiong Deng" />
+	<link rel="icon" href="${projectResPath}${applicationScope.homePageObject.iconURL}">
+
+    <!-- Bootstrap core CSS -->
+    <link href="${projectResPath}/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="${projectResPath}/css/carousel.css" rel="stylesheet">
 </head>
 <body>
-<div id="demo_pag1"></div>
-<p><spring:message code="welcome.greeting" arguments="i18nTest"/></p>
-	<div class="container">
-		<div class="hero">
-			<div class="hero__back hero__back--static"></div>
-			<div class="hero__back hero__back--mover"></div>
-			<div class="hero__front"></div>
-		</div>
-		<header class="codrops-header">
-			<div class="codrops-links">
-				<a class="codrops-icon codrops-icon--prev" href="#Development/InteractiveColoringConcept/" title="Previous Demo"><span>Previous Demo</span></a>
-				<a class="codrops-icon codrops-icon--drop" href="#codrops/2015/05/06/photography-website-concept/" title="Back to the article"><span>Back to the Codrops article</span></a>
-			</div>
-			<h1 class="codrops-title">Shaun Deng <span>Photography</span></h1>
-			<nav class="menu">
-				<a class="menu__item" href="#"><span>About</span></a>
-				<a class="menu__item menu__item--current" href="#"><span>Work</span></a>
-				<a class="menu__item" href="#"><span>Contact</span></a>
-			</nav>
-		</header>
-		<div class="stack-slider">
-			<div class="stacks-wrapper">
-				<div class="stack">
-					<h2 class="stack-title"><a href="#" data-text="Portraits"><span>Portraits</span></a></h2>
-					<div class="item">
-						<div class="item__content">
-							<img src="${projectResPath}/img/type1/1.jpg" alt="img01" />
-							<h3 class="item__title">Hoodie stumptown kitsch <span class="item__date">05/05/2015</span></h3>
-							<div class="item__details">
-								<ul>
-									<li><i class="icon icon-camera"></i><span>Canon PowerShot S95</span></li>
-									<li><i class="icon icon-focal_length"></i><span>22.5mm</span></li>
-									<li><i class="icon icon-aperture"></i><span>&fnof;/5.6</span></li>
-									<li><i class="icon icon-exposure_time"></i><span>1/1000</span></li>
-									<li><i class="icon icon-iso"></i><span>80</span></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					
-					
-				</div>
-				<div class="stack">
-					<h2 class="stack-title"><a href="#" data-text="Landscape"><span>Landscape</span></a></h2>
-					<div class="item">
-						<div class="item__content">
-							<img src="${projectResPath}/img/type3/1.jpg" alt="img01" />
-							<h3 class="item__title">Austin flannel salvia <span class="item__date">05/05/2015</span></h3>
-							<div class="item__details">
-								<ul>
-									<li><i class="icon icon-camera"></i><span>Canon PowerShot S95</span></li>
-									<li><i class="icon icon-focal_length"></i><span>22.5 mm</span></li>
-									<li><i class="icon icon-aperture"></i><span>&fnof;/5.6</span></li>
-									<li><i class="icon icon-exposure_time"></i><span>1/1000</span></li>
-									<li><i class="icon icon-iso"></i><span>80</span></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="stack">
-					<h2 class="stack-title"><a href="#" data-text="Miscellaneous"><span>Miscellaneous</span></a></h2>
-					<div class="item">
-						<div class="item__content">
-							<img src="${projectResPath}/img/type2/1.jpg" alt="img01" />
-							<h3 class="item__title">Chambray fingerstache <span class="item__date">05/05/2015</span></h3>
-							<div class="item__details">
-								<ul>
-									<li><i class="icon icon-camera"></i><span>Canon PowerShot S95</span></li>
-									<li><i class="icon icon-focal_length"></i><span>22.5 mm</span></li>
-									<li><i class="icon icon-aperture"></i><span>&fnof;/5.6</span></li>
-									<li><i class="icon icon-exposure_time"></i><span>1/1000</span></li>
-									<li><i class="icon icon-iso"></i><span>80</span></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /stacks-wrapper -->
-		</div>
-		<!-- /stacks -->
-		<img class="loader" src="${projectResPath}/img/three-dots.svg" width="60" alt="Loader image" />
-	</div>
-	<!-- /container -->
-	<script src="${projectResPath}/js/flickity.pkgd.min.js"></script>
-	<script src="${projectResPath}/js/smoothscroll.js"></script>
-	<script src="${projectResPath}/js/main.js"></script>
+  <!-- NAVBAR================================================== -->
+  <div class="navbar-wrapper">
+    <div class="container">
+      <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="${applicationScope.homePageObject.homeUrl}">${applicationScope.homePageObject.projectNm}</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+				<c:forEach items = "${applicationScope.homePageObject.navigationBars}" var = "naviBar">
+					<c:choose>
+						<c:when test = "${naviBar.type eq 'normal'}">
+							<li <c:if test = "${naviBar.active eq 'active'}">class="active"</c:if>>
+								<a href="${naviBar.url}">${naviBar.name}</a>
+							</li>
+						</c:when>
+						<c:when test = "${naviBar.type eq 'dropdown'}">
+							<li class="dropdown">
+			                <a href="${naviBar.url}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${naviBar.name} <span class="caret"></span></a>
+			                <ul class="dropdown-menu">
+			                	<c:forEach items = "${naviBar.downLists}" var = "downList">
+			                		<c:choose>
+										<c:when test="${downList.type eq 'normal'}">
+											<li><a href="${downList.url}">${downList.name}</a></li>
+										</c:when>
+										<c:when test="${downList.type eq 'separator'}">
+											<li role="separator" class="divider"></li>
+										</c:when>
+										<c:when test="${downList.type eq 'dropdown_header'}">
+											<li class="dropdown-header">${downList.name}</li>
+										</c:when>
+										<c:otherwise></c:otherwise>
+									</c:choose>
+			                	</c:forEach>
+			                </ul>
+			              </li>
+						</c:when>
+					</c:choose>
+				</c:forEach>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <!-- Carousel================================================== -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+    	<c:forEach var = "i" begin = "1" end = "${applicationScope.homePageObject.carousels.size()}">
+    		 <li data-target="#myCarousel" data-slide-to="${i}" 
+    		 <c:if test = "${i == 1}">class="active"</c:if>
+    		 ></li>
+    	</c:forEach>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+    	<c:set var = "carouselsIndex" value = "1"/>
+    	<c:forEach items = "${applicationScope.homePageObject.carousels}" var = "carousel">
+    		<div class="item<c:if test = "${carouselsIndex == 1}"> active</c:if>">
+    			<c:if test = "${not empty carousel.image}">
+    				<img class="${carousel.image.cssClass}" src="${carousel.image.url}" alt="${carousel.image.name}">
+    			</c:if>
+		        <div class="container">
+		          <div class="carousel-caption">
+		            <h1>${carousel.header}</h1>
+		            <p>${carousel.content}</p>
+		            <c:if test = "${not empty carousel.button}">
+		            	<p><a class="${carousel.button.cssClass}" href="${carousel.button.url}" role="button">${carousel.button.name}</a></p>
+		            </c:if>
+		          </div>
+		        </div>
+		      </div>
+		    <c:set var = "carouselsIndex" value = "${carouselsIndex + 1}"/>
+    	</c:forEach>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only"><spring:message code="homepage.previous"/></p></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only"><spring:message code="homepage.next"/></p></span>
+    </a>
+  </div><!-- /.carousel -->
+  
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+      <c:set var = "carouselsIndex" value = "1"/>
+      	<c:forEach items = "${applicationScope.homePageObject.marketInfos}" var = "marketInfo">
+      		<c:if test="${carouselsIndex % 3 == 1}"><div class="row"></c:if>
+	      		<div class="col-lg-4">
+		          <img class="${marketInfo.image.cssClass}" src="${marketInfo.image.url}" alt="${marketInfo.image.name}" width="140" height="140">
+		          <h2>${marketInfo.header}</h2>
+		          <p>${marketInfo.content}</p>
+		          <p><a class="${marketInfo.button.cssClass}" href="${marketInfo.button.url}" role="button">${marketInfo.button.name} &raquo;</a></p>
+		        </div><!-- /.col-lg-4 -->
+	        <c:if test="${carouselsIndex % 3 == 0}"></div><!-- /.row --></c:if>
+	        <c:set var = "carouselsIndex" value = "${carouselsIndex + 1}"/>
+      	</c:forEach>
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; ${applicationScope.homePageObject.systemYear} ${applicationScope.homePageObject.companyNm} &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="${webResPath}/js/jquery.min.js"></script>
+    <script src="${webResPath}/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="${projectResPath}/js/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="${projectResPath}/js/ie10-viewport-bug-workaround.js"></script>
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="${projectResPath}/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
 </body>
 </html>
