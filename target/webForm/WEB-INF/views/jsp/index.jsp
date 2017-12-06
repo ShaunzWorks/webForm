@@ -5,18 +5,16 @@
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ShaunzPhotoShare</title>
-	<meta name="description" content="ShaunzPhotoShare" />
-	<meta name="keywords" content="ShaunzPhotoShare" />
-	<meta name="author" content="Shaun Deng" />
-	<link rel="icon" href="${projectResPath}/img/favicon.ico">
+	<title>${applicationScope.homePageObject.projectNm}</title>
+	<meta name="description" content="${applicationScope.homePageObject.description}" />
+	<meta name="keywords" content="${applicationScope.homePageObject.keywords}" />
+	<meta name="author" content="Shaun Xiong Deng" />
+	<link rel="icon" href="${projectResPath}${applicationScope.homePageObject.iconURL}">
 
     <!-- Bootstrap core CSS -->
     <link href="${projectResPath}/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="${projectResPath}/css/carousel.css" rel="stylesheet">
-    
-    
 </head>
 <body>
   <!-- NAVBAR================================================== -->
@@ -25,31 +23,40 @@
       <nav class="navbar navbar-inverse navbar-static-top">
         <div class="container">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><spring:message code="project.name"/></a>
+            <a class="navbar-brand" href="${applicationScope.homePageObject.homeUrl}">${applicationScope.homePageObject.projectNm}</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#"><spring:message code="navbar.home"/></a></li>
-              <li><a href="#about"><spring:message code="navbar.about"/></a></li>
-              <li><a href="#contact"><spring:message code="navbar.contact"/></a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><spring:message code="navbar.dropdown"/> <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
+				<c:forEach items = "${applicationScope.homePageObject.navigationBars}" var = "naviBar">
+					<c:choose>
+						<c:when test = "${naviBar.type eq 'normal'}">
+							<li <c:if test = "${naviBar.active eq 'active'}">class="active"</c:if>>
+								<a href="${naviBar.url}">${naviBar.name}</a>
+							</li>
+						</c:when>
+						<c:when test = "${naviBar.type eq 'dropdown'}">
+							<li class="dropdown">
+			                <a href="${naviBar.url}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${naviBar.name} <span class="caret"></span></a>
+			                <ul class="dropdown-menu">
+			                	<c:forEach items = "${naviBar.downLists}" var = "downList">
+			                		<c:choose>
+										<c:when test="${downList.type eq 'normal'}">
+											<li><a href="${downList.url}">${downList.name}</a></li>
+										</c:when>
+										<c:when test="${downList.type eq 'separator'}">
+											<li role="separator" class="divider"></li>
+										</c:when>
+										<c:when test="${downList.type eq 'dropdown_header'}">
+											<li class="dropdown-header">${downList.name}</li>
+										</c:when>
+										<c:otherwise></c:otherwise>
+									</c:choose>
+			                	</c:forEach>
+			                </ul>
+			              </li>
+						</c:when>
+					</c:choose>
+				</c:forEach>
             </ul>
           </div>
         </div>
@@ -60,60 +67,39 @@
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
+    	<c:forEach var = "i" begin = "1" end = "${applicationScope.homePageObject.carousels.size()}">
+    		 <li data-target="#myCarousel" data-slide-to="${i}" 
+    		 <c:if test = "${i == 1}">class="active"</c:if>
+    		 ></li>
+    	</c:forEach>
     </ol>
     <div class="carousel-inner" role="listbox">
-      <div class="item active">
-        <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Example headline.</h1>
-            <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Another example headline.</h1>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>One more for good measure.</h1>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="forth slide">
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>And One more for good measure.</h1>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-          </div>
-        </div>
-      </div>      
+    	<c:set var = "carouselsIndex" value = "1"/>
+    	<c:forEach items = "${applicationScope.homePageObject.carousels}" var = "carousel">
+    		<div class="item<c:if test = "${carouselsIndex == 1}"> active</c:if>">
+    			<c:if test = "${not empty carousel.image}">
+    				<img class="${carousel.image.cssClass}" src="${carousel.image.url}" alt="${carousel.image.name}">
+    			</c:if>
+		        <div class="container">
+		          <div class="carousel-caption">
+		            <h1>${carousel.header}</h1>
+		            <p>${carousel.content}</p>
+		            <c:if test = "${not empty carousel.button}">
+		            	<p><a class="${carousel.button.cssClass}" href="${carousel.button.url}" role="button">${carousel.button.name}</a></p>
+		            </c:if>
+		          </div>
+		        </div>
+		      </div>
+		    <c:set var = "carouselsIndex" value = "${carouselsIndex + 1}"/>
+    	</c:forEach>
     </div>
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
+      <span class="sr-only"><spring:message code="homepage.previous"/></p></span>
     </a>
     <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
       <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
+      <span class="sr-only"><spring:message code="homepage.next"/></p></span>
     </a>
   </div><!-- /.carousel -->
   
@@ -123,31 +109,22 @@
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
     <div class="container marketing">
-      <!-- Three columns of text below the carousel -->
-      <div class="row">
-        <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
+      <c:set var = "carouselsIndex" value = "1"/>
+      	<c:forEach items = "${applicationScope.homePageObject.marketInfos}" var = "marketInfo">
+      		<c:if test="${carouselsIndex % 3 == 1}"><div class="row"></c:if>
+	      		<div class="col-lg-4">
+		          <img class="${marketInfo.image.cssClass}" src="${marketInfo.image.url}" alt="${marketInfo.image.name}" width="140" height="140">
+		          <h2>${marketInfo.header}</h2>
+		          <p>${marketInfo.content}</p>
+		          <p><a class="${marketInfo.button.cssClass}" href="${marketInfo.button.url}" role="button">${marketInfo.button.name} &raquo;</a></p>
+		        </div><!-- /.col-lg-4 -->
+	        <c:if test="${carouselsIndex % 3 == 0}"></div><!-- /.row --></c:if>
+	        <c:set var = "carouselsIndex" value = "${carouselsIndex + 1}"/>
+      	</c:forEach>
       <!-- FOOTER -->
       <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2017 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        <p>&copy; ${applicationScope.homePageObject.systemYear} ${applicationScope.homePageObject.companyNm} &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
     </div><!-- /.container -->
 

@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=utf-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -5,3 +6,4 @@
 <c:set var="ctxPath" value="${pageContext.request.contextPath}"/>
 <c:set var="webResPath" value="${ctxPath}/staticResources/webresources"/>
 <c:set var="projectResPath" value="${ctxPath}/staticResources/webresources/projectResources"/>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 

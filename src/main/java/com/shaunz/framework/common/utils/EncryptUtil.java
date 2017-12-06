@@ -365,7 +365,7 @@ public class EncryptUtil
 	      }
 	      return sb.toString();
 	    } catch (NoSuchAlgorithmException e) {
-	      e.printStackTrace();
+	    	logger.error(e.getMessage());
 	    }
 	    return null;
 	}
@@ -380,7 +380,7 @@ public class EncryptUtil
 	      }
 	      return sb.toString();
 	    } catch (NoSuchAlgorithmException e) {
-	      e.printStackTrace();
+	    	logger.error(e.getMessage());
 	    }
 	    return null;
 	}

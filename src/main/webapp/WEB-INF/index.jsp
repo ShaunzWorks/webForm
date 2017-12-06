@@ -1,5 +1,2 @@
-<html>
-<body>
-<h2>Welcome to java web platform(base on SSM)</h2>
-</body>
-</html>
+<%@ include file="./views/jsp/common/common.jsp"%>
+<c:redirect url="/index"/>

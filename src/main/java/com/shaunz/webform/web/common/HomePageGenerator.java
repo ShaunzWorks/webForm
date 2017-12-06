@@ -61,7 +61,6 @@ public class HomePageGenerator {
 		return sourceTableGenerator.getHomePageParameterby(name);
 	}
 	
-	@SuppressWarnings("deprecation")
 	private String getSystemYear(){
 		return ""+Calendar.getInstance().get(Calendar.YEAR);
 	}

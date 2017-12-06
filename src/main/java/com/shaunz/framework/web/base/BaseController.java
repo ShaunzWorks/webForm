@@ -2,6 +2,8 @@ package com.shaunz.framework.web.base;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -69,5 +71,10 @@ public class BaseController {
 	    public String toString() {  
 	        return getString();  
 	    }  
+	}
+	
+	protected Map<String, Object> generateResultMap() {
+		Map<String, Object> resultMap = new HashMap<String,Object>();
+		return resultMap;
 	}
 }

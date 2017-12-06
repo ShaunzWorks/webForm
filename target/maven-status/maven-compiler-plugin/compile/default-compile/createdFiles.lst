@@ -10,6 +10,7 @@ com/shaunz/framework/web/base/BaseService.class
 com/shaunz/framework/web/page/PageInterceptor.class
 com/shaunz/webform/web/carousel/dao/CarouselMapper.class
 com/shaunz/webform/web/dropdownlist/dao/DropDownListMapper.class
+com/shaunz/webform/web/common/SourceTableGenerator.class
 com/shaunz/framework/core/YgdrasilConst.class
 com/shaunz/webform/web/dropdownlist/entity/DropDownList.class
 com/shaunz/framework/web/base/BaseController$StringPrintWriter.class
@@ -37,10 +38,12 @@ com/shaunz/framework/example/jqgrid/SuperHeroDTO.class
 com/shaunz/webform/web/button/dao/ButtonMapper.class
 com/shaunz/framework/common/listener/ShaunzApplicationListener.class
 com/shaunz/framework/common/utils/IPropertyUtil.class
+com/shaunz/webform/web/marketinfo/dao/MarketInfoMapper.class
 com/shaunz/webform/web/autor/dao/AuthorMapper.class
 com/shaunz/webform/web/navigationbar/dao/NavigationBarMapper.class
 com/shaunz/framework/example/jqgrid/JQGridHandler.class
 com/shaunz/webform/web/image/dao/ImageMapper.class
+com/shaunz/webform/web/marketinfo/entity/MarketInfo.class
 com/shaunz/framework/common/utils/JsonUtil.class
 com/shaunz/webform/web/common/HomePageInterceptor.class
 com/shaunz/framework/common/utils/MultipartFileUtil.class
