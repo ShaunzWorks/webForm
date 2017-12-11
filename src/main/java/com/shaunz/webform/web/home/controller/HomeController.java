@@ -66,6 +66,16 @@ public class HomeController extends BaseController{
 		return new ModelAndView("blogWithRightSideBar",resultMap);
 	}
 	
+	@RequestMapping(value="/signInPage",method=RequestMethod.GET)
+	public String signInPage(){
+		return "SignIn";
+	}
+	
+	@RequestMapping(value="/managePlantPage",method=RequestMethod.GET)
+	public String managePlantPage(){
+		return "managePlantPage";
+	}
+	
 	private String getDefaultActivePage(HttpServletRequest request){
 		String activePageId = "1";
 		HomePage homePage = (HomePage)request.getServletContext().getAttribute("homePageObject");

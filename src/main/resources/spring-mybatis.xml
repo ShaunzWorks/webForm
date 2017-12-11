@@ -11,8 +11,7 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"> 
     <!-- Scans for application @Components to deployment,but @controller -->
 	<context:component-scan base-package="com">
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
     <!-- import properties -->
     <bean id="propertyConfigurer"  
@@ -50,8 +49,24 @@
     </bean>  
   
     <!-- transaction manager, use JtaTransactionManager for global tx -->  
-    <bean id="transactionManager"  
-        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
         <property name="dataSource" ref="dataSource" />  
     </bean>  
+    
+    <!-- Open shiro annotation -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true" />
+    </bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+    <import resource="spring-shiro.xml" />
+    <bean id="shiroEncacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+    	<property name="cacheManager" ref="ehCacheManager"/>
+	</bean>
+	<bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    	<property name="configLocation" value="classpath:ehcache.xml"></property>
+    	<property name="shared" value="true"/>
+	</bean>
 </beans>  
