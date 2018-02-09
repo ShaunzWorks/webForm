@@ -1,5 +1,5 @@
 #target
-*/target/*
+target/*
 # Compiled class file
 *.class
 
@@ -19,3 +19,5 @@
 *.zip
 *.tar.gz
 *.rar
+
+.settings/*

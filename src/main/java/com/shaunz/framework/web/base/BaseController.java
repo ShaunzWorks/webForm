@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,8 +23,14 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Shaun Deng
  * @since 2016-06-21
  */
-@Component
+@Controller
 public class BaseController {
+	protected static final String FORWARD_TO = "forward:";
+	protected static final String REDIRECT_TO = "redirect:";
+	
+	@Autowired
+	protected MessageSource messageSource;
+	
 	protected HttpServletRequest request;
 	protected HttpServletResponse response;
 	protected HttpSession session;

@@ -9,7 +9,7 @@
         <!-- Shiro core security interface -->
         <property name="securityManager" ref="securityManager"/>
         <!-- Login url default "/login.jsp" if not be configured -->
-        <property name="loginUrl" value="/signInPage"/>
+        <property name="loginUrl" value="/signIn.html"/>
         <!-- Success url, we will specify in the controller -->
         <!-- <property name="successUrl" value="/" ></property> -->
         <!-- Unauthorized url -->
@@ -17,7 +17,13 @@
 
         <property name="filterChainDefinitions">
             <value>
+            	/index=anon
+            	/navBarPage=anon
+            	/dropDownLstPage=anon
+            	/marketInfoPage=anon
             	/staticResources/**=anon
+            	/index.jsp=anon
+            	/signIn=anon
                 /**=authc
             </value>
         </property>
@@ -44,5 +50,15 @@
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="shaunzRealm"></property>
         <property name="cacheManager" ref="shiroCacheManager"></property>
+    </bean>
+    
+    <!-- Shiro Annotation -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+      depends-on="lifecycleBeanPostProcessor">
+    	<property name="proxyTargetClass" value="true" />
+    </bean>
+
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
     </bean>
 </beans>

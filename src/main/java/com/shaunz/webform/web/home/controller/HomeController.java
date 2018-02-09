@@ -26,7 +26,7 @@ public class HomeController extends BaseController{
 	@Resource
 	private HomeService homeService;
 	
-	@RequestMapping(value="/index",method=RequestMethod.GET)
+	@RequestMapping(value="/index.html",method=RequestMethod.GET)
     public ModelAndView homePage(HttpServletRequest request){
 		String navBarId = getDefaultActivePage(request);
 		Map<String, Object> resultMap = generateResultMap();
@@ -39,7 +39,7 @@ public class HomeController extends BaseController{
     	return homePage(request);
     }
 	
-	@RequestMapping(value="/navBarPage",method=RequestMethod.GET)
+	@RequestMapping(value="/navBar.html",method=RequestMethod.GET)
 	public ModelAndView navBarPage(String navBarId){
 		List<Blog> blogs = homeService.selectByPageId(PAGE_TYPE_NAVBAR, navBarId);
 		Map<String, Object> resultMap = generateResultMap();
@@ -48,7 +48,7 @@ public class HomeController extends BaseController{
 		return new ModelAndView("blog",resultMap);
 	}
 	
-	@RequestMapping(value="/dropDownLstPage",method=RequestMethod.GET)
+	@RequestMapping(value="/dropDownLst.html",method=RequestMethod.GET)
 	public ModelAndView dropDownLstPage(String dropDownLstId){
 		List<Blog> blogs = homeService.selectByPageId(PAGE_TYPE_DROPDOWNLST, dropDownLstId);
 		Map<String, Object> resultMap = generateResultMap();
@@ -57,7 +57,7 @@ public class HomeController extends BaseController{
 		return new ModelAndView("blog",resultMap);
 	}
 	
-	@RequestMapping(value="/marketInfoPage",method=RequestMethod.GET)
+	@RequestMapping(value="/marketInfo.html",method=RequestMethod.GET)
 	public ModelAndView marketPage(String marketInfoId) {
 		List<Blog> blogs = homeService.selectByPageId(PAGE_TYPE_MARKET, marketInfoId);
 		Map<String, Object> resultMap = generateResultMap();
@@ -66,12 +66,7 @@ public class HomeController extends BaseController{
 		return new ModelAndView("blogWithRightSideBar",resultMap);
 	}
 	
-	@RequestMapping(value="/signInPage",method=RequestMethod.GET)
-	public String signInPage(){
-		return "SignIn";
-	}
-	
-	@RequestMapping(value="/managePlantPage",method=RequestMethod.GET)
+	@RequestMapping(value="/managePlant.html",method=RequestMethod.GET)
 	public String managePlantPage(){
 		return "managePlantPage";
 	}
