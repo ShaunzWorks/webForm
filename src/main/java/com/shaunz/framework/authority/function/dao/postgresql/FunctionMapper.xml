@@ -90,4 +90,10 @@
       close_flg = #{closeFlg,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="queryAll" resultMap="BaseResultMap">
+	  select 
+	  <include refid="Base_Column_List" />
+	  from tb_function
+	  where close_flg = 'N'
+  </select>
 </mapper>

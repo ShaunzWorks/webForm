@@ -7,6 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.shaunz.framework.authority.function.entity.Function;
+
 
 public class TreeHelper {
 
@@ -125,6 +127,10 @@ public class TreeHelper {
 			tempNodeList.add(treeNode);
 		}
 		return tempNodeList;
+	}
+	
+	public static List<TreeNode> changeFunctionLstToTreeNodes(List<Function> functions) {
+		return null;
 	}
 
 	public boolean isValidTree() {

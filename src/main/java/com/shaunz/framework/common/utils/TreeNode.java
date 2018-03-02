@@ -78,7 +78,6 @@ public class TreeNode implements Serializable {
 		}
 	}
 
-	/* 返回当前节点的晚辈集合 */
 	public List<TreeNode> getJuniors() {
 		List<TreeNode> juniorList = new ArrayList<TreeNode>();
 		List<TreeNode> childList = this.getChildList();
@@ -95,12 +94,10 @@ public class TreeNode implements Serializable {
 		}
 	}
 
-	/* 返回当前节点的孩子集合 */
 	public List<TreeNode> getChildList() {
 		return childList;
 	}
 
-	/* 删除节点和它下面的晚辈 */
 	public void deleteNode() {
 		TreeNode parentNode = this.getPNode();
 		String id = this.getId();
@@ -110,7 +107,6 @@ public class TreeNode implements Serializable {
 		}
 	}
 
-	/* 删除当前节点的某个子节点 */
 	public void deleteChildNode(String childId) {
 		List<TreeNode> childList = this.getChildList();
 		int childNumber = childList.size();
@@ -123,7 +119,6 @@ public class TreeNode implements Serializable {
 		}
 	}
 
-	/* 动态的插入一个新的节点到当前树中 */
 	public boolean insertJuniorNode(TreeNode treeNode) {
 		String juniorParentId = treeNode.getPid();
 		if (this.pid .equals(juniorParentId)) {
@@ -144,7 +139,6 @@ public class TreeNode implements Serializable {
 		}
 	}
 
-	/* 找到一颗树中某个节点 */
 	public TreeNode findTreeNodeById(String id) {
 		if (this.id.equals(id))
 			return this;
@@ -163,7 +157,6 @@ public class TreeNode implements Serializable {
 		}
 	}
 
-	/* 遍历一棵树，层次遍历 */
 	public void traverse() {
 		if (id ==null || "".equals(id))
 			return;
@@ -177,12 +170,8 @@ public class TreeNode implements Serializable {
 		}
 	}
 
-	public void print(String content) {
+	private void print(String content) {
 		System.out.println(content);
-	}
-
-	public void print(int content) {
-		System.out.println(String.valueOf(content));
 	}
 
 	public void setChildList(List<TreeNode> childList) {

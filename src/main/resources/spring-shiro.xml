@@ -17,13 +17,13 @@
 
         <property name="filterChainDefinitions">
             <value>
-            	/index=anon
-            	/navBarPage=anon
-            	/dropDownLstPage=anon
-            	/marketInfoPage=anon
+            	/index.html=anon
+            	/navBarPage.html=anon
+            	/dropDownLstPage.html=anon
+            	/marketInfoPage.html=anon
             	/staticResources/**=anon
             	/index.jsp=anon
-            	/signIn=anon
+            	/signIn.html=anon
                 /**=authc
             </value>
         </property>

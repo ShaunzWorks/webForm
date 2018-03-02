@@ -1,5 +1,7 @@
 package com.shaunz.framework.authority.function.dao;
 
+import java.util.List;
+
 import com.shaunz.framework.authority.function.entity.Function;
 
 public interface FunctionMapper {
@@ -14,4 +16,6 @@ public interface FunctionMapper {
     int updateByPrimaryKeySelective(Function record);
 
     int updateByPrimaryKey(Function record);
+    
+    List<Function> queryAll();
 }
