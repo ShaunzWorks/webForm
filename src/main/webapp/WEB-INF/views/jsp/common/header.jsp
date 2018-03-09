@@ -5,3 +5,4 @@
 <meta name="keywords" content="${applicationScope.homePageObject.keywords}" />
 <meta name="author" content="Shaun Xiong Deng" />
 <link rel="icon" href="${projectResPath}${applicationScope.homePageObject.iconURL}">
+<%@ include file="./jsReference.jsp"%>

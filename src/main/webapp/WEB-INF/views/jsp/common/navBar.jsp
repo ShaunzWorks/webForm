@@ -43,6 +43,19 @@
 			</c:choose>
 		</c:forEach>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a id="signInURL" href="${applicationScope.homePageObject.signInURL}">Sign In</a></li>
+        </ul>
       </div>
     </div>
 </nav>
+<!-- <script type="text/javascript" >
+	ShowPageInDialog = function(pageURL){
+		BootstrapDialog.show({
+	     message: $('<div></div>').load(pageURL)
+	 });
+	}
+	$("#signInURL").click(function(){
+		ShowPageInDialog("./signIn.html");
+	})
+</script> -->

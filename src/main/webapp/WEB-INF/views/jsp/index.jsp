@@ -5,6 +5,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="${projectResPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${projectResPath}/css/bootstrap-dialog.min.js" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="${projectResPath}/css/carousel.css" rel="stylesheet">
 </head>
@@ -75,6 +76,5 @@
       	</c:forEach>
       <%@ include file="./common/copyright.jsp"%>
     </div><!-- /.container -->
-    <%@ include file="./common/jsReference.jsp"%>
 </body>
 </html>

@@ -40,6 +40,7 @@ public class SignInController extends BaseController{
 		try {
 			subject.login(token);
 			if(subject.isAuthenticated()){
+				//user = (User)subject.getPrincipal();
 				session.setAttribute("user", user);
 				/*SavedRequest savedRequest = WebUtils.getSavedRequest(request);
 				if(savedRequest == null || savedRequest.getRequestUrl() == null){
@@ -47,7 +48,7 @@ public class SignInController extends BaseController{
 				} else {
 					return FORWARD_TO + savedRequest.getRequestUrl();
 				}*/
-				return FORWARD_TO + "managePlant.html";
+				return REDIRECT_TO + "managePlant.html";
 			} else {
 				return "SignIn";
 			}

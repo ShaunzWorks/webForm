@@ -46,14 +46,9 @@ public class ShaunzRealm extends AuthorizingRealm{
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		SimpleAuthorizationInfo autoInfo = null;
 		String inputUsrNm = principals.getPrimaryPrincipal().toString();
-		User user = findUsrByNm(inputUsrNm);
+		User user = findUsr(inputUsrNm);
 		if(IStringUtil.notBlank(user.getId())){
-			generateAuthorizationInfo(autoInfo,user);
-		} else {
-			user = findusrByEmail(inputUsrNm);
-			if(IStringUtil.notBlank(user.getId())){
-				generateAuthorizationInfo(autoInfo,user);
-			}
+			autoInfo = generateAuthorizationInfo(autoInfo,user);
 		}
 		return autoInfo;
 	}
@@ -63,12 +58,9 @@ public class ShaunzRealm extends AuthorizingRealm{
 		if(token == null || token.getPrincipal() == null)
 			return null;
 		String inputUsrNm = token.getPrincipal().toString();
-		User user = findUsrByNm(inputUsrNm);
+		User user = findUsr(inputUsrNm);
 		if(user == null){
-			user = findusrByEmail(inputUsrNm);
-			if(user == null){
-				throw new UnknownAccountException();
-			}
+			throw new UnknownAccountException();
 		}
 		if("lock".equals(user.getLockUp())){
 			throw new LockedAccountException();
@@ -79,6 +71,14 @@ public class ShaunzRealm extends AuthorizingRealm{
                 getName() 
         );
 		return authInfo;
+	}
+	
+	private User findUsr(String str){
+		User user = findUsrByNm(str);
+		if(user== null || IStringUtil.isBlank(user.getId())){
+			user = findusrByEmail(str);
+		}
+		return user;
 	}
 	
 	private User findUsrByNm(String usrNm){
@@ -97,10 +97,11 @@ public class ShaunzRealm extends AuthorizingRealm{
 		return null;
 	}
 	
-	private void generateAuthorizationInfo(SimpleAuthorizationInfo autoInfo,User user){
+	private SimpleAuthorizationInfo generateAuthorizationInfo(SimpleAuthorizationInfo autoInfo,User user){
 		autoInfo = new SimpleAuthorizationInfo();
 		autoInfo.setRoles(findRolesByUsrId(user.getId()));
 		autoInfo.setStringPermissions(findPermissionByUsrId(user.getId()));
+		return autoInfo;
 	}
 	
 	private Set<String> findRolesByUsrId(String usrId){

@@ -43,6 +43,8 @@ public class HomePageGenerator {
 		homePage.setHomeUrl(getHomePageParameterBy("home_url"));
 		homePage.setCompanyNm(getHomePageParameterBy("company"));
 		homePage.setSystemYear(getSystemYear());
+		homePage.setSignInURL(getHomePageParameterBy("signin_url"));
+		homePage.setSignUpURL(getHomePageParameterBy("signup_url"));
 		
 		List<NavigationBar> allNavigationBars = navigationBarMapper.queryAllNavigationBar();
 		homePage.setNavigationBars(allNavigationBars);

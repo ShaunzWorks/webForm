@@ -104,12 +104,12 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
-	  select 
-	  <include refid="Base_Column_List" />
-	  select * from tb_role role
+	  select role.id, role.name, role.parent_id, role.close_flg, role.start_time, role.end_time
+	  	from tb_role role 
 		inner join tb_user_role user_role on user_role.role_id = role.id
 		inner join tb_user usr on usr.id = user_role.user_id
 		where usr.id = #{usrId,jdbcType=VARCHAR}
-		<![CDATA[and role.start_time < current_timestamp and role.end_time > current_timestamp]]>
+		<![CDATA[and COALESCE(role.start_time,current_timestamp) <= current_timestamp and COALESCE(role.end_time,current_timestamp) >= current_timestamp]]>
+		and role.close_flg = 'N'
   </select>
 </mapper>

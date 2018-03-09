@@ -22,11 +22,11 @@
           <label>
             <input type="checkbox" id="rememberMe" value="remember-me"> <spring:message code="signinpage.rememberme"/>
           </label>
+          <a class="right" href="./signUp.html">Sign Up</a>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="signinpage.signin"/></button>
       </form>
 
     </div> <!-- /container -->
-	<%@ include file="./common/jsReference.jsp"%>
 </body>
 </html>

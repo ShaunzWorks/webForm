@@ -24,6 +24,8 @@ public class HomePage implements Serializable{
 	private List<NavigationBar> navigationBars;
 	private List<Carousel> carousels;
 	private List<MarketInfo> marketInfos;
+	private String signInURL;
+	private String signUpURL;
 	public String getTitle() {
 		return title;
 	}
@@ -89,5 +91,17 @@ public class HomePage implements Serializable{
 	}
 	public void setMarketInfos(List<MarketInfo> marketInfos) {
 		this.marketInfos = marketInfos;
+	}
+	public String getSignInURL() {
+		return signInURL;
+	}
+	public void setSignInURL(String signInURL) {
+		this.signInURL = signInURL;
+	}
+	public String getSignUpURL() {
+		return signUpURL;
+	}
+	public void setSignUpURL(String signUpURL) {
+		this.signUpURL = signUpURL;
 	}
 }

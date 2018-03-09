@@ -467,6 +467,8 @@ INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", cl
 INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", close_flg) VALUES ('3', 'homepage', 'keywords', 'value', 'WebForm Template', 'N');
 INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", close_flg) VALUES ('4', 'homepage', 'icon_url', 'value', '/img/favicon.ico', 'N');
 INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", close_flg) VALUES ('6', 'homepage', 'company', 'value', 'Company,Inc.', 'N');
-INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", close_flg) VALUES ('5', 'homepage', 'home_url', 'value', './index', 'N');
+INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", close_flg) VALUES ('5', 'homepage', 'home_url', 'value', './index.html', 'N');
+INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", close_flg) VALUES ('7', 'homepage', 'signin_url', 'value', './signIn.html', 'N');
+INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", close_flg) VALUES ('8', 'homepage', 'signup_url', 'value', './signUp.html', 'N');
 INSERT INTO webform.public.tb_user("id", login_name, "password", org_path, alias_nm, gender, email, close_flg, lock_up, start_time, end_time) VALUES ('1', 'admin', 'admin', '1', 'admin', 'Male', 'dengxiong90@foxmail.com', 'N', 'N', null, null);
 INSERT INTO webform.public.tb_user_role(user_id, role_id, start_time, end_time) VALUES ('1', '1', null, null);
