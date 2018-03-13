@@ -7,8 +7,27 @@
     <link href="${projectResPath}/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="${projectResPath}/css/dashboard.css" rel="stylesheet">
+    <%@ include file="./common/jsReference.jsp"%>
+    <link href="${projectResPath}/css/bootstrap-treeview.min.css" rel="stylesheet">
   </head>
-
+	<script type="text/javascript" > 
+		$('document').ready(function(){
+			var treeData;
+			console.log('${ctxPath}');
+			$.ajax({
+				   url: '${ctxPath}/functions',
+				   type: 'GET',
+				   success: function(data,status) {
+					   console.log('success: ' +data);
+					   $('#TreeMenu').treeview(jQuery.parseJSON(data));
+				   },
+				   error: function(e) {
+					   console.log(e);
+				   }
+				   
+				});
+		});
+	</script>
   <body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -39,7 +58,7 @@
     <div class="container-fluid">
       <div class="row">
         <div id="TreeMenu" class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
+          <!-- <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
             <li><a href="#">Reports</a></li>
             <li><a href="#">Analytics</a></li>
@@ -56,7 +75,7 @@
             <li><a href="">Nav item again</a></li>
             <li><a href="">One more nav</a></li>
             <li><a href="">Another nav item</a></li>
-          </ul>
+          </ul> -->
         </div>
         <div id="FeatureContainer" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
@@ -215,6 +234,5 @@
         </div>
       </div>
     </div>
-    <%@ include file="./common/jsReference.jsp"%>
   </body>
 </html>

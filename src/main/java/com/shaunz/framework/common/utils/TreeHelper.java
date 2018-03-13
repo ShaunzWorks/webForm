@@ -120,7 +120,7 @@ public class TreeHelper {
 			Map<String, String> data = (Map<String, String>) it.next();
 			treeNode = new TreeNode();
 			treeNode.setObj(data);
-			treeNode.setPid(data.get("pid"));
+			treeNode.setPid(data.get("parent_id"));
 			treeNode.setId(data.get("id"));
 			treeNode.setName(data.get("name"));
 			treeNode.setUrl(data.get("url"));

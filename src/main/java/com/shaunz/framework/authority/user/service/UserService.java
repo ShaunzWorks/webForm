@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.shaunz.framework.authority.user.dao.UserMapper;
 import com.shaunz.framework.authority.user.entity.User;
+import com.shaunz.framework.common.utils.IStringUtil;
 import com.shaunz.framework.web.base.BaseService;
 
 @Service
@@ -19,5 +20,13 @@ public class UserService extends BaseService{
 	
 	public User findUserByEmail(String email){
 		return userMapper.selectByEmail(email);
+	}
+	
+	public User findUser(String identifier){
+		User user = findUserByNm(identifier);
+		if(user== null || IStringUtil.isBlank(user.getId())){
+			user = findUserByEmail(identifier);
+		}
+		return user;
 	}
 }

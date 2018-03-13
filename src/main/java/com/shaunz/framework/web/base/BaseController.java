@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.alibaba.fastjson.JSONObject;
+import com.shaunz.framework.authority.user.entity.User;
 
 /**
  * @version 1.0.0
@@ -66,7 +71,7 @@ public class BaseController {
 	        super(new StringWriter());  
 	    }  
 	     
-	    public StringPrintWriter(int initialSize) {  
+	    public StringPrintWriter(int initialSize) {
 	          super(new StringWriter(initialSize));  
 	    }  
 	     
@@ -84,5 +89,16 @@ public class BaseController {
 	protected Map<String, Object> generateResultMap() {
 		Map<String, Object> resultMap = new HashMap<String,Object>();
 		return resultMap;
+	}
+	
+	protected User getUser() {
+		User user = (User)session.getAttribute("user");
+		return user;
+	}
+	
+	protected String convertToJsonString(Object obj) {
+		String jsonStr = JSONObject.toJSONString(obj);
+		//jsonStr = jsonStr.replaceAll("\"", "'");
+		return jsonStr;
 	}
 }

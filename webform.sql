@@ -437,8 +437,16 @@ INSERT INTO webform.public.tb_dropdown_list("id", "name", url, "type", parent_id
 INSERT INTO webform.public.tb_dropdown_list("id", "name", url, "type", parent_id) VALUES ('4', 'This is separator', './dropDownLst.html', 'separator', '4');
 INSERT INTO webform.public.tb_dropdown_list("id", "name", url, "type", parent_id) VALUES ('5', 'Nav header', './dropDownLst.html', 'dropdown_header', '4');
 INSERT INTO webform.public.tb_dropdown_list("id", "name", url, "type", parent_id) VALUES ('6', 'Separated link', './dropDownLst.html', 'normal', '4');
-INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('1', 'root', '1', '#', 'N');
-INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('2', 'userMngmt', '1', '/userMngmt.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('1', 'Authority Management', '1', '#', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('2', 'Account', '1', '/userMngmt.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('3', 'Role', '1', '/roleMngmt.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('4', 'Home Page Management', '4', '/roleMngmt.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('5', 'Navigation Bar', '4', '/naviBarMngmt.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('6', 'Market', '4', '/marketMngmt.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('7', 'Carousel', '4', '/carouselMngmt.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('8', 'Meta Element', '4', '#', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('9', 'Button', '8', '/buttonMngmt.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('10', 'Image', '8', '/imageMngmt.html', 'N');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('1', 'First slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'first-slide');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('2', 'Second slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'second-slide');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('3', 'Third slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'third-slide');

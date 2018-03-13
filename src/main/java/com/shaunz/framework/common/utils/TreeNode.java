@@ -1,21 +1,28 @@
 package com.shaunz.framework.common.utils;
 
 import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.io.Serializable;
 
+@Component
 public class TreeNode implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String pid;
-	private String id;
+	private static final Logger logger = Logger.getLogger(TreeNode.class);
+	
+	protected String pid;
+	protected String id;
 	protected String name;
-	private String url ;
+	protected String url ;
 	protected Object obj;
 	protected TreeNode pNode;
-	protected List<TreeNode> childList;
-	private String loadStyle;
+	protected List<TreeNode> nodes;
+	
 	public TreeNode() {
-		initChildList();
+		init();
 	}
 	
 	public TreeNode(String id,String name,String pid,String url) {
@@ -23,19 +30,22 @@ public class TreeNode implements Serializable {
 		this.name=name;
 		this.pid=pid;
 		this.url=url;
-		initChildList();
+		init();
+	}
+	
+	public void init(){
+		initNodes();
 	}
 
-	public TreeNode(TreeNode parentNode) {
-		this.getPNode();
-		initChildList();
-	}
-
+	/**
+	 * Check if this tree node have children.
+	 * @return true if not have children.
+	 */
 	public boolean isLeaf() {
-		if (childList == null) {
+		if (nodes == null) {
 			return true;
 		} else {
-			if (childList.isEmpty()) {
+			if (nodes.isEmpty()) {
 				return true;
 			} else {
 				return false;
@@ -43,16 +53,20 @@ public class TreeNode implements Serializable {
 		}
 	}
 	
+	/**
+	 * Add specific tree node as child of current node
+	 * @param node
+	 */
 	public void addChildNode(TreeNode node) {
-		initChildList();
-		if(!childList.contains(node)){
-			childList.add(node);
+		initNodes();
+		if(!nodes.contains(node)){
+			nodes.add(node);
 		}
 	}
 
-	public void initChildList() {
-		if (childList == null)
-			childList = new ArrayList<TreeNode>();
+	protected void initNodes() {
+		if (nodes == null)
+			nodes = new ArrayList<TreeNode>();
 	}
 
 	
@@ -66,38 +80,53 @@ public class TreeNode implements Serializable {
 		return true;
 	}
 	
-	public List<TreeNode> getElders() {
+	/**
+	 * Get the parent of current tree node.
+	 * @return
+	 */
+	public List<TreeNode> elders() {
 		List<TreeNode> elderList = new ArrayList<TreeNode>();
 		TreeNode parentNode = this.getPNode();
 		if (parentNode == null) {
 			return elderList;
 		} else {
 			elderList.add(parentNode);
-			elderList.addAll(parentNode.getElders());
+			elderList.addAll(parentNode.elders());
 			return elderList;
 		}
 	}
 
-	public List<TreeNode> getJuniors() {
+	/**
+	 * Get all children from current tree node.
+	 * @return
+	 */
+	public List<TreeNode> juniors() {
 		List<TreeNode> juniorList = new ArrayList<TreeNode>();
-		List<TreeNode> childList = this.getChildList();
-		if (childList == null) {
+		List<TreeNode> nodes = this.getNodes();
+		if (nodes == null) {
 			return juniorList;
 		} else {
-			int childNumber = childList.size();
+			int childNumber = nodes.size();
 			for (int i = 0; i < childNumber; i++) {
-				TreeNode junior = childList.get(i);
+				TreeNode junior = nodes.get(i);
 				juniorList.add(junior);
-				juniorList.addAll(junior.getJuniors());
+				juniorList.addAll(junior.juniors());
 			}
 			return juniorList;
 		}
 	}
 
-	public List<TreeNode> getChildList() {
-		return childList;
+	/**
+	 * Get children list from current tree node.
+	 * @return
+	 */
+	public List<TreeNode> getNodes() {
+		return nodes;
 	}
 
+	/**
+	 * Delete the node and it's children from tree.
+	 */
 	public void deleteNode() {
 		TreeNode parentNode = this.getPNode();
 		String id = this.getId();
@@ -107,30 +136,39 @@ public class TreeNode implements Serializable {
 		}
 	}
 
+	/**
+	 * Delete the tree node from tree.
+	 * @param childId
+	 */
 	public void deleteChildNode(String childId) {
-		List<TreeNode> childList = this.getChildList();
-		int childNumber = childList.size();
+		List<TreeNode> nodes = this.getNodes();
+		int childNumber = nodes.size();
 		for (int i = 0; i < childNumber; i++) {
-			TreeNode child = childList.get(i);
+			TreeNode child = nodes.get(i);
 			if (child.getId() .equals( childId)) {
-				childList.remove(i);
+				nodes.remove(i);
 				return;
 			}
 		}
 	}
 
+	/**
+	 * Insert the specific treeNode into tree.
+	 * @param treeNode
+	 * @return
+	 */
 	public boolean insertJuniorNode(TreeNode treeNode) {
 		String juniorParentId = treeNode.getPid();
 		if (this.pid .equals(juniorParentId)) {
 			addChildNode(treeNode);
 			return true;
 		} else {
-			List<TreeNode> childList = this.getChildList();
-			int childNumber = childList.size();
+			List<TreeNode> nodes = this.getNodes();
+			int childNumber = nodes.size();
 			boolean insertFlag;
 
 			for (int i = 0; i < childNumber; i++) {
-				TreeNode childNode = childList.get(i);
+				TreeNode childNode = nodes.get(i);
 				insertFlag = childNode.insertJuniorNode(treeNode);
 				if (insertFlag == true)
 					return true;
@@ -139,15 +177,21 @@ public class TreeNode implements Serializable {
 		}
 	}
 
+	/**
+	 * Find a tree node base on id provided. 
+	 * It will return the first one found.
+	 * @param id
+	 * @return
+	 */
 	public TreeNode findTreeNodeById(String id) {
 		if (this.id.equals(id))
 			return this;
-		if (childList.isEmpty() || childList == null) {
+		if (nodes.isEmpty() || nodes == null) {
 			return null;
 		} else {
-			int childNumber = childList.size();
+			int childNumber = nodes.size();
 			for (int i = 0; i < childNumber; i++) {
-				TreeNode child = childList.get(i);
+				TreeNode child = nodes.get(i);
 				TreeNode resultNode = child.findTreeNodeById(id);
 				if (resultNode != null) {
 					return resultNode;
@@ -157,25 +201,25 @@ public class TreeNode implements Serializable {
 		}
 	}
 
+	/**
+	 * Traverse this TreeNode and print it.
+	 */
 	public void traverse() {
 		if (id ==null || "".equals(id))
 			return;
-		print(this.id);
-		if (childList == null || childList.isEmpty())
+		logger.info(this.toString());
+		if (nodes == null || nodes.isEmpty())
 			return;
-		int childNumber = childList.size();
+		int childNumber = nodes.size();
 		for (int i = 0; i < childNumber; i++) {
-			TreeNode child = childList.get(i);
+			TreeNode child = nodes.get(i);
 			child.traverse();
 		}
 	}
 
-	private void print(String content) {
-		System.out.println(content);
-	}
 
-	public void setChildList(List<TreeNode> childList) {
-		this.childList = childList;
+	public void setNodes(List<TreeNode> nodes) {
+		this.nodes = nodes;
 	}
 
 	public String getPid() {
@@ -226,13 +270,7 @@ public class TreeNode implements Serializable {
 		this.url = url;
 	}
 
-	public String getLoadStyle() {
-		return loadStyle;
-	}
-
-	public void setLoadStyle(String loadStyle) {
-		this.loadStyle = loadStyle;
-	}
+	
 	
 	
 }

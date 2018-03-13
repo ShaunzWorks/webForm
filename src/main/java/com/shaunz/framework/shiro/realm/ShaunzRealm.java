@@ -46,7 +46,7 @@ public class ShaunzRealm extends AuthorizingRealm{
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		SimpleAuthorizationInfo autoInfo = null;
 		String inputUsrNm = principals.getPrimaryPrincipal().toString();
-		User user = findUsr(inputUsrNm);
+		User user = userService.findUser(inputUsrNm);
 		if(IStringUtil.notBlank(user.getId())){
 			autoInfo = generateAuthorizationInfo(autoInfo,user);
 		}
@@ -58,7 +58,7 @@ public class ShaunzRealm extends AuthorizingRealm{
 		if(token == null || token.getPrincipal() == null)
 			return null;
 		String inputUsrNm = token.getPrincipal().toString();
-		User user = findUsr(inputUsrNm);
+		User user = userService.findUser(inputUsrNm);
 		if(user == null){
 			throw new UnknownAccountException();
 		}
@@ -71,30 +71,6 @@ public class ShaunzRealm extends AuthorizingRealm{
                 getName() 
         );
 		return authInfo;
-	}
-	
-	private User findUsr(String str){
-		User user = findUsrByNm(str);
-		if(user== null || IStringUtil.isBlank(user.getId())){
-			user = findusrByEmail(str);
-		}
-		return user;
-	}
-	
-	private User findUsrByNm(String usrNm){
-		if(IStringUtil.notBlank(usrNm)){
-			User user = userService.findUserByNm(usrNm);
-			return user;
-		}
-		return null;
-	}
-	
-	private User findusrByEmail(String email){
-		if(IStringUtil.notBlank(email)){
-			User user = userService.findUserByEmail(email);
-			return user;
-		}
-		return null;
 	}
 	
 	private SimpleAuthorizationInfo generateAuthorizationInfo(SimpleAuthorizationInfo autoInfo,User user){

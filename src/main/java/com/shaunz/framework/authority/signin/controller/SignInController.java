@@ -14,6 +14,7 @@ import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,14 +22,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.shaunz.framework.authority.user.entity.User;
+import com.shaunz.framework.authority.user.service.UserService;
 import com.shaunz.framework.common.utils.IStringUtil;
 import com.shaunz.framework.web.base.BaseController;
 
 @Controller
 public class SignInController extends BaseController{
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping(value="/signIn.html",method=RequestMethod.GET)
 	public String signInPage(){
 		return "SignIn";
+	}
+	
+	@RequestMapping(value="/signUp.html",method=RequestMethod.GET)
+	public String signUpPage(){
+		return "SignUp";
 	}
 	
 	@RequestMapping(value="/signIn",method=RequestMethod.POST)
@@ -41,6 +51,7 @@ public class SignInController extends BaseController{
 			subject.login(token);
 			if(subject.isAuthenticated()){
 				//user = (User)subject.getPrincipal();
+				user = userService.findUser(user.getInputUserNM());
 				session.setAttribute("user", user);
 				/*SavedRequest savedRequest = WebUtils.getSavedRequest(request);
 				if(savedRequest == null || savedRequest.getRequestUrl() == null){
