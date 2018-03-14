@@ -1,5 +1,6 @@
 package com.shaunz.framework.shiro.realm;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -7,6 +8,9 @@ import java.util.Set;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.DisabledAccountException;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
+import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -24,6 +28,7 @@ import com.shaunz.framework.authority.role.entity.Role;
 import com.shaunz.framework.authority.role.service.RoleService;
 import com.shaunz.framework.authority.user.entity.User;
 import com.shaunz.framework.authority.user.service.UserService;
+import com.shaunz.framework.common.SourceTableGenerator;
 import com.shaunz.framework.common.utils.IStringUtil;
 
 @Component
@@ -35,7 +40,8 @@ public class ShaunzRealm extends AuthorizingRealm{
 	RoleService roleService;
 	@Autowired
 	AuthorityService authorityService;
-	
+	@Autowired
+	SourceTableGenerator sourceTableGenerator;
 	
 	@Autowired
     public ShaunzRealm(@Qualifier("shiroEncacheManager") CacheManager cacheManager) {
@@ -64,6 +70,15 @@ public class ShaunzRealm extends AuthorizingRealm{
 		}
 		if("lock".equals(user.getLockUp())){
 			throw new LockedAccountException();
+		}
+		if("Y".equals(user.getCloseFlg())){
+			throw new DisabledAccountException();
+		}
+		if(isAccountExpired(user)){
+			throw new ExpiredCredentialsException();
+		}
+		if(isExcessiveAttemptsTime(user)){
+			throw new ExcessiveAttemptsException();
 		}
 		SimpleAuthenticationInfo authInfo = new SimpleAuthenticationInfo(
 				user.getLoginName(),
@@ -96,7 +111,9 @@ public class ShaunzRealm extends AuthorizingRealm{
 		List<String> functionPermissionLst = 
 				authorityService.findFunctionPermissionByUsrId(usrId);
 		if(notEmptyLst(functionPermissionLst)){
-			
+			for(int i = 0; i < functionPermissionLst.size(); i++){
+				permissionSet.add(functionPermissionLst.get(i));
+			}
 		}
 		return permissionSet;
 	}
@@ -106,6 +123,31 @@ public class ShaunzRealm extends AuthorizingRealm{
 			return true;
 		}
 		return false;
+	}
+	
+	private boolean isAccountExpired(User user){
+		Date currentDate = new Date();
+		if(user.getStartTime() == null && user.getEndTime() == null)
+			return false;
+		if(user.getStartTime() == null)
+			user.setStartTime(currentDate);
+		if(user.getEndTime() == null)
+			user.setEndTime(currentDate);
+		return !((currentDate.after(user.getStartTime()) || currentDate.equals(user.getStartTime())) 
+				&& (currentDate.before(user.getEndTime()) ||  currentDate.equals(user.getStartTime())));
+	}
+	
+	private boolean isExcessiveAttemptsTime(User user){
+		if(IStringUtil.isBlank(user.getAttemptSignTimes())){
+			return false;
+		}
+		String maxSignAttemptsTimeString = sourceTableGenerator.getSourceValueBy("System", "MaxSignAttemptsTime");
+		if(IStringUtil.isBlank(maxSignAttemptsTimeString)){
+			return false;
+		}
+		int maxSignAttemptsTime = Integer.valueOf(maxSignAttemptsTimeString);
+		int attemptsTime = Integer.valueOf(user.getAttemptSignTimes());
+		return attemptsTime >= maxSignAttemptsTime;
 	}
 
 }

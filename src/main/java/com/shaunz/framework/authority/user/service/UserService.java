@@ -29,4 +29,8 @@ public class UserService extends BaseService{
 		}
 		return user;
 	}
+	
+	public boolean updateUserByPrimaryKeySelective(User user){
+		return userMapper.updateByPrimaryKeySelective(user) == 1;
+	}
 }

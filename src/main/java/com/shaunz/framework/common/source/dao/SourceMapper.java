@@ -1,10 +1,12 @@
-package com.shaunz.webform.web.source.dao;
+package com.shaunz.framework.common.source.dao;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.shaunz.webform.web.source.entity.Source;
+import com.shaunz.framework.common.source.entity.Source;
+
+
 
 @Repository
 public interface SourceMapper {

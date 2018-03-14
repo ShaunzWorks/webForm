@@ -1,4 +1,4 @@
-package com.shaunz.webform.web.common;
+package com.shaunz.framework.common;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,8 +8,11 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import com.shaunz.webform.web.source.dao.SourceMapper;
-import com.shaunz.webform.web.source.entity.Source;
+import com.shaunz.framework.common.source.dao.SourceMapper;
+import com.shaunz.framework.common.source.entity.Source;
+
+
+
 
 @Service
 public class SourceTableGenerator {

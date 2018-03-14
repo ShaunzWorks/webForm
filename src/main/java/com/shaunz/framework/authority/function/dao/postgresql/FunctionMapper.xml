@@ -96,4 +96,11 @@
 	  from tb_function
 	  where close_flg = 'N'
   </select>
+  <select id="queryAllAuthorizedFunctionByUsrId" parameterType="string" resultMap="BaseResultMap">
+	  select distinct func.* from tb_function func
+		inner join tb_role_function_authority auth on auth.function_id = func.id
+		inner join tb_user_role usr_rol on usr_rol.role_id = auth.role_id
+		where usr_rol.user_id = #{usrId,jdbcType=VARCHAR}
+	  	and close_flg = 'N'
+  </select>
 </mapper>

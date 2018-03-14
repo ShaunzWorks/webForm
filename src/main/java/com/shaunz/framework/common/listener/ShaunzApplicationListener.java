@@ -14,8 +14,8 @@ import org.springframework.context.event.ContextStoppedEvent;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.RequestHandledEvent;
 
+import com.shaunz.framework.common.SourceTableGenerator;
 import com.shaunz.webform.web.common.HomePageGenerator;
-import com.shaunz.webform.web.common.SourceTableGenerator;
 
 public class ShaunzApplicationListener implements ApplicationListener<ApplicationEvent>{
 	private Logger logger = Logger.getLogger(ShaunzApplicationListener.class);

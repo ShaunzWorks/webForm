@@ -21,7 +21,7 @@ public class FunctionService extends BaseService{
 	}
 	
 	public TreeMenu generateMngmtTree(String usrId){
-		List<Function> allAuthorizedFunctions = functionMapper.queryAll();
+		List<Function> allAuthorizedFunctions = functionMapper.queryAllAuthorizedFunctionByUsrId(usrId);
 		List<BootStrapTreeViewNode> treeNodes = TreeMenu.changeFunctionLstToTreeNodes(allAuthorizedFunctions);
 		TreeMenu treeMenu = new TreeMenu(treeNodes);
 		if(treeMenu.isValidTree()){

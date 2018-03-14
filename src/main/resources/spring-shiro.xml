@@ -9,7 +9,7 @@
         <!-- Shiro core security interface -->
         <property name="securityManager" ref="securityManager"/>
         <!-- Login url default "/login.jsp" if not be configured -->
-        <property name="loginUrl" value="/signIn.html"/>
+        <property name="loginUrl" value="/index.html"/>
         <!-- Success url, we will specify in the controller -->
         <!-- <property name="successUrl" value="/" ></property> -->
         <!-- Unauthorized url -->
@@ -24,6 +24,7 @@
             	/staticResources/**=anon
             	/index.jsp=anon
             	/signIn.html=anon
+            	/signUp.html=anon
                 /**=authc
             </value>
         </property>

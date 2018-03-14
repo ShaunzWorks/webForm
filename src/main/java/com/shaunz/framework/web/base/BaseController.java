@@ -97,6 +97,8 @@ public class BaseController {
 	}
 	
 	protected String convertToJsonString(Object obj) {
+		if(obj == null)
+			return "{object:null}";
 		String jsonStr = JSONObject.toJSONString(obj);
 		//jsonStr = jsonStr.replaceAll("\"", "'");
 		return jsonStr;

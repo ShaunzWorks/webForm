@@ -25,6 +25,7 @@ import com.shaunz.framework.authority.user.entity.User;
 import com.shaunz.framework.authority.user.service.UserService;
 import com.shaunz.framework.common.utils.IStringUtil;
 import com.shaunz.framework.web.base.BaseController;
+import com.shaunz.webform.web.home.entity.HomePage;
 
 @Controller
 public class SignInController extends BaseController{
@@ -33,6 +34,10 @@ public class SignInController extends BaseController{
 	
 	@RequestMapping(value="/signIn.html",method=RequestMethod.GET)
 	public String signInPage(){
+		Subject subject = SecurityUtils.getSubject();
+		if(subject.isAuthenticated()){
+			return redirct2MngmtPlant();
+		}
 		return "SignIn";
 	}
 	
@@ -44,46 +49,50 @@ public class SignInController extends BaseController{
 	@RequestMapping(value="/signIn",method=RequestMethod.POST)
 	public String doSignIn(User user,Model model,Locale locale){
 		String msg = "";
+		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getInputUserNM(), user.getInputPwd());
 		token.setRememberMe(IStringUtil.notBlank(user.getRememberMe()));
-		Subject subject = SecurityUtils.getSubject();
 		try {
 			subject.login(token);
 			if(subject.isAuthenticated()){
-				//user = (User)subject.getPrincipal();
 				user = userService.findUser(user.getInputUserNM());
+				clearAttemptSignTimes(user);
 				session.setAttribute("user", user);
-				/*SavedRequest savedRequest = WebUtils.getSavedRequest(request);
+				SavedRequest savedRequest = WebUtils.getSavedRequest(request);
 				if(savedRequest == null || savedRequest.getRequestUrl() == null){
-					return FORWARD_TO + "managePlant.html";
+					return redirct2MngmtPlant();
 				} else {
-					return FORWARD_TO + savedRequest.getRequestUrl();
-				}*/
-				return REDIRECT_TO + "managePlant.html";
+					model.addAttribute("loginMsg", "success");
+					return FORWARD_TO + filterProjectNmFromURL(savedRequest.getRequestUrl());
+				}
 			} else {
 				return "SignIn";
 			}
 		} catch (IncorrectCredentialsException e) {
 			msg = messageSource.getMessage("signin.pwdIncorrect", new Object[]{user.getInputUserNM()},locale);
-            model.addAttribute("message", msg);
+            model.addAttribute("errMsg", msg);
+            addSignInFailedTimes(user);
         } catch (ExcessiveAttemptsException e) {
         	msg = messageSource.getMessage("signin.signinTimesLimit", null,locale);
-            model.addAttribute("message", msg);
+            model.addAttribute("errMsg", msg);
         } catch (LockedAccountException e) {
         	msg = messageSource.getMessage("signin.accountLocked", new Object[]{user.getInputUserNM()},locale);
-            model.addAttribute("message", msg);
+            model.addAttribute("errMsg", msg);
+            addSignInFailedTimes(user);
         } catch (DisabledAccountException e) {
         	msg = messageSource.getMessage("signin.accountDisabled", new Object[]{user.getInputUserNM()},locale);
-            model.addAttribute("message", msg);
+            model.addAttribute("errMsg", msg);
+            addSignInFailedTimes(user);
         } catch (ExpiredCredentialsException e) {
         	msg = messageSource.getMessage("signin.accountExpired", new Object[]{user.getInputUserNM()},locale);
-            model.addAttribute("message", msg);
+            model.addAttribute("errMsg", msg);
+            addSignInFailedTimes(user);
         } catch (UnknownAccountException e) {
         	msg = messageSource.getMessage("signin.unkownAccount", new Object[]{user.getInputUserNM()},locale);
-            model.addAttribute("message", msg);
+            model.addAttribute("errMsg", msg);
         } catch (UnauthorizedException e) {
         	msg = messageSource.getMessage("signin.unauthorized", null,locale);
-            model.addAttribute("message", msg);
+            model.addAttribute("errMsg", msg);
         } catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		} finally {
@@ -96,6 +105,41 @@ public class SignInController extends BaseController{
 	@RequestMapping(value="/signout")
 	public String signOut(){
 		SecurityUtils.getSubject().logout();
-		return REDIRECT_TO + "SignIn";
+		return REDIRECT_TO + "index.html";
+	}
+	
+	private void addSignInFailedTimes(User user){
+		user = userService.findUser(user.getInputUserNM());
+		User updateUsr = new User();
+		updateUsr.setId(user.getId());
+		updateUsr.setAttemptSignTimes(user.getAttemptSignTimes());
+		updateUsr.attmptSignTimesPlusOne();
+		boolean flag = userService.updateUserByPrimaryKeySelective(updateUsr);
+		if(!flag)
+			logger.warn("Sign failed! and collect attempt times failed.");
+	}
+	
+	private void clearAttemptSignTimes(User user){
+		User updateUsr = new User();
+		updateUsr.setId(user.getId());
+		updateUsr.setAttemptSignTimes("0");
+		user.setAttemptSignTimes("0");
+		boolean flag = userService.updateUserByPrimaryKeySelective(updateUsr);
+		if(!flag)
+			logger.warn("Sign success! but clear attempt times failed.");
+	}
+	
+	private String redirct2MngmtPlant(){
+		return REDIRECT_TO + "managePlant.html";
+	}
+	
+	private String filterProjectNmFromURL(String url){
+		HomePage homePageObj = (HomePage)request.getServletContext().getAttribute("homePageObject");
+		String projectNm = homePageObj.getProjectNm().toUpperCase();
+		String tmpUrl = url.toUpperCase();
+		if(tmpUrl.contains(projectNm)){
+			url = url.substring(tmpUrl.indexOf(projectNm) + projectNm.length());
+		}
+		return url;
 	}
 }

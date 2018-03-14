@@ -16,7 +16,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <select id="findFunctionPermissionByUsrId" resultType="java.lang.String" parameterType="java.lang.String" >
-    select map.function_id||'$'||auth.name as permission from tb_authority auth
+    select map.function_id||'.'||auth.name as permission from tb_authority auth
 	inner join tb_role_function_authority map on map.authority_id = auth.id
 	inner join tb_user_role user_role on user_role.role_id = map.role_id
 	where user_role.user_id = #{id,jdbcType=VARCHAR};

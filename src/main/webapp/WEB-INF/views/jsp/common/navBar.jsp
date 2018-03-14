@@ -44,7 +44,14 @@
 		</c:forEach>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a id="signInURL" href="${applicationScope.homePageObject.signInURL}">Sign In</a></li>
+          <li>
+          	<a id="signInURL" href="${applicationScope.homePageObject.signInURL}">
+          		<c:choose>
+          			<c:when test="${'success' eq loginMsg}"><spring:message code="homepage.gotoMngmtPlt"/></c:when>
+          			<c:otherwise><spring:message code="homepage.signin"/></c:otherwise>
+          		</c:choose>
+          	</a>
+          </li>
         </ul>
       </div>
     </div>

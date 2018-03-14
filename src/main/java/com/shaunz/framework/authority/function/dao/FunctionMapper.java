@@ -18,4 +18,6 @@ public interface FunctionMapper {
     int updateByPrimaryKey(Function record);
     
     List<Function> queryAll();
+    
+    List<Function> queryAllAuthorizedFunctionByUsrId(String usrId);
 }

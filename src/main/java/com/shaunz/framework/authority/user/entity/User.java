@@ -2,7 +2,13 @@ package com.shaunz.framework.authority.user.entity;
 
 import java.util.Date;
 
-public class User {
+import org.apache.log4j.Logger;
+
+import com.shaunz.framework.common.utils.IStringUtil;
+
+public class User implements Cloneable{
+	Logger logger = Logger.getLogger(User.class);
+	
     private String id;
 
     private String loginName;
@@ -30,6 +36,8 @@ public class User {
     private String inputUserNM;
     
     private String inputPwd;
+    
+    private String attemptSignTimes;
 
     public String getId() {
         return id;
@@ -142,5 +150,42 @@ public class User {
 	public void setInputPwd(String inputPwd) {
 		this.inputPwd = inputPwd;
 	}
+
+	public String getAttemptSignTimes() {
+		return attemptSignTimes;
+	}
+
+	public void setAttemptSignTimes(String attemptSignTimes) {
+		this.attemptSignTimes = attemptSignTimes;
+	}
 	
+	public void attmptSignTimesPlusOne(){
+		if(IStringUtil.isBlank(attemptSignTimes)){
+			attemptSignTimes = "0";
+		}
+		int times = 0;
+		try {
+			times = Integer.valueOf(attemptSignTimes) +1;
+		} catch (Exception e) {
+			logger.error(e);
+			times = 0;
+		}
+		attemptSignTimes = ""+times;
+	}
+	
+	public void deSensitive(){
+	    this.id = null;
+	    this.loginName = null;
+	    this.orgPath = null;
+		this.password = null;
+		this.email = null;
+		this.inputPwd = null;
+		this.lockUp = null;
+		this.closeFlg = null;
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 }

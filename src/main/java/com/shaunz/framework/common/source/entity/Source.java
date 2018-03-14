@@ -1,4 +1,4 @@
-package com.shaunz.webform.web.source.entity;
+package com.shaunz.framework.common.source.entity;
 
 public class Source {
     private String id;
