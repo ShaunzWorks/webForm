@@ -11,7 +11,7 @@
 					<li <c:if test = "${naviBar.id eq navBarId}">class="active"</c:if>>
 						<c:choose>
 							<c:when test="${naviBar.active eq 'active'}">
-								<a href="./index">${naviBar.name}</a>
+								<a href="${applicationScope.homePageObject.homeUrl}">${naviBar.name}</a>
 							</c:when>
 							<c:otherwise>
 								<a href="${naviBar.url}?navBarId=${naviBar.id}">${naviBar.name}</a>
@@ -47,9 +47,13 @@
           <li>
           	<a id="signInURL" href="${applicationScope.homePageObject.signInURL}">
           		<c:choose>
-          			<c:when test="${'success' eq loginMsg}"><spring:message code="homepage.gotoMngmtPlt"/></c:when>
-          			<c:otherwise><spring:message code="homepage.signin"/></c:otherwise>
-          		</c:choose>
+					<c:when test="${'success' eq signIn}">
+						<spring:message code="homepage.gotoMngmtPlt"/>
+					</c:when>
+					<c:otherwise>
+						<spring:message code="homepage.signin"/>
+					</c:otherwise>
+				</c:choose>
           	</a>
           </li>
         </ul>
@@ -57,12 +61,30 @@
     </div>
 </nav>
 <!-- <script type="text/javascript" >
-	ShowPageInDialog = function(pageURL){
-		BootstrapDialog.show({
-	     message: $('<div></div>').load(pageURL)
-	 });
-	}
-	$("#signInURL").click(function(){
-		ShowPageInDialog("./signIn.html");
-	})
-</script> -->
+	var signInText = '<spring:message code="homepage.signin"/>';
+	var mngmtPltText = '<spring:message code="homepage.gotoMngmtPlt"/>';
+	$('document').ready(function(){
+		console.log(signInText + mngmtPltText);
+		$.ajax({
+			url: '${ctxPath}/signCheck',
+			type: 'GET',
+			success: function(data,status){
+				if(data != null){
+					console.log(data);
+					var user = jQuery.parseJSON(data);
+					if(user.aliasNm != null)
+						$('#signInURL').html(mngmtPltText);
+					else
+						$('#signInURL').html(signInText);
+				} else {
+					$('#signInURL').html(signInText);
+				}
+				
+			},
+			error: function(){
+				console.log('error');
+				$('#signInURL').html(signInText);
+			}
+		});
+	}); -->
+</script>

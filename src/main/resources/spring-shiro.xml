@@ -18,9 +18,9 @@
         <property name="filterChainDefinitions">
             <value>
             	/index.html=anon
-            	/navBarPage.html=anon
-            	/dropDownLstPage.html=anon
-            	/marketInfoPage.html=anon
+            	/navBar.html=anon
+            	/dropDownLst.html=anon
+            	/marketInfo.html=anon
             	/staticResources/**=anon
             	/index.jsp=anon
             	/signIn.html=anon

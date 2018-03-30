@@ -2,6 +2,7 @@ package com.shaunz.framework.web.base;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,8 +63,13 @@ public class BaseController {
 	public ModelAndView ExceptionHandler(HttpServletRequest request,Exception ex){
 		StringPrintWriter spw=new StringPrintWriter();
 		ex.printStackTrace(spw); 
-		logger.error("[ExceptionHandler:]"+spw.getString());
-		return new ModelAndView("error/exception","exception",ex.getMessage());
+		long timeStamp = new Date().getTime();
+		logger.error("[ExceptionHandler: "+timeStamp+"]\n"+spw.getString());
+		
+		Map<String, String> resultMap = new HashMap<String, String>();
+		resultMap.put("exception",spw.getString());
+		resultMap.put("ReferenceNo", ""+timeStamp);
+		return new ModelAndView("error/exception",resultMap);
 	}
 	
 	public class StringPrintWriter extends PrintWriter{
@@ -98,7 +104,7 @@ public class BaseController {
 	
 	protected String convertToJsonString(Object obj) {
 		if(obj == null)
-			return "{object:null}";
+			return "{object:\"null\"}";
 		String jsonStr = JSONObject.toJSONString(obj);
 		//jsonStr = jsonStr.replaceAll("\"", "'");
 		return jsonStr;

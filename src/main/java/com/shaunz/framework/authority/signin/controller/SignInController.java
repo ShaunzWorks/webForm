@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shaunz.framework.authority.user.entity.User;
 import com.shaunz.framework.authority.user.service.UserService;
@@ -62,7 +63,7 @@ public class SignInController extends BaseController{
 				if(savedRequest == null || savedRequest.getRequestUrl() == null){
 					return redirct2MngmtPlant();
 				} else {
-					model.addAttribute("loginMsg", "success");
+					session.setAttribute("signIn", "success");
 					return FORWARD_TO + filterProjectNmFromURL(savedRequest.getRequestUrl());
 				}
 			} else {
@@ -108,6 +109,18 @@ public class SignInController extends BaseController{
 		return REDIRECT_TO + "index.html";
 	}
 	
+	@RequestMapping(value="/signCheck",method=RequestMethod.GET)
+	@ResponseBody
+	public String signCheck(){
+		User user = null;
+		if(SecurityUtils.getSubject() != null && SecurityUtils.getSubject().isAuthenticated()){
+			user = (User)session.getAttribute("user");
+			if(user != null)
+				user.deSensitive();
+		}
+		return convertToJsonString(user);
+	}
+	
 	private void addSignInFailedTimes(User user){
 		user = userService.findUser(user.getInputUserNM());
 		User updateUsr = new User();
@@ -120,7 +133,7 @@ public class SignInController extends BaseController{
 	}
 	
 	private void clearAttemptSignTimes(User user){
-		User updateUsr = new User();
+		User updateUsr = null;//new User();
 		updateUsr.setId(user.getId());
 		updateUsr.setAttemptSignTimes("0");
 		user.setAttemptSignTimes("0");

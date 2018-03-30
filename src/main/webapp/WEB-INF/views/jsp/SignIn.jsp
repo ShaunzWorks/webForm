@@ -12,7 +12,11 @@
 	<div class="container">
       <form class="form-signin" onsubmit="/signIn" method="post">
         <c:choose>
-        	<c:when test="${not empty errMsg}">${errMsg}</c:when>
+        	<c:when test="${not empty errMsg}">
+        		<div class="alert alert-danger" role="alert">
+        		<strong>Oh snap!</strong> ${errMsg}
+      			</div>
+      		</c:when>
         	<c:otherwise><h2 class="form-signin-heading"><spring:message code="signinpage.header"/></h2></c:otherwise>
         </c:choose>
         <label for="inputEmail" class="sr-only"><spring:message code="signinpage.loginnm"/></label>
