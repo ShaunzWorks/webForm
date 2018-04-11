@@ -2,6 +2,9 @@ package com.shaunz.framework.authority.user.entity;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.apache.log4j.Logger;
 
 import com.shaunz.framework.common.utils.IStringUtil;
@@ -11,8 +14,12 @@ public class User implements Cloneable{
 	
     private String id;
 
+    @NotNull
+    @Size(min=2,max=100)
     private String loginName;
 
+    @NotNull
+    @Size(min=8,max=100)
     private String password;
 
     private String orgPath;
@@ -21,6 +28,7 @@ public class User implements Cloneable{
 
     private String gender;
 
+    @NotNull
     private String email;
 
     private String closeFlg;
@@ -182,6 +190,11 @@ public class User implements Cloneable{
 		this.inputPwd = null;
 		this.lockUp = null;
 		this.closeFlg = null;
+	}
+	
+	public boolean isAvaliableData(){
+		return IStringUtil.notBlank(id) || IStringUtil.notBlank(loginName)
+				|| IStringUtil.notBlank(email);
 	}
 
 	@Override

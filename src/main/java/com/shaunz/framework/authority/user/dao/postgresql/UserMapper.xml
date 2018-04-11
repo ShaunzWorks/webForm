@@ -184,4 +184,51 @@
     from tb_user
     where email = #{email,jdbcType=VARCHAR}
   </select>
+  <select id="queryLst" resultMap="BaseResultMap" parameterType="com.shaunz.framework.authority.user.entity.User" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    <where>
+    	close_flg = 'N',
+   	  <if test="loginName != null" >
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPath != null" >
+        org_path = #{orgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="aliasNm != null" >
+        alias_nm = #{aliasNm,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="closeFlg != null" >
+        close_flg = #{closeFlg,jdbcType=VARCHAR},
+      </if>
+      <if test="lockUp != null" >
+        lock_up = #{lockUp,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attemptSignTimes != null" >
+        attempt_sign_times = #{attemptSignTimes,jdbcType=VARCHAR},
+      </if>
+    </where>
+  </select>
+  <select id="queryAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where close_flg = 'N'
+  </select>   
 </mapper>

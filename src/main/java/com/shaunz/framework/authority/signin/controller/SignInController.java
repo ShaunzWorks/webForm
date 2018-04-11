@@ -133,7 +133,7 @@ public class SignInController extends BaseController{
 	}
 	
 	private void clearAttemptSignTimes(User user){
-		User updateUsr = null;//new User();
+		User updateUsr = new User();
 		updateUsr.setId(user.getId());
 		updateUsr.setAttemptSignTimes("0");
 		user.setAttemptSignTimes("0");

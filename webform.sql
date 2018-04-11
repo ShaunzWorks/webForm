@@ -2,7 +2,7 @@
 -- Table: public.tb_author
 
 -- DROP TABLE public.tb_author;
-
+CREATE SEQUENCE mngmt_sq START 101;
 CREATE TABLE public.tb_author
 (
   id character varying(10) NOT NULL,
@@ -440,7 +440,7 @@ INSERT INTO webform.public.tb_dropdown_list("id", "name", url, "type", parent_id
 INSERT INTO webform.public.tb_dropdown_list("id", "name", url, "type", parent_id) VALUES ('5', 'Nav header', './dropDownLst.html', 'dropdown_header', '4');
 INSERT INTO webform.public.tb_dropdown_list("id", "name", url, "type", parent_id) VALUES ('6', 'Separated link', './dropDownLst.html', 'normal', '4');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('1', 'Authority Management', '1', '#', 'N');
-INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('2', 'Account', '1', '/userMngmt.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('2', 'Account', '1', './mngpages/account_lst.html', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('3', 'Role', '1', '/roleMngmt.html', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('4', 'Home Page Management', '4', '/roleMngmt.html', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('5', 'Navigation Bar', '4', '/naviBarMngmt.html', 'N');

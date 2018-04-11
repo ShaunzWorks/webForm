@@ -5,6 +5,9 @@
 <script src="${webResPath}/js/bootstrap.min.js"></script>
 <script src="${webResPath}/js/bootstrap-dialog.min.js"></script>
 <script src="${webResPath}/js/bootstrap-treeview.min.js"></script>
+<script src="${webResPath}/js/jquery.dataTables.min.js"></script>
+<script src="${webResPath}/js/dataTables.bootstrap.min.js"></script>
+<script src="${webResPath}/js/bootstrap-datetimepicker.min.js"></script>
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="${projectResPath}/js/holder.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

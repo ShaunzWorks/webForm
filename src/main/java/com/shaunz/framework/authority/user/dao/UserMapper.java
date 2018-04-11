@@ -1,5 +1,7 @@
 package com.shaunz.framework.authority.user.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.shaunz.framework.authority.user.entity.User;
@@ -21,4 +23,8 @@ public interface UserMapper {
     User selectByUserNm(String name);
     
     User selectByEmail(String email);
+    
+    List<User> queryAll();
+    
+    List<User> queryLst(User user);
 }

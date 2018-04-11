@@ -1,5 +1,7 @@
 package com.shaunz.framework.authority.user.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +32,19 @@ public class UserService extends BaseService{
 		return user;
 	}
 	
+	public List<User> queryAll(){
+		return userMapper.queryAll();
+	}
+    
+	public List<User> queryLst(User user){
+		return userMapper.queryLst(user);
+	}
+	
 	public boolean updateUserByPrimaryKeySelective(User user){
 		return userMapper.updateByPrimaryKeySelective(user) == 1;
+	}
+	
+	public boolean addNewUser(User user){
+		return userMapper.insertSelective(user) == 1;
 	}
 }
