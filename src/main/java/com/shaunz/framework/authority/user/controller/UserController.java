@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.shaunz.framework.authority.user.entity.User;
 import com.shaunz.framework.authority.user.service.UserService;
 import com.shaunz.framework.common.SequenceGenerator;
+import com.shaunz.framework.common.utils.IStringUtil;
 import com.shaunz.framework.web.base.BaseController;
 
 @Controller
@@ -63,10 +64,31 @@ public class UserController extends BaseController{
 	public String addUser(@Valid User user,BindingResult bindingResult,Locale locale){
 		Map<String, String> results = new HashMap<String, String>();
 		if(bindingResult.hasErrors()){
-			results.put("error", messageSource.getMessage("validation.failed",null,locale));
+			results.put("result", "error");
+			results.put("message", messageSource.getMessage("validation.failed",null,locale));
 		} else {
+			User tmpUser = userService.findUserByEmail(user.getEmail());
+			if(tmpUser != null && IStringUtil.notBlank(tmpUser.getId())){
+				results.put("result", "error");
+				results.put("message", messageSource.getMessage("validation.existEmail",new Object[]{user.getEmail()},locale));
+				return convertToJsonString(results);
+			}
+			tmpUser = userService.findUserByNm(user.getLoginName());
+			if(tmpUser != null && IStringUtil.notBlank(tmpUser.getId())){
+				results.put("result", "error");
+				results.put("message", messageSource.getMessage("validation.existLoginNm",new Object[]{user.getLoginName()},locale));
+				return convertToJsonString(results);
+			}
 			user.setId(""+sequenceGenerator.getNextMngmtSequenceNo());
-			userService.addNewUser(user);
+			user.setCloseFlg("N");
+			boolean flag = userService.addNewUser(user);
+			if(flag){
+				results.put("result", "success");
+				results.put("message",messageSource.getMessage("user.addUserSuccess",new Object[]{user.getLoginName()},locale));
+			} else {
+				results.put("result", "failed");
+				results.put("message",messageSource.getMessage("user.addUserFailed",new Object[]{user.getLoginName()},locale));
+			}
 		}
 		
 		return convertToJsonString(results);

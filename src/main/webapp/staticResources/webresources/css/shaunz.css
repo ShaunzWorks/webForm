@@ -1,0 +1,11 @@
+.alter-box{
+    width: 350px;
+    height: auto;
+    min-height: 100px;
+    position:absolute;
+    bottom: 10px;
+    right: 10px;
+    text-align: left;
+    word-wrap: break-word;
+}
+

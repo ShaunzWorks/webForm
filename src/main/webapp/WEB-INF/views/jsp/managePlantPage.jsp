@@ -10,6 +10,7 @@
     <link href="${webResPath}/css/bootstrap-treeview.min.css" rel="stylesheet">
     <link href="${webResPath}/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="${webResPath}/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="${webResPath}/css/shaunz.css" rel="stylesheet">
     <%@ include file="./common/jsReference.jsp"%>
   </head>
 	<script type="text/javascript" > 
@@ -25,19 +26,8 @@
 				   }
 				});
 			$('#FeatureContainer').load('./mngpages/dashboard.html');
+			Shaunz.showSuccess('test','test');
 		});
-		function treeNodeOnclick(target){
-			var nodeId = $(target).attr('data-nodeid');
-			var treeMenu = $('#TreeMenu');
-			var node = treeMenu.treeview('getNode',nodeId);
-			if(node.state.expanded){
-				treeMenu.treeview('collapseNode',node.nodeId);
-			} else {
-				treeMenu.treeview('expandNode',node.nodeId);
-			}
-			if(node.href != "#")
-				$('#FeatureContainer').load(node.href);
-		}
 	</script>
   <body>
 

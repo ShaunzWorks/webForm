@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.log4j.Logger;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.shaunz.framework.common.utils.IStringUtil;
 
@@ -35,8 +36,10 @@ public class User implements Cloneable{
 
     private String lockUp;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date startTime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date endTime;
     
     private String rememberMe;
