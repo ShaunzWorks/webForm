@@ -97,6 +97,12 @@
 		    <groupId>org.postgresql</groupId>
 		    <artifactId>postgresql</artifactId>
 		    <version>9.4-1200-jdbc41</version>
+		</dependency>
+		<!-- mysql -->
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>8.0.11</version>
 		</dependency>  
         <!-- dbcp config datasource in file applicationContext.xml -->  
         <dependency>  

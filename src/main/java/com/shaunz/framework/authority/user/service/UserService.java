@@ -47,4 +47,13 @@ public class UserService extends BaseService{
 	public boolean addNewUser(User user){
 		return userMapper.insertSelective(user) == 1;
 	}
+	
+	public boolean deleteUser(User user){
+		return userMapper.deleteByPrimaryKey(IStringUtil.isBlank(user.getId())?"":user.getId()) == 1;
+	}
+	
+	public boolean closeUser(User user){
+		user.setCloseFlg("Y");
+		return updateUserByPrimaryKeySelective(user);
+	}
 }

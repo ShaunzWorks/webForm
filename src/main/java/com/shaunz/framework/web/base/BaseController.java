@@ -5,11 +5,13 @@ import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.FormSubmitEvent;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +112,18 @@ public class BaseController {
 		String jsonStr = JSONObject.toJSONString(obj);
 		//jsonStr = jsonStr.replaceAll("\"", "'");
 		return jsonStr;
+	}
+	
+	protected String formSubmitResult(boolean flag,String successStr,Object[] successParam,String failedStr,Object[] failedParam,Locale locale){
+		Map<String, String> results = new HashMap<String, String>();
+		if(flag){
+			results.put("result", "success");
+			results.put("message",messageSource.getMessage(successStr,successParam,locale));
+		} else {
+			results.put("result", "failed");
+			results.put("message",messageSource.getMessage(failedStr,successParam,locale));
+		}
+		return convertToJsonString(results);
 	}
 	
 	@InitBinder

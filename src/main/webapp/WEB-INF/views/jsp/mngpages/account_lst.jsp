@@ -15,18 +15,27 @@
 		var TableParam = {
 				header:['#','name','gender','email'],
 				column:['id','aliasNm','gender','email'],
-				needOpration:true,
-				oprations:['edit','delete','view'],
 				url:'./user',
 				httpType:'GET',
-				target:'table'
+				target:'table',
+				needOpration:true,
+				operations:['edit','delt','detail'],
+				methods:[function(data){
+					Shaunz.load("./mngpages/account_add.html");
+				},
+				function(data){
+					console.log(data);
+				},
+				function(data){
+					console.log(data);
+				}]
 		};
 		$(function(){
 			Shaunz.generateTable(TableParam);
 		});
 		
 		openNewAccountPage = function(){
-			$('#FeatureContainer').load("./mngpages/account_add.html");
+			Shaunz.load("./mngpages/account_add.html");
 		}
 	</script>
 </html>

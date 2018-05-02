@@ -25,8 +25,7 @@
 					   console.log(e);
 				   }
 				});
-			$('#FeatureContainer').load('./mngpages/dashboard.html');
-			Shaunz.showSuccess('test','test');
+			Shaunz.load('./mngpages/dashboard.html');
 		});
 	</script>
   <body>

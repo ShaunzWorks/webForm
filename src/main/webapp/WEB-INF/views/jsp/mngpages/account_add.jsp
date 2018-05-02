@@ -170,29 +170,12 @@
 			    error.addClass("text-danger").insertAfter(nextElement);
 			},
 			submitHandler:function(form){
-				$.ajax({
-	  	  			url:'./user',
-	  	  			type:'POST',
-	  	  			data:$(form).serialize(),
-	  	  			success:function(data,status){
-	  	  				console.log(data);
-	  	  				var result = jQuery.parseJSON(data);
-	  	  				if(result.result == 'success'){
-	  	  					form.reset();
-	  	  					Shaunz.showSuccess('Success',result.message);
-	  	  				} else {
-	  	  					Shaunz.showError('Error',result.message);
-	  	  				}
-	  	  			},
-	  	  			error:function(e){
-	  	  				console.log(e);
-	  	  			}
-	  	  		});
+				Shaunz.submitForm(form,'./user','POST');
 			}
   		});
         
         $('#goBack').click(function(){
-        	$('#FeatureContainer').load('./mngpages/account_lst.html');
+        	Shaunz.load('./mngpages/account_lst.html');
         });
     });
 	</script>

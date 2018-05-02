@@ -67,31 +67,45 @@ public class UserController extends BaseController{
 			results.put("result", "error");
 			results.put("message", messageSource.getMessage("validation.failed",null,locale));
 		} else {
+			boolean flag = true;
 			User tmpUser = userService.findUserByEmail(user.getEmail());
 			if(tmpUser != null && IStringUtil.notBlank(tmpUser.getId())){
 				results.put("result", "error");
 				results.put("message", messageSource.getMessage("validation.existEmail",new Object[]{user.getEmail()},locale));
-				return convertToJsonString(results);
+				flag = false;
 			}
 			tmpUser = userService.findUserByNm(user.getLoginName());
 			if(tmpUser != null && IStringUtil.notBlank(tmpUser.getId())){
 				results.put("result", "error");
 				results.put("message", messageSource.getMessage("validation.existLoginNm",new Object[]{user.getLoginName()},locale));
-				return convertToJsonString(results);
+				flag = false;
 			}
-			user.setId(""+sequenceGenerator.getNextMngmtSequenceNo());
-			user.setCloseFlg("N");
-			boolean flag = userService.addNewUser(user);
 			if(flag){
-				results.put("result", "success");
-				results.put("message",messageSource.getMessage("user.addUserSuccess",new Object[]{user.getLoginName()},locale));
-			} else {
-				results.put("result", "failed");
-				results.put("message",messageSource.getMessage("user.addUserFailed",new Object[]{user.getLoginName()},locale));
+				user.setId(""+sequenceGenerator.getNextMngmtSequenceNo());
+				user.setCloseFlg("N");
+				flag = userService.addNewUser(user);
+				return formSubmitResult(flag, "user.addUserSuccess", new Object[]{user.getLoginName()}, 
+						"user.addUserFailed", new Object[]{user.getLoginName()}, locale);
 			}
 		}
 		
 		return convertToJsonString(results);
+	}
+	
+	@RequestMapping(value="/user",method=RequestMethod.PUT)
+	@ResponseBody
+	public String updateUser(User user,Locale locale){
+		boolean flag = userService.updateUserByPrimaryKeySelective(user);
+		return formSubmitResult(flag, "user.addUserSuccess", new Object[]{user.getLoginName()}, 
+				"user.addUserFailed", new Object[]{user.getLoginName()}, locale);
+	}
+	
+	@RequestMapping(value="/user",method=RequestMethod.DELETE)
+	@ResponseBody
+	public String deleteUser(User user,Locale locale){
+		boolean flag = userService.closeUser(user);
+		return formSubmitResult(flag, "user.addUserSuccess", new Object[]{user.getLoginName()}, 
+				"user.addUserFailed", new Object[]{user.getLoginName()}, locale);
 	}
 	
 }
