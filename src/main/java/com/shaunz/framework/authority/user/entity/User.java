@@ -1,10 +1,12 @@
 package com.shaunz.framework.authority.user.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.log4j.Logger;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -49,6 +51,10 @@ public class User implements Cloneable{
     private String inputPwd;
     
     private String attemptSignTimes;
+    
+    private String startTimeString;
+    
+    private String endTimeString;
 
     public String getId() {
         return id;
@@ -170,6 +176,22 @@ public class User implements Cloneable{
 		this.attemptSignTimes = attemptSignTimes;
 	}
 	
+	public String getStartTimeString() {
+		return startTimeString;
+	}
+
+	public void setStartTimeString(String startTimeString) {
+		this.startTimeString = startTimeString;
+	}
+
+	public String getEndTimeString() {
+		return endTimeString;
+	}
+
+	public void setEndTimeString(String endTimeString) {
+		this.endTimeString = endTimeString;
+	}
+
 	public void attmptSignTimesPlusOne(){
 		if(IStringUtil.isBlank(attemptSignTimes)){
 			attemptSignTimes = "0";
@@ -198,6 +220,16 @@ public class User implements Cloneable{
 	public boolean isAvaliableData(){
 		return IStringUtil.notBlank(id) || IStringUtil.notBlank(loginName)
 				|| IStringUtil.notBlank(email);
+	}
+	
+	public void dateConverter(){
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		if(startTime != null){
+			this.startTimeString = dateFormat.format(startTime);
+		}
+		if(endTime != null){
+			this.endTimeString = dateFormat.format(endTime);
+		}
 	}
 
 	@Override

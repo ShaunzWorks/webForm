@@ -13,6 +13,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -96,16 +97,17 @@ public class UserController extends BaseController{
 	@ResponseBody
 	public String updateUser(User user,Locale locale){
 		boolean flag = userService.updateUserByPrimaryKeySelective(user);
-		return formSubmitResult(flag, "user.addUserSuccess", new Object[]{user.getLoginName()}, 
-				"user.addUserFailed", new Object[]{user.getLoginName()}, locale);
+		return formSubmitResult(flag, "user.updateUserSuccess", new Object[]{user.getLoginName()}, 
+				"user.updateUserFailed", new Object[]{user.getLoginName()}, locale);
 	}
 	
-	@RequestMapping(value="/user",method=RequestMethod.DELETE)
+	@RequestMapping(value="/user/{id}",method=RequestMethod.DELETE)
 	@ResponseBody
-	public String deleteUser(User user,Locale locale){
+	public String deleteUser(@PathVariable("id") String id,Locale locale){
+		User user = userService.selectByPrimaryKey(id);
 		boolean flag = userService.closeUser(user);
-		return formSubmitResult(flag, "user.addUserSuccess", new Object[]{user.getLoginName()}, 
-				"user.addUserFailed", new Object[]{user.getLoginName()}, locale);
+		return formSubmitResult(flag, "user.deleteUserSuccess", new Object[]{user.getLoginName()}, 
+				"user.deleteUserFailed", new Object[]{user.getLoginName()}, locale);
 	}
 	
 }

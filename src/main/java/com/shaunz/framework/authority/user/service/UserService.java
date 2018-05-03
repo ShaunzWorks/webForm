@@ -16,6 +16,10 @@ public class UserService extends BaseService{
 	@Autowired
 	UserMapper userMapper;
 	
+	public User selectByPrimaryKey(String id){
+		return userMapper.selectByPrimaryKey(id);
+	}
+	
 	public User findUserByNm(String usrNm){
 		return userMapper.selectByUserNm(usrNm);
 	}

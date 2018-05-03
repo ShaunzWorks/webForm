@@ -46,6 +46,16 @@
         <filter-name>shiroFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <!-- SpringMVC PUT parameters -->
+    <filter>  
+        <filter-name>httpPutFormContentFilter</filter-name>  
+        <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>  
+    </filter>  
+      
+    <filter-mapping>  
+        <filter-name>httpPutFormContentFilter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>  
     <!-- Avoid RAM overflow 
     	This listener should be registered as the first one in web.xml, before any application listeners such as Spring's ContextLoaderListener
     -->  

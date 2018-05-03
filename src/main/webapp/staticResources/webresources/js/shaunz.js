@@ -1,8 +1,8 @@
 var Shaunz = new Object;
 var tableIconBtn = {
 		edit:'glyphicon glyphicon-edit text-success',
-		detail:'glyphicon glyphicon-zoom-in',
-		delt:'glyphicon glyphicon-remove'
+		detail:'glyphicon glyphicon-zoom-in text-info',
+		delt:'glyphicon glyphicon-remove text-danger'
 };
 
 Shaunz.loadPage = function(container,url){
@@ -133,7 +133,6 @@ Shaunz.submitForm = function(form,requestUrl,requestType){
 			success:function(data,status){
 				var result = jQuery.parseJSON(data);
 				if(result.result == 'success'){
-					form.reset();
 					Shaunz.showSuccess('Success',result.message);
 				} else {
 					Shaunz.showError('Error',result.message);
@@ -143,4 +142,23 @@ Shaunz.submitForm = function(form,requestUrl,requestType){
 				Shaunz.showError('Error',e);
 			}
 		});
-}
+};
+
+Shaunz.ajaxRequest = function(params,requestUrl,requestType){
+	$.ajax({
+		url:requestUrl,
+		type:requestType,
+		data:params,
+		success:function(data,status){
+			var result = jQuery.parseJSON(data);
+			if(result.result == 'success'){
+				Shaunz.showSuccess('Success',result.message);
+			} else {
+				Shaunz.showError('Error',result.message);
+			}
+		},
+		error:function(e){
+			Shaunz.showError('Error',e);
+		}
+	});
+};

@@ -6,7 +6,8 @@
        	  <div class="form-group row">
 		    <label for="loginName" class="col-sm-2 col-form-label"><spring:message code="user.userNm"/></label>
 		    <div class="input-group col-sm-6">
-		    	<input type="text" class="form-control" id="loginName" name="loginName" placeholder="<spring:message code="user.userNm.placeHolder"/>"/>
+		    	<input type="text" class="form-control" id="loginName" name="loginName" placeholder="<spring:message code="user.userNm.placeHolder"/>" value="${user.loginName}"/>
+		    	<input type="hidden" name="id" value="${user.id}"/>
 		    </div>
 		    <div class="col-sm-4">
 		    	<span></span>
@@ -15,7 +16,7 @@
 		  <div class="form-group row">
 		    <label for="email" class="col-sm-2 col-form-label"><spring:message code="user.email"/></label>
 		    <div class="input-group col-sm-6">
-		    	<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="<spring:message code="user.email.placeHolder"/>"/>
+		    	<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="<spring:message code="user.email.placeHolder"/>" value="${user.email}"/>
 		    	<small id="emailHelp" class="form-text text-muted"><spring:message code="user.email.help"/></small>
 		    </div>
 		    <div class="col-sm-4">
@@ -25,7 +26,7 @@
 		  <div class="form-group row">
 		    <label for="password" class="col-sm-2 col-form-label"><spring:message code="user.password"/></label>
 		    <div class="input-group col-sm-6">
-		    	<input type="password" class="form-control" id="password" name="password" placeholder="<spring:message code="user.password.placeHolder"/>"/>
+		    	<input type="password" class="form-control" id="password" name="password" placeholder="<spring:message code="user.password.placeHolder"/>" value="${user.password}"/>
 		    </div>
 		    <div class="col-sm-4">
 		    	<span></span>
@@ -34,7 +35,7 @@
 		  <div class="form-group row">
 		    <label for="aliasName" class="col-sm-2 col-form-label"><spring:message code="user.aliasNm"/></label>
 		    <div class="input-group col-sm-6">
-		    	<input type="text" class="form-control" id="aliasName" name="aliasNm" placeholder="<spring:message code="user.aliasNm.placeHolder"/>"/>
+		    	<input type="text" class="form-control" id="aliasName" name="aliasNm" placeholder="<spring:message code="user.aliasNm.placeHolder"/>" value="${user.aliasNm}"/>
 		    </div>
 		    <div class="col-sm-4">
 		    	<span></span>
@@ -44,9 +45,9 @@
 		    <label for="gender" class="col-sm-2 col-form-label"><spring:message code="user.gender"/></label>
 		    <div class="input-group col-sm-6">
 		    	<select class="form-control" id="gender" name="gender">
-				  <option selected><spring:message code="common.selectOption"/></option>
-				  <option value="Male"><spring:message code="user.gender.male"/></option>
-				  <option value="Female"><spring:message code="user.gender.female"/></option>
+				  <option><spring:message code="common.selectOption"/></option>
+				  <option <c:if test="${user.gender eq 'Male'}">selected</c:if> value="Male"><spring:message code="user.gender.male"/></option>
+				  <option <c:if test="${user.gender eq 'Female'}">selected</c:if> value="Female"><spring:message code="user.gender.female"/></option>
 				</select>
 		    </div>
 		    <div class="col-sm-4">
@@ -56,7 +57,7 @@
 		  <div class="form-group row">
 		    <label for="orgPath" class="col-sm-2 col-form-label"><spring:message code="user.organization"/></label>
 		    <div class="input-group col-sm-6">
-		    	<input type="text" class="form-control" id="orgPath" name="orgPath" aria-describedby="emailHelp" placeholder="<spring:message code="user.organization.placeHolder"/>">
+		    	<input type="text" class="form-control" id="orgPath" name="orgPath" aria-describedby="emailHelp" placeholder="<spring:message code="user.organization.placeHolder"/>" value="${user.orgPath}">
 		    </div>
 		    <div class="col-sm-4">
 		    	<span></span>
@@ -65,7 +66,7 @@
 		  <div class="form-group row">
 		  	<label for="startTime" class="col-sm-2 col-form-label"><spring:message code="user.startTime"/></label>
             <div class='input-group date col-sm-6' id='datetimepickerFrom'>
-               	<input type="text" class="form-control" id="startTime" name="startTime" placeholder="<spring:message code="user.startTime.placeHolder"/>"/>
+               	<input type="text" class="form-control" id="startTime" name="startTime" placeholder="<spring:message code="user.startTime.placeHolder"/>" value="${user.startTimeString}">
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -77,7 +78,7 @@
           <div class="form-group row">
           	<label for="endTime" class="col-sm-2 col-form-label"><spring:message code="user.endTime"/></label>
             <div class='input-group date col-sm-6' id='datetimepickerTo'>
-               	<input type="text" class="form-control" id="endTime" name="endTime" placeholder="<spring:message code="user.endTime.placeHolder"/>"/>
+               	<input type="text" class="form-control" id="endTime" name="endTime" placeholder="<spring:message code="user.endTime.placeHolder"/>" value="${user.endTimeString}">
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -90,9 +91,9 @@
 		    <label for="lockUpN" class="col-sm-2 col-form-label"><spring:message code="user.lockUp"/></label>
 		    <div class="input-group col-sm-6">
 		    	<div class="form-check form-check-inline">
-				  <input class="form-check-input" type="radio" name="lockUp" id="lockUpY" value="Y"/>
+				  <input class="form-check-input" type="radio" name="lockUp" id="lockUpY" value="Y" <c:if test="${user.lockUp eq 'Y'}">checked</c:if>/>
 				  <label class="form-check-label" for="lockUpY"><spring:message code="common.yes"/></label>
-				  <input class="form-check-input" type="radio" name="lockUp" id="lockUpN" value="N" checked/>
+				  <input class="form-check-input" type="radio" name="lockUp" id="lockUpN" value="N" <c:if test="${user.lockUp eq 'N'}">checked</c:if>/>
 				  <label class="form-check-label" for="lockUpN"><spring:message code="common.no"/></label>
 				</div>
 		    </div>
@@ -123,7 +124,7 @@
             $('#datetimepickerFrom').data("DateTimePicker").maxDate(e.date);
         });
         
-        $('#accAddForm').validate({
+        $('#accEditForm').validate({
         	debug: true,
         	onfocusout: true,
         	rules: {
@@ -170,8 +171,8 @@
 			    error.addClass("text-danger").insertAfter(nextElement);
 			},
 			submitHandler:function(form){
-				Shaunz.submitForm(form,'./user','POST');
-				form.reset();
+				Shaunz.submitForm(form,'./user','PUT');
+				//Shaunz.load("./mngpages/account_edit.html?id="+${user.id});
 			}
   		});
         

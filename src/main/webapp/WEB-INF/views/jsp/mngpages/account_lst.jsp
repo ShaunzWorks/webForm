@@ -1,9 +1,9 @@
 <%@ include file="../common/common.jsp"%>
 <html lang="en">
   <body>
-  		<h2 class="sub-header">Account</h2>
+  		<h2 class="sub-header"><spring:message code="user.title"/></h2>
   		<div class="row">
-        	<div class="col-sm-3 col-md-2"><button class="btn btn-md btn-primary glyphicon glyphicon-plus" onClick="openNewAccountPage()"> New</button></div>
+        	<div class="col-sm-3 col-md-2"><button class="btn btn-md btn-primary glyphicon glyphicon-plus" onClick="openNewAccountPage()"> <spring:message code="common.new"/></button></div>
         </div>
         <br/>
         <div class="table-responsive">
@@ -13,21 +13,22 @@
   </body>
   	<script type="text/javascript" >
 		var TableParam = {
-				header:['#','name','gender','email'],
+				header:['#','<spring:message code="user.userNm"/>','<spring:message code="user.gender"/>','<spring:message code="user.email"/>'],
 				column:['id','aliasNm','gender','email'],
 				url:'./user',
 				httpType:'GET',
 				target:'table',
 				needOpration:true,
-				operations:['edit','delt','detail'],
-				methods:[function(data){
-					Shaunz.load("./mngpages/account_add.html");
+				operations:['detail','edit','delt'],
+				methods:[function(obj){
+					
 				},
-				function(data){
-					console.log(data);
+				function(obj){
+					Shaunz.load("./mngpages/account_edit.html?id="+obj.data.id);
 				},
-				function(data){
-					console.log(data);
+				function(obj){
+					Shaunz.ajaxRequest(null,'./user/'+obj.data.id,'DELETE');
+					Shaunz.load("./mngpages/account_lst.html");
 				}]
 		};
 		$(function(){
