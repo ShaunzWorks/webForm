@@ -3,6 +3,7 @@
 
 -- DROP TABLE public.tb_author;
 CREATE SEQUENCE mngmt_sq START 101;
+CREATE SEQUENCE log_sq START 1;
 CREATE TABLE public.tb_author
 (
   id character varying(10) NOT NULL,
@@ -163,6 +164,7 @@ CREATE TABLE public.tb_function
   parent_id character varying(100),
   url character varying(100),
   close_flg character varying(1),
+  tb_nm character varying(100),
   CONSTRAINT tb_function_pkey PRIMARY KEY (id)
 )
 WITH (
@@ -375,6 +377,33 @@ WITH (
 );
 ALTER TABLE public.tb_user_role
   OWNER TO "Shaun";
+  
+-- Table: public.tb_sys_log
+
+-- DROP TABLE public.tb_sys_log;
+
+CREATE TABLE public.tb_sys_log
+(
+  id character varying(100) NOT NULL,
+  user_id character varying(100),
+  function_id character varying(100),
+  target_id character varying(100),
+  opt_type character varying(10),
+  opt_time timestamp without time zone,
+  content character varying(2000),
+  CONSTRAINT tb_sys_log_pkey PRIMARY KEY (id),
+  CONSTRAINT tb_sys_log_function_id_fkey FOREIGN KEY (function_id)
+      REFERENCES public.tb_function (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT tb_sys_log_user_id_fkey FOREIGN KEY (user_id)
+      REFERENCES public.tb_user (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.tb_sys_log
+  OWNER TO "Shaun";
 
 
 INSERT INTO webform.public.tb_author("id", "name", pwd, alias_nm, gender, email, close_flg, lock_up) VALUES ('1', 'Shaun', 'Shaun', 'Shaun Xiong Deng', 'MALE', 'dengxiong90@foxmail.com', 'N', 'UNLOCK');
@@ -440,7 +469,7 @@ INSERT INTO webform.public.tb_dropdown_list("id", "name", url, "type", parent_id
 INSERT INTO webform.public.tb_dropdown_list("id", "name", url, "type", parent_id) VALUES ('5', 'Nav header', './dropDownLst.html', 'dropdown_header', '4');
 INSERT INTO webform.public.tb_dropdown_list("id", "name", url, "type", parent_id) VALUES ('6', 'Separated link', './dropDownLst.html', 'normal', '4');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('1', 'Authority Management', '1', '#', 'N');
-INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('2', 'Account', '1', './mngpages/account_lst.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('2', 'Account', '1', './mngpages/account_lst.html', 'N','tb_user');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('3', 'Role', '1', '/roleMngmt.html', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('4', 'Home Page Management', '4', '/roleMngmt.html', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('5', 'Navigation Bar', '4', '/naviBarMngmt.html', 'N');

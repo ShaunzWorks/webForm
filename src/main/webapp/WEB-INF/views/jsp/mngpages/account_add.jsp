@@ -2,7 +2,7 @@
 <html lang="en">
   <body>
   		<h2 class="sub-header"><spring:message code="user.title"/></h2>
-       	<form id="accEditForm">
+       	<form id="accAddForm">
        	  <div class="form-group row">
 		    <label for="loginName" class="col-sm-2 col-form-label"><spring:message code="user.userNm"/></label>
 		    <div class="input-group col-sm-6">

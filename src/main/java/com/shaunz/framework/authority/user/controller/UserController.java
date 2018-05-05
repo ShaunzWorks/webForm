@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.shaunz.framework.authority.user.entity.User;
 import com.shaunz.framework.authority.user.service.UserService;
 import com.shaunz.framework.common.SequenceGenerator;
+import com.shaunz.framework.common.auditlogs.ShaunzAuditLog;
 import com.shaunz.framework.common.utils.IStringUtil;
 import com.shaunz.framework.web.base.BaseController;
 
@@ -62,6 +63,7 @@ public class UserController extends BaseController{
 	
 	@RequestMapping(value="/user",method=RequestMethod.POST)
 	@ResponseBody
+	@ShaunzAuditLog(optType="add",functionId="2")
 	public String addUser(@Valid User user,BindingResult bindingResult,Locale locale){
 		Map<String, String> results = new HashMap<String, String>();
 		if(bindingResult.hasErrors()){
@@ -85,6 +87,7 @@ public class UserController extends BaseController{
 				user.setId(""+sequenceGenerator.getNextMngmtSequenceNo());
 				user.setCloseFlg("N");
 				flag = userService.addNewUser(user);
+				user.setOptFlag(flag);
 				return formSubmitResult(flag, "user.addUserSuccess", new Object[]{user.getLoginName()}, 
 						"user.addUserFailed", new Object[]{user.getLoginName()}, locale);
 			}
@@ -95,6 +98,7 @@ public class UserController extends BaseController{
 	
 	@RequestMapping(value="/user",method=RequestMethod.PUT)
 	@ResponseBody
+	@ShaunzAuditLog(optType="edit",functionId="2")
 	public String updateUser(User user,Locale locale){
 		boolean flag = userService.updateUserByPrimaryKeySelective(user);
 		return formSubmitResult(flag, "user.updateUserSuccess", new Object[]{user.getLoginName()}, 
@@ -103,6 +107,7 @@ public class UserController extends BaseController{
 	
 	@RequestMapping(value="/user/{id}",method=RequestMethod.DELETE)
 	@ResponseBody
+	@ShaunzAuditLog(optType="del",functionId="2")
 	public String deleteUser(@PathVariable("id") String id,Locale locale){
 		User user = userService.selectByPrimaryKey(id);
 		boolean flag = userService.closeUser(user);

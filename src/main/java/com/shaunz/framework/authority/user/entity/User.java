@@ -11,12 +11,9 @@ import org.apache.log4j.Logger;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.shaunz.framework.common.utils.IStringUtil;
+import com.shaunz.framework.core.BaseEntity;
 
-public class User implements Cloneable{
-	Logger logger = Logger.getLogger(User.class);
-	
-    private String id;
-
+public class User extends BaseEntity{
     @NotNull
     @Size(min=2,max=100)
     private String loginName;
@@ -55,14 +52,6 @@ public class User implements Cloneable{
     private String startTimeString;
     
     private String endTimeString;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
 
     public String getLoginName() {
         return loginName;
