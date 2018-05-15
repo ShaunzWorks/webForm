@@ -47,7 +47,11 @@ Shaunz.generateTable = function(param){
 			for(i=0;i<objs.length;i++){
 				bodyHtml += "<tr>";
 				for(j=0;j<param.column.length;j++){
-					bodyHtml = bodyHtml+"<td>"+objs[i][param.column[j]]+"</td>"; 
+					var tdContent = '-';
+					if(objs[i][param.column[j]]){
+						tdContent = objs[i][param.column[j]];
+					}
+					bodyHtml = bodyHtml+"<td>"+tdContent+"</td>"; 
 				}
 				if(TableParam.needOpration){
 					bodyHtml += '<td>';
@@ -162,3 +166,26 @@ Shaunz.ajaxRequest = function(params,requestUrl,requestType){
 		}
 	});
 };
+
+Shaunz.showDetail = function(functionId,ObjId){
+	BootstrapDialog.show({
+    	title: 'View Detail',
+		size: BootstrapDialog.SIZE_WIDE,
+    	message: function(dialog) {
+            var $message = $('<div></div>');
+            var pageToLoad = dialog.getData('pageToLoad');
+            $message.load(pageToLoad);
+            return $message;
+        },
+        data: {
+            'pageToLoad': './mngpages/detail.html?functionId='+functionId+'&objId='+ObjId
+        },
+        buttons: [{
+            label: 'Close',
+            title: 'Close this dialog',
+            action: function(dialogItself){
+                dialogItself.close();
+            }
+        }]
+    });
+}

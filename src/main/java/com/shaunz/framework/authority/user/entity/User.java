@@ -6,12 +6,11 @@ import java.util.Date;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.apache.commons.beanutils.converters.DateConverter;
-import org.apache.log4j.Logger;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.shaunz.framework.common.utils.IStringUtil;
 import com.shaunz.framework.core.BaseEntity;
+import com.shaunz.framework.core.YgdrasilConst;
 
 public class User extends BaseEntity{
     @NotNull
@@ -35,10 +34,10 @@ public class User extends BaseEntity{
 
     private String lockUp;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
     
     private String rememberMe;
@@ -212,17 +211,12 @@ public class User extends BaseEntity{
 	}
 	
 	public void dateConverter(){
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat dateFormat = new SimpleDateFormat(YgdrasilConst.DATE_FORMART);
 		if(startTime != null){
 			this.startTimeString = dateFormat.format(startTime);
 		}
 		if(endTime != null){
 			this.endTimeString = dateFormat.format(endTime);
 		}
-	}
-
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
 	}
 }

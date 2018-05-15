@@ -7,9 +7,10 @@
     <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="close_flg" property="closeFlg" jdbcType="VARCHAR" />
+    <result column="tb_nm" property="tableNm" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, parent_id, url, close_flg
+    id, name, parent_id, url, close_flg,tb_nm
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -102,5 +103,8 @@
 		inner join tb_user_role usr_rol on usr_rol.role_id = auth.role_id
 		where usr_rol.user_id = #{usrId,jdbcType=VARCHAR}
 	  	and close_flg = 'N'
+  </select>
+  <select id="findObjBy" parameterType="string" resultType="java.util.Map">
+    select * from ${tableNm} where id=#{1}
   </select>
 </mapper>

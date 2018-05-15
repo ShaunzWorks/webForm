@@ -22,5 +22,9 @@ public class BaseEntity implements Cloneable{
 	public void setOptFlag(boolean optFlag) {
 		this.optFlag = optFlag;
 	}
-    
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 }

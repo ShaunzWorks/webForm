@@ -112,4 +112,18 @@
 		<![CDATA[and COALESCE(role.start_time,current_timestamp) <= current_timestamp and COALESCE(role.end_time,current_timestamp) >= current_timestamp]]>
 		and role.close_flg = 'N'
   </select>
+  <select id="queryList" resultMap="BaseResultMap" parameterType="com.shaunz.framework.authority.role.entity.Role" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_role
+    <where>
+    	close_flg = 'N'
+	    <if test="name != null" >
+	        name = #{name,jdbcType=VARCHAR},
+	   	</if>
+	   	<if test="parentId != null" >
+	        parent_id = #{parentId,jdbcType=VARCHAR},
+	   	</if>
+   	</where>
+  </select>
 </mapper>

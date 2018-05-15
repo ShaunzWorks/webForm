@@ -1,8 +1,8 @@
 package com.shaunz.framework.authority.function.entity;
 
-public class Function {
-    private String id;
+import com.shaunz.framework.core.BaseEntity;
 
+public class Function extends BaseEntity{
     private String name;
 
     private String parentId;
@@ -10,14 +10,8 @@ public class Function {
     private String url;
 
     private String closeFlg;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
+    
+    private String tableNm;
 
     public String getName() {
         return name;
@@ -50,4 +44,12 @@ public class Function {
     public void setCloseFlg(String closeFlg) {
         this.closeFlg = closeFlg == null ? null : closeFlg.trim();
     }
+
+	public String getTableNm() {
+		return tableNm;
+	}
+
+	public void setTableNm(String tableNm) {
+		this.tableNm = tableNm;
+	}
 }

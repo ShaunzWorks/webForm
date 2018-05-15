@@ -18,4 +18,6 @@ public interface RoleMapper {
     int updateByPrimaryKey(Role record);
     
     List<Role> selectByUserId(String usrId);
+    
+    List<Role> queryList(Role role);
 }

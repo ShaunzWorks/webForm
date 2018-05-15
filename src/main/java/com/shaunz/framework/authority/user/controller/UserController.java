@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,6 +50,7 @@ public class UserController extends BaseController{
 		return convertToJsonString(usrRet);
 	}
 	
+	@RequiresPermissions("2.query")
 	@RequestMapping(value="/user",method=RequestMethod.GET)
 	@ResponseBody
 	public String userList(User user){
@@ -61,6 +63,7 @@ public class UserController extends BaseController{
 		return convertToJsonString(result);
 	}
 	
+	@RequiresPermissions("2.add")
 	@RequestMapping(value="/user",method=RequestMethod.POST)
 	@ResponseBody
 	@ShaunzAuditLog(optType="add",functionId="2")
@@ -88,31 +91,33 @@ public class UserController extends BaseController{
 				user.setCloseFlg("N");
 				flag = userService.addNewUser(user);
 				user.setOptFlag(flag);
-				return formSubmitResult(flag, "user.addUserSuccess", new Object[]{user.getLoginName()}, 
-						"user.addUserFailed", new Object[]{user.getLoginName()}, locale);
+				return formSubmitResult(flag, "common.addMsg", new Object[]{messageSource.getMessage("user.title", null, locale),user.getLoginName()}
+				,locale);
 			}
 		}
 		
 		return convertToJsonString(results);
 	}
 	
+	@RequiresPermissions("2.update")
 	@RequestMapping(value="/user",method=RequestMethod.PUT)
 	@ResponseBody
-	@ShaunzAuditLog(optType="edit",functionId="2")
+	@ShaunzAuditLog(optType="update",functionId="2")
 	public String updateUser(User user,Locale locale){
 		boolean flag = userService.updateUserByPrimaryKeySelective(user);
-		return formSubmitResult(flag, "user.updateUserSuccess", new Object[]{user.getLoginName()}, 
-				"user.updateUserFailed", new Object[]{user.getLoginName()}, locale);
+		return formSubmitResult(flag, "common.updateMsg", new Object[]{messageSource.getMessage("user.title", null, locale),user.getLoginName()}
+			, locale);
 	}
 	
+	@RequiresPermissions("2.delete")
 	@RequestMapping(value="/user/{id}",method=RequestMethod.DELETE)
 	@ResponseBody
 	@ShaunzAuditLog(optType="del",functionId="2")
 	public String deleteUser(@PathVariable("id") String id,Locale locale){
 		User user = userService.selectByPrimaryKey(id);
 		boolean flag = userService.closeUser(user);
-		return formSubmitResult(flag, "user.deleteUserSuccess", new Object[]{user.getLoginName()}, 
-				"user.deleteUserFailed", new Object[]{user.getLoginName()}, locale);
+		return formSubmitResult(flag, "common.deleteMsg", new Object[]{messageSource.getMessage("user.title", null, locale),user.getLoginName()}
+				, locale);
 	}
 	
 }

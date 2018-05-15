@@ -87,7 +87,7 @@ public class BootStrapTreeViewNode extends TreeNode{
 		 * Boolean Default: false
 		 * Whether or not a node is expanded i.e. open. Takes precedence over global option levels.
 		 */
-		public Boolean expanded;
+		public Boolean expanded = true;
 		
 		/**
 		 * Boolean Default: false

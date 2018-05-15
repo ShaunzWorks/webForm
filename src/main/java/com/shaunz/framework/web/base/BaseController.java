@@ -3,15 +3,17 @@ package com.shaunz.framework.web.base;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.html.FormSubmitEvent;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.shaunz.framework.authority.user.entity.User;
+import com.shaunz.framework.core.YgdrasilConst;
 
 /**
  * @version 1.0.0
@@ -109,27 +113,29 @@ public class BaseController {
 	protected String convertToJsonString(Object obj) {
 		if(obj == null)
 			return "{object:\"null\"}";
-		String jsonStr = JSONObject.toJSONString(obj);
+		String jsonStr = JSONObject.toJSONStringWithDateFormat(obj, YgdrasilConst.DATE_FORMART, SerializerFeature.WriteDateUseDateFormat);
 		//jsonStr = jsonStr.replaceAll("\"", "'");
 		return jsonStr;
 	}
 	
-	protected String formSubmitResult(boolean flag,String successStr,Object[] successParam,String failedStr,Object[] failedParam,Locale locale){
+	protected String formSubmitResult(boolean flag,String msgKey,Object[] params,Locale locale){
 		Map<String, String> results = new HashMap<String, String>();
+		List<Object> paramsLst = new ArrayList<Object>(Arrays.asList(params));
 		if(flag){
 			results.put("result", "success");
-			results.put("message",messageSource.getMessage(successStr,successParam,locale));
+			paramsLst.add(messageSource.getMessage("common.success",null,locale));
 		} else {
 			results.put("result", "failed");
-			results.put("message",messageSource.getMessage(failedStr,successParam,locale));
+			paramsLst.add(messageSource.getMessage("common.failed",null,locale));
 		}
+		results.put("message",messageSource.getMessage(msgKey,paramsLst.toArray(),locale));
 		return convertToJsonString(results);
 	}
 	
 	@InitBinder
 	protected void dateBinder(WebDataBinder binder) {
 	            //The date format to parse or output your dates
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	    SimpleDateFormat dateFormat = new SimpleDateFormat(YgdrasilConst.DATE_FORMART);
 	            //Create a new CustomDateEditor
 	    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
 	            //Register it as custom editor for the Date type

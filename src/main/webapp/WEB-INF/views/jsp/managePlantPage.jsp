@@ -20,6 +20,7 @@
 				   type: 'GET',
 				   success: function(data,status) {
 					   $('#TreeMenu').treeview(jQuery.parseJSON(data));
+					   $('#TreeMenu').treeview('collapseAll', { silent: true });
 				   },
 				   error: function(e) {
 					   console.log(e);

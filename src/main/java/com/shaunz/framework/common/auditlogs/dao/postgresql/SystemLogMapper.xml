@@ -114,4 +114,10 @@
       content = #{content,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="queryAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sys_log
+    order by opt_time desc
+  </select>
 </mapper>

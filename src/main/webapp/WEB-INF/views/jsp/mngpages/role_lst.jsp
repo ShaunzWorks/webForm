@@ -1,7 +1,7 @@
 <%@ include file="../common/common.jsp"%>
 <html lang="en">
   <body>
-  		<h2 class="sub-header"><spring:message code="user.title"/></h2>
+  		<h2 class="sub-header"><spring:message code="role.title"/></h2>
   		<div class="row">
         	<div class="col-sm-3 col-md-2"><button class="btn btn-md btn-primary glyphicon glyphicon-plus" onClick="openNewAccountPage()"> <spring:message code="common.new"/></button></div>
         </div>
@@ -13,23 +13,22 @@
   </body>
   	<script type="text/javascript" >
 		var TableParam = {
-				header:['#','<spring:message code="user.userNm"/>','<spring:message code="user.gender"/>','<spring:message code="user.email"/>',
-					'<spring:message code="user.startTime"/>','<spring:message code="user.endTime"/>'],
-				column:['id','aliasNm','gender','email','startTime','endTime'],
-				url:'./user',
+				header:['#','<spring:message code="role.name"/>','<spring:message code="role.parentId"/>','<spring:message code="role.startTime"/>','<spring:message code="role.endTime"/>'],
+				column:['id','name','parentId','startTime','endTime'],
+				url:'./role',
 				httpType:'GET',
 				target:'table',
 				needOpration:true,
 				operations:['detail','edit','delt'],
 				methods:[function(obj){
-					Shaunz.showDetail('2',obj.data.id);
+					Shaunz.showDetail('3',obj.data.id);
 				},
 				function(obj){
-					Shaunz.load("./mngpages/account_edit.html?id="+obj.data.id);
+					Shaunz.load("./mngpages/role_edit.html?id="+obj.data.id);
 				},
 				function(obj){
-					Shaunz.ajaxRequest(null,'./user/'+obj.data.id,'DELETE');
-					Shaunz.load("./mngpages/account_lst.html");
+					Shaunz.ajaxRequest(null,'./role/'+obj.data.id,'DELETE');
+					Shaunz.load("./mngpages/role_lst.html");
 				}]
 		};
 		$(function(){
@@ -37,8 +36,7 @@
 		});
 		
 		openNewAccountPage = function(){
-			Shaunz.load("./mngpages/account_add.html");
+			Shaunz.load("./mngpages/role_add.html");
 		}
-		
 	</script>
 </html>

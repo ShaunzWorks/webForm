@@ -1,5 +1,7 @@
 package com.shaunz.framework.common.auditlogs.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.shaunz.framework.common.auditlogs.entity.SystemLog;
@@ -17,4 +19,6 @@ public interface SystemLogMapper {
     int updateByPrimaryKeySelective(SystemLog record);
 
     int updateByPrimaryKey(SystemLog record);
+    
+    List<SystemLog> queryAll();
 }

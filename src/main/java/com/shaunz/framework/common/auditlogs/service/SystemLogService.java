@@ -70,4 +70,8 @@ public class SystemLogService extends BaseService{
 		return retFlag;
 	}
 	
+	public List<SystemLog> queryAll(SystemLog systemLog){
+		return systemLogMapper.queryAll();
+	}
+	
 }
