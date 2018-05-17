@@ -1,5 +1,6 @@
 package com.shaunz.framework.authority.function.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.shaunz.framework.authority.function.entity.Function;
 import com.shaunz.framework.authority.function.service.FunctionService;
 import com.shaunz.framework.authority.user.entity.User;
 import com.shaunz.framework.common.treemenu.TreeMenu;
@@ -33,5 +35,12 @@ public class FunctionController extends BaseController{
 	public String findObjBy(@PathVariable("functionId")long functionId, @PathVariable("objId")long objId){
 		Map<String, Object> obj = functionService.findObjectDetailBy(""+functionId, ""+objId);
 		return convertToJsonString(obj);
+	}
+	
+	@RequestMapping(value="/function",method=RequestMethod.GET)
+	@ResponseBody
+	public String functionLst(){
+		List<Function> functions = functionService.queryAllFunctions();
+		return convertToJsonString(functions);
 	}
 }

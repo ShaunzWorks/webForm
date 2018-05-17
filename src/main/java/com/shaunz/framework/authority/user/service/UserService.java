@@ -1,12 +1,17 @@
 package com.shaunz.framework.authority.user.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.shaunz.framework.authority.user.dao.UserMapper;
 import com.shaunz.framework.authority.user.entity.User;
+import com.shaunz.framework.common.utils.IArrayListUtil;
 import com.shaunz.framework.common.utils.IStringUtil;
 import com.shaunz.framework.web.base.BaseService;
 
@@ -59,5 +64,41 @@ public class UserService extends BaseService{
 	public boolean closeUser(User user){
 		user.setCloseFlg("Y");
 		return updateUserByPrimaryKeySelective(user);
+	}
+	
+	@Transactional
+	public boolean roleGrant(String[] roleIds,String userId){
+		boolean flag = false;
+		List<Map<String, Object>> oldUsrRoleMap = userMapper.getUsrRoleMapBy(userId);
+		List<Map<String, Object>> newUsrRoleMap = new ArrayList<Map<String,Object>>();
+		for (int i = 0; i < roleIds.length; i++) {
+			Map<String, Object> usrRoleMap = null;
+			for (int j = 0; j < oldUsrRoleMap.size(); j++) {
+				usrRoleMap = oldUsrRoleMap.get(j);
+				if(roleIds[i].equals(usrRoleMap.get("role_id").toString())){
+					newUsrRoleMap.add(usrRoleMap);
+					break;
+				}
+				usrRoleMap = null;
+			}
+			if(usrRoleMap == null){
+				usrRoleMap = new HashMap<String, Object>();
+				usrRoleMap.put("user_id", userId);
+				usrRoleMap.put("role_id", roleIds[i]);
+				newUsrRoleMap.add(usrRoleMap);
+			}
+		}
+		int deletedRows = 0;
+		if(!IArrayListUtil.isBlankList(oldUsrRoleMap)){
+			deletedRows = userMapper.deleteUsrRoleMapBy(userId);
+		}
+		int insertedRows = 0;
+		for (int i = 0; i < newUsrRoleMap.size(); i++) {
+			insertedRows += userMapper.insertUsrRoleMapSelective(newUsrRoleMap.get(i));
+		}
+		if((deletedRows == (oldUsrRoleMap==null?0:oldUsrRoleMap.size()))
+				&&(insertedRows == newUsrRoleMap.size()))
+			flag = true;
+		return flag;
 	}
 }

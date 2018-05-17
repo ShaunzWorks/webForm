@@ -9,6 +9,8 @@
     <link href="${projectResPath}/css/dashboard.css" rel="stylesheet">
     <link href="${webResPath}/css/bootstrap-treeview.min.css" rel="stylesheet">
     <link href="${webResPath}/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="${webResPath}/css/select.dataTables.min.css" rel="stylesheet">
+    <link href="${webResPath}/css/dataTables.checkboxes.css" rel="stylesheet">
     <link href="${webResPath}/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="${webResPath}/css/shaunz.css" rel="stylesheet">
     <%@ include file="./common/jsReference.jsp"%>
@@ -40,7 +42,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">${applicationScope.homePageObject.projectNm}</a>
+          <a class="navbar-brand" href="${applicationScope.homePageObject.homeUrl}">${applicationScope.homePageObject.projectNm}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -48,7 +50,7 @@
             <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
-            <li><a href="./signout">Logout</a></li>
+            <li><a href="./signout"><spring:message code="homepage.signout"/></a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">

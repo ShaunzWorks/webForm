@@ -1,6 +1,7 @@
 package com.shaunz.framework.authority.user.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -27,4 +28,10 @@ public interface UserMapper {
     List<User> queryAll();
     
     List<User> queryLst(User user);
+    
+    List<Map<String, Object>> getUsrRoleMapBy(String userId);
+    
+    int insertUsrRoleMapSelective(Map<String, Object> usrRoleMap);
+    
+    int deleteUsrRoleMapBy(String userId);
 }

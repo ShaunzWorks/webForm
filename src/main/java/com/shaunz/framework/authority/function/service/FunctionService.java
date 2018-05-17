@@ -44,6 +44,8 @@ public class FunctionService extends BaseService{
 		Map<String,Object> result = null;
 		if(IStringUtil.notBlank(tableNm)){
 			result= functionMapper.findObjBy(tableNm, objId);
+			result.remove("close_flg");
+			result.remove("close_flg".toUpperCase());
 		}
 		return result;
 	}

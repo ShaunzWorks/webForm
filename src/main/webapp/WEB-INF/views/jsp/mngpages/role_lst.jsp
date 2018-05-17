@@ -19,12 +19,15 @@
 				httpType:'GET',
 				target:'table',
 				needOpration:true,
-				operations:['detail','edit','delt'],
+				operations:['detail','edit','grant','delt'],
 				methods:[function(obj){
 					Shaunz.showDetail('3',obj.data.id);
 				},
 				function(obj){
 					Shaunz.load("./mngpages/role_edit.html?id="+obj.data.id);
+				},
+				function(obj){
+					
 				},
 				function(obj){
 					Shaunz.ajaxRequest(null,'./role/'+obj.data.id,'DELETE');

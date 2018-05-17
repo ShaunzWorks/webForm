@@ -231,4 +231,42 @@
     from tb_user
     where close_flg = 'N'
   </select>   
+  <select id="getUsrRoleMapBy" parameterType="java.lang.String" resultType="java.util.Map">
+  	select * from tb_user_role where user_id = #{userId}
+  </select>
+  <insert id="insertUsrRoleMapSelective" parameterType="java.util.Map" >
+    insert into tb_user_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="user_id != null" >
+        user_id,
+      </if>
+      <if test="role_id != null" >
+        role_id,
+      </if>
+      <if test="start_time != null" >
+        start_time,
+      </if>
+      <if test="end_time != null" >
+        end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="user_id != null" >
+        #{user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="role_id != null" >
+        #{role_id,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteUsrRoleMapBy" parameterType="java.lang.String" >
+    delete from tb_user_role
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
 </mapper>

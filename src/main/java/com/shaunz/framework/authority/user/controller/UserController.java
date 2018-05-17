@@ -120,4 +120,16 @@ public class UserController extends BaseController{
 				, locale);
 	}
 	
+	//@RequiresPermissions("2.grant")
+	@RequestMapping(value="/user/grant")
+	@ResponseBody
+	//@ShaunzAuditLog(optType='grant',functionId='2')
+	public String grantRole(String id,String roleIds,Locale locale){
+		User user = userService.selectByPrimaryKey(id);
+		String[] roleIdArr = roleIds.split(",");
+		boolean flag = userService.roleGrant(roleIdArr, id);
+		return formSubmitResult(flag, "common.grantMsg", new Object[]{messageSource.getMessage("user.title", null, locale),user.getLoginName()}
+		, locale);
+	}
+	
 }

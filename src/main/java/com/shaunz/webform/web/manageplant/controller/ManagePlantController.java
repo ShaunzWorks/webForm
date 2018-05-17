@@ -1,6 +1,7 @@
 package com.shaunz.webform.web.manageplant.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -14,6 +15,7 @@ import com.shaunz.framework.authority.role.entity.Role;
 import com.shaunz.framework.authority.role.service.RoleService;
 import com.shaunz.framework.authority.user.entity.User;
 import com.shaunz.framework.authority.user.service.UserService;
+import com.shaunz.framework.common.utils.IArrayListUtil;
 import com.shaunz.framework.web.base.BaseController;
 
 @RequiresRoles("admin")
@@ -62,6 +64,27 @@ public class ManagePlantController extends BaseController{
 		return new ModelAndView("mngpages/account_edit", result);
 	}
 	
+	@RequestMapping(value="/mngpages/account_grant.html",method=RequestMethod.GET)
+	public ModelAndView roleGrantPage(String userId){
+		Map<String, Object> result = new HashMap<String, Object>();
+		User user = userService.selectByPrimaryKey(userId);
+		user.dateConverter();
+		result.put("user", user);
+		List<Role> grantedRoles = roleService.getRolesByUsrId(user.getId());
+		String grantedRolesString = "";
+		if(!IArrayListUtil.isBlankList(grantedRoles)){
+			for (int i = 0; i < grantedRoles.size(); i++) {
+				Role role = grantedRoles.get(i);
+				grantedRolesString += role.getId();
+				if(i < grantedRoles.size()-1){
+					grantedRolesString += ",";
+				}
+			}
+		}
+		result.put("selectedRoleIds", grantedRolesString);
+		return new ModelAndView("mngpages/account_grant", result);
+	}
+	
 	@RequestMapping(value="/mngpages/role_lst.html",method=RequestMethod.GET)
 	public String roleLstPage(){
 		return "mngpages/role_lst";
@@ -79,6 +102,11 @@ public class ManagePlantController extends BaseController{
 		role.dateConverter();
 		result.put("role", role);
 		return new ModelAndView("mngpages/role_edit", result);
+	}
+	
+	@RequestMapping(value="/mngpages/function_lst.html",method=RequestMethod.GET)
+	public String functionLstPage(){
+		return "mngpages/function_lst";
 	}
 	
 	@RequestMapping(value="/mngpages/syslog_lst.html",method=RequestMethod.GET)

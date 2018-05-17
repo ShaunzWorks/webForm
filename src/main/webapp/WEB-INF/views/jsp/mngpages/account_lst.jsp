@@ -13,19 +13,22 @@
   </body>
   	<script type="text/javascript" >
 		var TableParam = {
-				header:['#','<spring:message code="user.userNm"/>','<spring:message code="user.gender"/>','<spring:message code="user.email"/>',
+				header:['#','<spring:message code="user.aliasNm"/>','<spring:message code="user.gender"/>','<spring:message code="user.email"/>',
 					'<spring:message code="user.startTime"/>','<spring:message code="user.endTime"/>'],
 				column:['id','aliasNm','gender','email','startTime','endTime'],
 				url:'./user',
 				httpType:'GET',
 				target:'table',
 				needOpration:true,
-				operations:['detail','edit','delt'],
+				operations:['detail','edit','grant','delt'],
 				methods:[function(obj){
 					Shaunz.showDetail('2',obj.data.id);
 				},
 				function(obj){
 					Shaunz.load("./mngpages/account_edit.html?id="+obj.data.id);
+				},
+				function(obj){
+					Shaunz.load("./mngpages/account_grant.html?userId="+obj.data.id);
 				},
 				function(obj){
 					Shaunz.ajaxRequest(null,'./user/'+obj.data.id,'DELETE');

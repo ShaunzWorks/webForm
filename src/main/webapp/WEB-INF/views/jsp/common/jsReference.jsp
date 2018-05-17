@@ -7,6 +7,8 @@
 <script src="${webResPath}/js/bootstrap-treeview.min.js"></script>
 <script src="${webResPath}/js/jquery.dataTables.min.js"></script>
 <script src="${webResPath}/js/dataTables.bootstrap.min.js"></script>
+<script src="${webResPath}/js/dataTables.select.min.js"></script>
+<script src="${webResPath}/js/dataTables.checkboxes.min.js"></script>
 <script src="${webResPath}/js/bootstrap-datetimepicker.min.js"></script>
 <script src="${webResPath}/js/jquery.validate.min.js"></script>
 <script src="${webResPath}/js/shaunz.js"></script>

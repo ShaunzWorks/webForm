@@ -479,7 +479,8 @@ INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) 
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('9', 'Button', '8', '/buttonMngmt.html', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('10', 'Image', '8', '/imageMngmt.html', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('11', 'Audit', '11', '#', 'N');
-INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('12', 'System Log', '11', './mngpages/syslog_lst.html', 'N','tb_sys_log');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('12', 'System Log', '11', './mngpages/syslog_lst.html', 'N','tb_sys_log');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('13', 'Function', '1', './mngpages/function_lst.html', 'N','tb_function');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('1', 'First slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'first-slide');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('2', 'Second slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'second-slide');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('3', 'Third slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'third-slide');
@@ -515,6 +516,10 @@ INSERT INTO webform.public.tb_role_function_authority(role_id, function_id, auth
 INSERT INTO webform.public.tb_role_function_authority(role_id, function_id, authority_id, lock_up, start_time, end_time) VALUES ('1', '12', '2', 'N', null, null);
 INSERT INTO webform.public.tb_role_function_authority(role_id, function_id, authority_id, lock_up, start_time, end_time) VALUES ('1', '12', '3', 'N', null, null);
 INSERT INTO webform.public.tb_role_function_authority(role_id, function_id, authority_id, lock_up, start_time, end_time) VALUES ('1', '12', '4', 'N', null, null);
+INSERT INTO webform.public.tb_role_function_authority(role_id, function_id, authority_id, lock_up, start_time, end_time) VALUES ('1', '13', '1', 'N', null, null);
+INSERT INTO webform.public.tb_role_function_authority(role_id, function_id, authority_id, lock_up, start_time, end_time) VALUES ('1', '13', '2', 'N', null, null);
+INSERT INTO webform.public.tb_role_function_authority(role_id, function_id, authority_id, lock_up, start_time, end_time) VALUES ('1', '13', '3', 'N', null, null);
+INSERT INTO webform.public.tb_role_function_authority(role_id, function_id, authority_id, lock_up, start_time, end_time) VALUES ('1', '13', '4', 'N', null, null);
 INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", close_flg) VALUES ('1', 'homepage', 'project_nm', 'value', 'WebForm', 'N');
 INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", close_flg) VALUES ('2', 'homepage', 'description', 'value', 'This is a WebForm', 'N');
 INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", close_flg) VALUES ('3', 'homepage', 'keywords', 'value', 'WebForm Template', 'N');
