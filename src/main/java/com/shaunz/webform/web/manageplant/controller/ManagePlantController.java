@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shaunz.framework.authority.function.entity.Function;
+import com.shaunz.framework.authority.function.service.FunctionService;
 import com.shaunz.framework.authority.role.entity.Role;
 import com.shaunz.framework.authority.role.service.RoleService;
 import com.shaunz.framework.authority.user.entity.User;
 import com.shaunz.framework.authority.user.service.UserService;
 import com.shaunz.framework.common.utils.IArrayListUtil;
+import com.shaunz.framework.core.BaseEntity;
 import com.shaunz.framework.web.base.BaseController;
 
 @RequiresRoles("admin")
@@ -25,6 +28,8 @@ public class ManagePlantController extends BaseController{
 	UserService userService;
 	@Autowired
 	RoleService roleService;
+	@Autowired
+	FunctionService functionService;
 	
 	
 	@RequestMapping(value="/managePlant.html",method=RequestMethod.POST)
@@ -65,7 +70,7 @@ public class ManagePlantController extends BaseController{
 	}
 	
 	@RequestMapping(value="/mngpages/account_grant.html",method=RequestMethod.GET)
-	public ModelAndView roleGrantPage(String userId){
+	public ModelAndView userGrantPage(String userId){
 		Map<String, Object> result = new HashMap<String, Object>();
 		User user = userService.selectByPrimaryKey(userId);
 		user.dateConverter();
@@ -102,6 +107,32 @@ public class ManagePlantController extends BaseController{
 		role.dateConverter();
 		result.put("role", role);
 		return new ModelAndView("mngpages/role_edit", result);
+	}
+	
+	@RequestMapping(value="/mngpages/role_grant.html",method=RequestMethod.GET)
+	public ModelAndView roleGrantPage(String id){
+		Map<String, Object> result = new HashMap<String, Object>();
+		List<Function> functions = functionService.queryAllFunctions();
+		
+		List<Map<String, Object>> functionAuthorityMap = roleService.getAuthorityBy(id);
+		if(!IArrayListUtil.isBlankList(functionAuthorityMap)){
+			Map<String, Function> functionMap = IArrayListUtil.entityLst2Map(functions);
+			Map<String, Object> functionAuthority = null;
+			String functionId = null;
+			Function function = null;
+			for (int i = 0; i < functionAuthorityMap.size(); i++) {
+				functionAuthority = functionAuthorityMap.get(i);
+				functionId = (String)functionAuthority.get("function_id");
+				function = functionMap.get(functionId);
+				function.setAuthority((String)functionAuthority.get("authority_id"));
+			}
+		}
+		
+		result.put("functions", functions);
+		Role role = roleService.selectByPrimaryKey(id);
+		role.dateConverter();
+		result.put("role", role);
+		return new ModelAndView("mngpages/role_grant", result);
 	}
 	
 	@RequestMapping(value="/mngpages/function_lst.html",method=RequestMethod.GET)

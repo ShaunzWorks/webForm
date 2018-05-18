@@ -27,7 +27,7 @@
 					Shaunz.load("./mngpages/role_edit.html?id="+obj.data.id);
 				},
 				function(obj){
-					
+					Shaunz.load("./mngpages/role_grant.html?id="+obj.data.id);
 				},
 				function(obj){
 					Shaunz.ajaxRequest(null,'./role/'+obj.data.id,'DELETE');

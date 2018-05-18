@@ -1,5 +1,8 @@
 package com.shaunz.framework.authority.function.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.shaunz.framework.core.BaseEntity;
 
 public class Function extends BaseEntity{
@@ -12,6 +15,8 @@ public class Function extends BaseEntity{
     private String closeFlg;
     
     private String tableNm;
+    
+    private List<String> grantedAuthority;
 
     public String getName() {
         return name;
@@ -52,4 +57,22 @@ public class Function extends BaseEntity{
 	public void setTableNm(String tableNm) {
 		this.tableNm = tableNm;
 	}
+
+	public List<String> getGrantedAuthority() {
+		return grantedAuthority;
+	}
+
+	public void setGrantedAuthority(List<String> grantedAuthority) {
+		this.grantedAuthority = grantedAuthority;
+	}
+	
+	public void setAuthority(String authorityId){
+		if(this.grantedAuthority == null){
+			this.grantedAuthority = new ArrayList<String>();
+		}
+		if(!grantedAuthority.contains(authorityId)){
+			grantedAuthority.add(authorityId);
+		}
+	}
+	
 }

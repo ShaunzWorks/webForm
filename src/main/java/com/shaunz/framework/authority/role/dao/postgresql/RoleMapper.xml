@@ -126,4 +126,54 @@
 	   	</if>
    	</where>
   </select>
+  <select id="getAuthorityBy" resultType="java.util.Map" parameterType="java.lang.String">
+  	select * from tb_role_function_authority where role_id = #{roleId}
+  </select>
+  <insert id="insertRoleFunctionAuthorityMapSelective" parameterType="java.util.Map" >
+  	insert into tb_role_function_authority
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="role_id != null" >
+        role_id,
+      </if>
+      <if test="function_id != null" >
+        function_id,
+      </if>
+      <if test="authority_id != null" >
+        authority_id,
+      </if>
+      <if test="lock_up != null" >
+        lock_up,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="role_id != null" >
+        #{role_id,jdbcType=VARCHAR},
+      </if>
+      <if test="function_id != null" >
+        #{function_id,jdbcType=VARCHAR},
+      </if>
+      <if test="authority_id != null" >
+        #{authority_id,jdbcType=VARCHAR},
+      </if>
+      <if test="lock_up != null" >
+        #{lock_up,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteRoleFunctionAuthorityMapBy" parameterType="java.lang.String" >
+    delete from tb_role_function_authority
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
 </mapper>

@@ -95,7 +95,7 @@
 	  select 
 	  <include refid="Base_Column_List" />
 	  from tb_function
-	  where close_flg = 'N'
+	  where close_flg = 'N' order by CAST(id AS integer) asc
   </select>
   <select id="queryAllAuthorizedFunctionByUsrId" parameterType="string" resultMap="BaseResultMap">
 	  select distinct func.* from tb_function func

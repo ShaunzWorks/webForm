@@ -112,7 +112,7 @@ public class UserController extends BaseController{
 	@RequiresPermissions("2.delete")
 	@RequestMapping(value="/user/{id}",method=RequestMethod.DELETE)
 	@ResponseBody
-	@ShaunzAuditLog(optType="del",functionId="2")
+	@ShaunzAuditLog(optType="delete",functionId="2")
 	public String deleteUser(@PathVariable("id") String id,Locale locale){
 		User user = userService.selectByPrimaryKey(id);
 		boolean flag = userService.closeUser(user);
@@ -120,10 +120,10 @@ public class UserController extends BaseController{
 				, locale);
 	}
 	
-	//@RequiresPermissions("2.grant")
+	@RequiresPermissions("2.update")
 	@RequestMapping(value="/user/grant")
 	@ResponseBody
-	//@ShaunzAuditLog(optType='grant',functionId='2')
+	@ShaunzAuditLog(optType="grant",functionId="2")
 	public String grantRole(String id,String roleIds,Locale locale){
 		User user = userService.selectByPrimaryKey(id);
 		String[] roleIdArr = roleIds.split(",");
