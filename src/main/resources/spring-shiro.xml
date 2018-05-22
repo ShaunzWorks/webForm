@@ -26,6 +26,7 @@
             	/signIn.html=anon
             	/signUp.html=anon
             	/signCheck=anon
+            	/signIn=anon
                 /**=authc
             </value>
         </property>

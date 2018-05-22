@@ -9,10 +9,12 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.shaunz.framework.common.SequenceGenerator;
 import com.shaunz.framework.common.auditlogs.ShaunzAuditLog;
@@ -36,8 +38,11 @@ public class AuthorContoller extends BaseController{
 		return "author/author_add";
 	}
 	@RequestMapping(value="/author/author_edit.html",method=RequestMethod.GET)
-	public String authorEditPage(){
-		return "author/author_edit";
+	public ModelAndView authorEditPage(String id){
+		Map<String, Object> result = new HashMap<String, Object>();
+		Author author = authorService.selectByPrimaryKey(id);
+		result.put("author", author);
+		return new ModelAndView("author/author_edit",result);
 	}
 	
 	@RequiresPermissions("14.query")
@@ -83,7 +88,7 @@ public class AuthorContoller extends BaseController{
 	@RequestMapping(value="/author/{id}",method=RequestMethod.DELETE)
 	@ResponseBody
 	@ShaunzAuditLog(optType="delete",functionId="14")
-	public String authorDelete(@RequestParam("id")String id,Locale locale){
+	public String authorDelete(@PathVariable("id") String id,Locale locale){
 		Author author = authorService.selectByPrimaryKey(id);
 		boolean flag = authorService.closeAuthor(author);
 		return formSubmitResult(flag, "common.deleteMsg", new Object[]{messageSource.getMessage("author.title", null, locale),author.getName()}

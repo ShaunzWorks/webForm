@@ -35,6 +35,7 @@
 					        deleteUser: {
 					            text: 'Delete',
 					            action: function () {
+					            	console.log(obj.data.id);
 					            	Shaunz.ajaxRequest(null,'./author/'+obj.data.id,'DELETE');
 									Shaunz.load("./author/author_lst.html");
 					            }

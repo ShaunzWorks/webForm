@@ -60,10 +60,9 @@
 			type: 'GET',
 			success: function(data,status){
 				if(data != null){
-					console.log(data);
 					var user = jQuery.parseJSON(data);
-					if(user.id != null)
-						$('#signInURL').html(mngmtPltText);
+					if(user.aliasNm != null)
+						$('#signInURL').html('<i class="glyphicon glyphicon-user"></i> '+user.aliasNm);
 					else
 						$('#signInURL').html(signInText);
 				} else {

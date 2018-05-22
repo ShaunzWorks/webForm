@@ -33,7 +33,7 @@ public class SignInController extends BaseController{
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value="/signIn.html")
+	@RequestMapping(value="/signIn.html",method=RequestMethod.GET)
 	public String signInPage(){
 		Subject subject = SecurityUtils.getSubject();
 		if(subject.isAuthenticated()){
@@ -42,7 +42,7 @@ public class SignInController extends BaseController{
 		return "SignIn";
 	}
 	
-	@RequestMapping(value="/signUp.html")
+	@RequestMapping(value="/signUp.html",method=RequestMethod.GET)
 	public String signUpPage(){
 		return "SignUp";
 	}
@@ -115,8 +115,14 @@ public class SignInController extends BaseController{
 		User user = null;
 		if(SecurityUtils.getSubject() != null && SecurityUtils.getSubject().isAuthenticated()){
 			user = (User)session.getAttribute("user");
-			if(user != null)
-				user.deSensitive();
+			if(user != null){
+				try {
+					user = (User) user.clone();
+					user.deSensitive();
+				} catch (CloneNotSupportedException e) {
+					logger.error(e.getMessage());
+				}
+			}
 		}
 		return convertToJsonString(user);
 	}
