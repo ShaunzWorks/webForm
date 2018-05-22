@@ -45,34 +45,24 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
-          	<a id="signInURL" href="${applicationScope.homePageObject.signInURL}">
-          		<c:choose>
-					<c:when test="${'success' eq signIn}">
-						<spring:message code="homepage.gotoMngmtPlt"/>
-					</c:when>
-					<c:otherwise>
-						<spring:message code="homepage.signin"/>
-					</c:otherwise>
-				</c:choose>
-          	</a>
+          	<a id="signInURL" href="${applicationScope.homePageObject.signInURL}"></a>
           </li>
         </ul>
       </div>
     </div>
 </nav>
-<!-- <script type="text/javascript" >
+<script type="text/javascript" >
 	var signInText = '<spring:message code="homepage.signin"/>';
 	var mngmtPltText = '<spring:message code="homepage.gotoMngmtPlt"/>';
 	$('document').ready(function(){
-		console.log(signInText + mngmtPltText);
 		$.ajax({
-			url: '${ctxPath}/signCheck',
+			url: './signCheck',
 			type: 'GET',
 			success: function(data,status){
 				if(data != null){
 					console.log(data);
 					var user = jQuery.parseJSON(data);
-					if(user.aliasNm != null)
+					if(user.id != null)
 						$('#signInURL').html(mngmtPltText);
 					else
 						$('#signInURL').html(signInText);
@@ -82,9 +72,8 @@
 				
 			},
 			error: function(){
-				console.log('error');
 				$('#signInURL').html(signInText);
 			}
 		});
-	}); -->
+	});
 </script>

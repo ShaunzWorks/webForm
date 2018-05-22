@@ -10,8 +10,8 @@
   </body>
   	<script type="text/javascript" >
 		var TableParam = {
-				header:['#','<spring:message code="user.userNm"/>','Function','Opration Type','Time','Content'],
-				column:['id','userId','functionId','optType','optTime','content'],
+				header:['#','Operator','Function','Opration Type','Time'],
+				column:['id','userId','functionId','optType','optTime'],
 				url:'./sysLog',
 				httpType:'GET',
 				target:'table',

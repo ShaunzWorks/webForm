@@ -33,7 +33,7 @@ public class SignInController extends BaseController{
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value="/signIn.html",method=RequestMethod.GET)
+	@RequestMapping(value="/signIn.html")
 	public String signInPage(){
 		Subject subject = SecurityUtils.getSubject();
 		if(subject.isAuthenticated()){
@@ -42,7 +42,7 @@ public class SignInController extends BaseController{
 		return "SignIn";
 	}
 	
-	@RequestMapping(value="/signUp.html",method=RequestMethod.GET)
+	@RequestMapping(value="/signUp.html")
 	public String signUpPage(){
 		return "SignUp";
 	}

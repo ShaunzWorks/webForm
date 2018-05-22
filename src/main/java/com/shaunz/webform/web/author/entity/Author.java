@@ -1,8 +1,8 @@
-package com.shaunz.webform.web.autor.entity;
+package com.shaunz.webform.web.author.entity;
 
-public class Author {
-    private String id;
+import com.shaunz.framework.core.BaseEntity;
 
+public class Author extends BaseEntity{
     private String name;
 
     private String pwd;
@@ -16,14 +16,6 @@ public class Author {
     private String closeFlg;
 
     private String lockUp;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
 
     public String getName() {
         return name;

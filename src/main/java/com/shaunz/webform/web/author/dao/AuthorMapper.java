@@ -1,8 +1,10 @@
-package com.shaunz.webform.web.autor.dao;
+package com.shaunz.webform.web.author.dao;
+
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.shaunz.webform.web.autor.entity.Author;
+import com.shaunz.webform.web.author.entity.Author;
 
 @Repository
 public interface AuthorMapper {
@@ -17,4 +19,6 @@ public interface AuthorMapper {
     int updateByPrimaryKeySelective(Author record);
 
     int updateByPrimaryKey(Author record);
+    
+    List<Author> queryList();
 }

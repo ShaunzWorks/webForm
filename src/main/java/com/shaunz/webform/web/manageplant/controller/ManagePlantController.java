@@ -18,7 +18,6 @@ import com.shaunz.framework.authority.role.service.RoleService;
 import com.shaunz.framework.authority.user.entity.User;
 import com.shaunz.framework.authority.user.service.UserService;
 import com.shaunz.framework.common.utils.IArrayListUtil;
-import com.shaunz.framework.core.BaseEntity;
 import com.shaunz.framework.web.base.BaseController;
 
 @RequiresRoles("admin")

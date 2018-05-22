@@ -1,6 +1,6 @@
 package com.shaunz.webform.web.carousel.entity;
 
-import com.shaunz.webform.web.autor.entity.Author;
+import com.shaunz.webform.web.author.entity.Author;
 import com.shaunz.webform.web.button.entity.Button;
 import com.shaunz.webform.web.image.entity.Image;
 

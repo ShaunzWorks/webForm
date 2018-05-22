@@ -112,7 +112,7 @@ public class BaseController {
 	
 	protected String convertToJsonString(Object obj) {
 		if(obj == null)
-			return "{object:\"null\"}";
+			return "{\"object\":\"null\"}";
 		String jsonStr = JSONObject.toJSONStringWithDateFormat(obj, YgdrasilConst.DATE_FORMART, SerializerFeature.WriteDateUseDateFormat);
 		//jsonStr = jsonStr.replaceAll("\"", "'");
 		return jsonStr;

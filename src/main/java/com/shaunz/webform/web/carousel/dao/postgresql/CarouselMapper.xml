@@ -24,7 +24,7 @@
 	   	<result column="button_url" property="url" jdbcType="VARCHAR" />
 	   	<result column="button_css_class" property="cssClass" jdbcType="VARCHAR" />
 	</association>
-	<association property="author" column="author_id" javaType="com.shaunz.webform.web.autor.entity.Author">
+	<association property="author" column="author_id" javaType="com.shaunz.webform.web.author.entity.Author">
 		<id column="author_id" property="id" jdbcType="VARCHAR" />
 	   	<result column="author_name" property="name" jdbcType="VARCHAR" />
 	   	<result column="author_pwd" property="pwd" jdbcType="VARCHAR" />

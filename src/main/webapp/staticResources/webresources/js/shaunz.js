@@ -167,8 +167,10 @@ Shaunz.alert = function(type,title,info){
 			height = lastDiv.height();
 		}
 		newDiv.css({top: position.top-(height+2), left: position.left});
+		newDiv.insertAfter(lastDiv);
+	} else {
+		$('body').append(newDiv);
 	}
-	newDiv.insertAfter(lastDiv);
 	window.setTimeout(function() {
 	    $(".alert").fadeTo(500, 0).slideUp(500, function(){
 	        $(this).remove(); 

@@ -1,7 +1,7 @@
 <%@ include file="../common/common.jsp"%>
 <html lang="en">
   <body>
-  		<h2 class="sub-header"><spring:message code="role.title"/></h2>
+  		<h2 class="sub-header"><spring:message code="author.title"/></h2>
   		<div class="row">
         	<div class="col-sm-3 col-md-2"><button class="btn btn-md btn-primary glyphicon glyphicon-plus" onClick="openNewAccountPage()"> <spring:message code="common.new"/></button></div>
         </div>
@@ -13,32 +13,30 @@
   </body>
   	<script type="text/javascript" >
 		var TableParam = {
-				header:['#','<spring:message code="role.name"/>','<spring:message code="role.parentId"/>','<spring:message code="role.startTime"/>','<spring:message code="role.endTime"/>'],
-				column:['id','name','parentId','startTime','endTime'],
-				url:'./role',
+				header:['#','<spring:message code="author.aliasNm"/>','<spring:message code="author.gender"/>','<spring:message code="author.email"/>',
+					'<spring:message code="user.lockUp"/>'],
+				column:['id','aliasNm','gender','email','lockUp'],
+				url:'./author',
 				httpType:'GET',
 				target:'table',
 				needOpration:true,
-				operations:['detail','edit','grant','delt'],
+				operations:['detail','edit','delt'],
 				methods:[function(obj){
-					Shaunz.showDetail('3',obj.data.id);
+					Shaunz.showDetail('2',obj.data.id);
 				},
 				function(obj){
-					Shaunz.load("./mngpages/role_edit.html?id="+obj.data.id);
-				},
-				function(obj){
-					Shaunz.load("./mngpages/role_grant.html?id="+obj.data.id);
+					Shaunz.load("./author/author_edit.html?id="+obj.data.id);
 				},
 				function(obj){
 					$.confirm({
-					    title: 'Delete ' + obj.data.name +' ?',
-					    autoClose: 'cancelAction|80000',
+					    title: 'Delete ' + obj.data.aliasNm +' ?',
+					    autoClose: 'cancelAction|8000',
 					    buttons: {
 					        deleteUser: {
 					            text: 'Delete',
 					            action: function () {
-					            	Shaunz.ajaxRequest(null,'./role/'+obj.data.id,'DELETE');
-					            	Shaunz.load("./mngpages/role_lst.html");
+					            	Shaunz.ajaxRequest(null,'./author/'+obj.data.id,'DELETE');
+									Shaunz.load("./author/author_lst.html");
 					            }
 					        },
 					        cancelAction: function () {
@@ -53,7 +51,8 @@
 		});
 		
 		openNewAccountPage = function(){
-			Shaunz.load("./mngpages/role_add.html");
+			Shaunz.load("./author/author_add.html");
 		}
+		
 	</script>
 </html>

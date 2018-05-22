@@ -11,7 +11,7 @@
     <result column="author_id" property="authorId" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="Blog" type="com.shaunz.webform.web.blog.entity.Blog" extends="BaseResultMap">
-	<association property="author" column="author_id" javaType="com.shaunz.webform.web.autor.entity.Author">
+	<association property="author" column="author_id" javaType="com.shaunz.webform.web.author.entity.Author">
 		<id column="author_id" property="id" jdbcType="VARCHAR" />
 	   	<result column="author_name" property="name" jdbcType="VARCHAR" />
 	   	<result column="author_pwd" property="pwd" jdbcType="VARCHAR" />

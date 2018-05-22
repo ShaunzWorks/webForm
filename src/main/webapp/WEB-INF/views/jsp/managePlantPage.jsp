@@ -12,6 +12,7 @@
     <link href="${webResPath}/css/select.dataTables.min.css" rel="stylesheet">
     <link href="${webResPath}/css/dataTables.checkboxes.css" rel="stylesheet">
     <link href="${webResPath}/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="${webResPath}/css/jquery-confirm.min.css" rel="stylesheet">
     <link href="${webResPath}/css/shaunz.css" rel="stylesheet">
     <%@ include file="./common/jsReference.jsp"%>
   </head>
@@ -29,6 +30,27 @@
 				   }
 				});
 			Shaunz.load('./mngpages/dashboard.html');
+			
+			$.ajax({
+				url:'./crrentUser',
+				type:'GET',
+				success: function(data,status) {
+					   var result = jQuery.parseJSON(data);
+					   $('#userInterface').append(result.aliasNm);
+					   $('#userName').append(result.aliasNm);
+			   	},
+			    error: function(e) {
+				   console.log(e);
+			    }
+			});
+			$('#userSettings').hide();
+			$('#userInterface').click(function(){
+				if($('#userSettings').is(":visible")){
+					$('#userSettings').fadeOut("slow");
+				} else {
+					$('#userSettings').fadeIn("slow");
+				}
+			});
 		});
 	</script>
   <body>
@@ -47,10 +69,8 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
-            <li><a href="./signout"><spring:message code="homepage.signout"/></a></li>
+            <li></i><a id="userInterface" href="#"><i class="glyphicon glyphicon-user"></i> </a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -61,8 +81,29 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div id="TreeMenu" class="col-sm-3 col-md-2 sidebar"></div>
+        <div class="col-sm-3 col-md-2 sidebar nopadding">
+        	<div id="TreeMenu"></div>
+        </div>
         <div id="FeatureContainer" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"></div>
+        <div id="userSettings" class="settings">
+        	<div class="container-fluid">
+        		<div class="row col-sm-offset-2 col-md-offset-3"><i class="glyphicon glyphicon-user gi-5x"></i></div>
+        		<div class="row col-sm-offset-2 col-md-offset-3">
+        			<div id="userName" class="gi-2x"></div>
+        		</div>
+        		<br/>
+        		<div class="row">
+        			<div class="row">
+	        			<a href="#">Profile</a>
+				        <br/>
+				        <a href="#">Change Password</a>
+				        <br/>
+				        <br/>
+	        			<a href="./signout"><i class="glyphicon glyphicon-off"></i> SignOut</a>
+			        </div>
+        		</div>
+        	</div>
+        </div>
       </div>
     </div>
   </body>

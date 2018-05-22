@@ -25,6 +25,7 @@
             	/index.jsp=anon
             	/signIn.html=anon
             	/signUp.html=anon
+            	/signCheck=anon
                 /**=authc
             </value>
         </property>

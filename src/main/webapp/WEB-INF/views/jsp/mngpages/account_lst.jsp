@@ -31,8 +31,22 @@
 					Shaunz.load("./mngpages/account_grant.html?userId="+obj.data.id);
 				},
 				function(obj){
-					Shaunz.ajaxRequest(null,'./user/'+obj.data.id,'DELETE');
-					Shaunz.load("./mngpages/account_lst.html");
+					$.confirm({
+					    title: 'Delete ' + obj.data.aliasNm +' ?',
+					    autoClose: 'cancelAction|8000',
+					    buttons: {
+					        deleteUser: {
+					            text: 'Delete',
+					            action: function () {
+					            	Shaunz.ajaxRequest(null,'./user/'+obj.data.id,'DELETE');
+									Shaunz.load("./mngpages/account_lst.html");
+					            }
+					        },
+					        cancelAction: function () {
+					        	
+					        }
+					    }
+					});
 				}]
 		};
 		$(function(){

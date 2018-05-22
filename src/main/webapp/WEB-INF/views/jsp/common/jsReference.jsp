@@ -11,6 +11,7 @@
 <script src="${webResPath}/js/dataTables.checkboxes.min.js"></script>
 <script src="${webResPath}/js/bootstrap-datetimepicker.min.js"></script>
 <script src="${webResPath}/js/jquery.validate.min.js"></script>
+<script src="${webResPath}/js/jquery-confirm.min.js"></script>
 <script src="${webResPath}/js/shaunz.js"></script>
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="${projectResPath}/js/holder.min.js"></script>

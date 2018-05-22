@@ -9,3 +9,30 @@
     word-wrap: break-word;
 }
 .glyphicon:hover { cursor: pointer; }
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+.settings{
+	position:absolute;
+	right:0;
+	order:1;
+	flex:0 0 auto;
+	height:calc(100% - 50px);
+	padding:24px;
+	display:flex;
+	opacity:1;
+	visibility:visible;
+	z-index:104;
+	background:#101010;
+	color:#f2f2f2;
+}
+.settings > div > div > div > a{
+	color:#f2f2f2;
+}
+.gi-1x{font-size: 1em;}
+.gi-2x{font-size: 2em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}
+.gi-6x{font-size: 6em;}

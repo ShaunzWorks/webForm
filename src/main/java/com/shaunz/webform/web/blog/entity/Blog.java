@@ -1,6 +1,6 @@
 package com.shaunz.webform.web.blog.entity;
 
-import com.shaunz.webform.web.autor.entity.Author;
+import com.shaunz.webform.web.author.entity.Author;
 
 public class Blog {
     private String id;

@@ -4,8 +4,7 @@
 	<%@ include file="./common/header.jsp"%>
 
     <!-- Bootstrap core CSS -->
-    <link href="${projectResPath}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${projectResPath}/css/bootstrap-dialog.min.js" rel="stylesheet">
+    <link href="${webResPath}/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="${projectResPath}/css/carousel.css" rel="stylesheet">
 </head>
