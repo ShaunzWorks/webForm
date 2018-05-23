@@ -53,7 +53,6 @@
 </nav>
 <script type="text/javascript" >
 	var signInText = '<spring:message code="homepage.signin"/>';
-	var mngmtPltText = '<spring:message code="homepage.gotoMngmtPlt"/>';
 	$('document').ready(function(){
 		$.ajax({
 			url: './signCheck',
@@ -64,7 +63,7 @@
 					if(user.aliasNm != null)
 						$('#signInURL').html('<i class="glyphicon glyphicon-user"></i> '+user.aliasNm);
 					else
-						$('#signInURL').html(signInText);
+						$('#signInURL').html('<i class="glyphicon glyphicon-log-in"></i> ' + signInText);
 				} else {
 					$('#signInURL').html(signInText);
 				}

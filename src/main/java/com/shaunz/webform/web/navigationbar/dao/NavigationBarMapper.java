@@ -21,4 +21,6 @@ public interface NavigationBarMapper {
 	public int updateByPrimaryKey(NavigationBar record);
     
 	public List<NavigationBar> queryAllNavigationBar();
+	
+	public List<NavigationBar> queryList();
 }

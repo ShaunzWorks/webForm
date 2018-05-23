@@ -233,6 +233,7 @@ CREATE TABLE public.tb_navigation_bar
   type character varying(20),
   url character varying(50),
   active character varying(20),
+  close_flg character varying(1) default 'N',
   CONSTRAINT tb_navigation_bar_pkey PRIMARY KEY (id)
 )
 WITH (
@@ -472,7 +473,7 @@ INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) 
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('2', 'Account', '1', './mngpages/account_lst.html', 'N','tb_user');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('3', 'Role', '1', './mngpages/role_lst.html', 'N','tb_role');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('4', 'Home Page Management', '4', '#', 'N');
-INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('5', 'Navigation Bar', '4', '/naviBarMngmt.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('5', 'Navigation Bar', '4', './navigationbar/navigationbar_lst.html', 'N','tb_navigation_bar');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('6', 'Market', '4', '/marketMngmt.html', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('7', 'Carousel', '4', '/carouselMngmt.html', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('8', 'Meta Element', '4', '#', 'N');

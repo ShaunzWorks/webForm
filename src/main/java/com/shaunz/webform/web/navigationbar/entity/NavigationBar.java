@@ -2,10 +2,10 @@ package com.shaunz.webform.web.navigationbar.entity;
 
 import java.util.List;
 
+import com.shaunz.framework.core.BaseEntity;
 import com.shaunz.webform.web.dropdownlist.entity.DropDownList;
 
-public class NavigationBar {
-    private String id;
+public class NavigationBar extends BaseEntity{
 
     private String name;
 
@@ -16,14 +16,8 @@ public class NavigationBar {
     private String active;
     
     private List<DropDownList> downLists;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
+    
+    private String closeFlg;
 
     public String getName() {
         return name;
@@ -64,5 +58,12 @@ public class NavigationBar {
 	public void setDownLists(List<DropDownList> downLists) {
 		this.downLists = downLists;
 	}
-    
+
+	public String getCloseFlg() {
+		return closeFlg;
+	}
+
+	public void setCloseFlg(String closeFlg) {
+		this.closeFlg = closeFlg;
+	}
 }

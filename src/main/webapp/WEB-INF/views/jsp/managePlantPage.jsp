@@ -64,7 +64,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="${applicationScope.homePageObject.homeUrl}">${applicationScope.homePageObject.projectNm}</a>
+          <a class="navbar-brand" href="${applicationScope.homePageObject.homeUrl}"><i class="glyphicon glyphicon-home"></i> ${applicationScope.homePageObject.projectNm}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -94,12 +94,12 @@
         		<br/>
         		<div class="row">
         			<div class="row">
-	        			<a href="#">Profile</a>
+	        			<a href="#"><i class="glyphicon glyphicon-file"></i> Profile</a>
 				        <br/>
-				        <a href="#">Change Password</a>
+				        <a href="#"><i class="glyphicon glyphicon-file"></i> Change Password</a>
 				        <br/>
 				        <br/>
-	        			<a href="./signout"><i class="glyphicon glyphicon-off"></i> SignOut</a>
+	        			<a href="./signout"><i class="glyphicon glyphicon-log-out"></i> SignOut</a>
 			        </div>
         		</div>
         	</div>

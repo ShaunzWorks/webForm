@@ -4,7 +4,7 @@
   		<h2 class="sub-header"><spring:message code="author.title"/></h2>
        	<form id="authorAddForm">
        	  <div class="form-group row">
-		    <label for="loginName" class="col-sm-2 col-form-label"><spring:message code="author.userNm"/></label>
+		    <label for="name" class="col-sm-2 col-form-label"><spring:message code="author.userNm"/></label>
 		    <div class="input-group col-sm-6">
 		    	<input type="text" class="form-control" id="name" name="name" placeholder="<spring:message code="author.userNm.placeHolder"/>"/>
 		    </div>
@@ -115,13 +115,13 @@
 				}
 			},
 			messages: {
-				loginName: {
+				name: {
 					required: '<spring:message code="validation.author.name.required"/>',
 					minlength: '<spring:message code="validation.author.name.minlength" arguments="2;" htmlEscape="false" argumentSeparator=";"/>',
 					maxlength: '<spring:message code="validation.author.name.minlength" arguments="100;" htmlEscape="false" argumentSeparator=";"/>'
 				},
 				email: '<spring:message code="validation.author.email"/>',
-				password: {
+				pwd: {
 					required: '<spring:message code="validation.author.password.required"/>',
 					minlength: '<spring:message code="validation.author.password.minlength" arguments="2;" htmlEscape="false" argumentSeparator=";"/>',
 					maxlength: '<spring:message code="validation.author.password.minlength" arguments="100;" htmlEscape="false" argumentSeparator=";"/>'
