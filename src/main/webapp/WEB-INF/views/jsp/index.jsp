@@ -30,7 +30,12 @@
     	<c:forEach items = "${applicationScope.homePageObject.carousels}" var = "carousel">
     		<div class="item<c:if test = "${carouselsIndex == 1}"> active</c:if>">
     			<c:if test = "${not empty carousel.image}">
-    				<img class="${carousel.image.cssClass}" src="${carousel.image.url}" alt="${carousel.image.name}">
+    				<c:choose>
+    					<c:when test = "${fn:startsWith(carousel.image.url, '/')}">
+    						<img class="${carousel.image.cssClass}" src="${ctxPath}${carousel.image.url}" alt="${carousel.image.name}">
+    					</c:when>
+    					<c:otherwise><img class="${carousel.image.cssClass}" src="${carousel.image.url}" alt="${carousel.image.name}"></c:otherwise>
+    				</c:choose>
     			</c:if>
 		        <div class="container">
 		          <div class="carousel-caption">
@@ -65,7 +70,12 @@
       	<c:forEach items = "${applicationScope.homePageObject.marketInfos}" var = "marketInfo">
       		<c:if test="${carouselsIndex % 3 == 1}"><div class="row"></c:if>
 	      		<div class="col-lg-4">
-		          <img class="${marketInfo.image.cssClass}" src="${marketInfo.image.url}" alt="${marketInfo.image.name}" width="140" height="140">
+	      			<c:choose>
+    					<c:when test = "${fn:startsWith(marketInfo.image.url, '/')}">
+    						<img class="${marketInfo.image.cssClass}" src="${ctxPath}${marketInfo.image.url}" alt="${marketInfo.image.name}" width="140" height="140">
+    					</c:when>
+    					<c:otherwise><img class="${marketInfo.image.cssClass}" src="${marketInfo.image.url}" alt="${marketInfo.image.name}" width="140" height="140"></c:otherwise>
+    				</c:choose>
 		          <h2>${marketInfo.header}</h2>
 		          <p>${marketInfo.content}</p>
 		          <p><a class="${marketInfo.button.cssClass}" href="${marketInfo.button.url}?marketInfoId=${marketInfo.id}" role="button">${marketInfo.button.name} &raquo;</a></p>

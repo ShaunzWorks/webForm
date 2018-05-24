@@ -86,11 +86,11 @@ public class UserController extends BaseController{
 				results.put("message", messageSource.getMessage("validation.existLoginNm",new Object[]{user.getLoginName()},locale));
 				flag = false;
 			}
+			user.setOptFlag(flag);
 			if(flag){
 				user.setId(""+sequenceGenerator.getNextMngmtSequenceNo());
 				user.setCloseFlg("N");
 				flag = userService.addNewUser(user);
-				user.setOptFlag(flag);
 				return formSubmitResult(flag, "common.addMsg", new Object[]{messageSource.getMessage("user.title", null, locale),user.getLoginName()}
 				,locale);
 			}
@@ -105,6 +105,7 @@ public class UserController extends BaseController{
 	@ShaunzAuditLog(optType="update",functionId="2")
 	public String updateUser(User user,Locale locale){
 		boolean flag = userService.updateUserByPrimaryKeySelective(user);
+		user.setOptFlag(flag);
 		return formSubmitResult(flag, "common.updateMsg", new Object[]{messageSource.getMessage("user.title", null, locale),user.getLoginName()}
 			, locale);
 	}

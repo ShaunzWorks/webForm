@@ -84,6 +84,7 @@ public class NavigationBarController extends BaseController{
 	@ShaunzAuditLog(optType="update",functionId="5")
 	public String authorEdit(NavigationBar navigationBar,Locale locale){
 		boolean flag = navigationBarService.updateByPrimaryKeySelective(navigationBar);
+		navigationBar.setOptFlag(flag);
 		if(flag){
 			refreshNavigationBarInHomepage();
 		}

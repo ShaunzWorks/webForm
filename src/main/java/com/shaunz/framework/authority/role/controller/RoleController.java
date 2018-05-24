@@ -73,6 +73,7 @@ public class RoleController extends BaseController{
 	@ShaunzAuditLog(optType="update",functionId="3")
 	public String roleEdit(Role role,Locale locale){
 		boolean flag = roleService.updateByPrimaryKeySelective(role);
+		role.setOptFlag(flag);
 		return formSubmitResult(flag, "common.updateMsg", new Object[]{messageSource.getMessage("role.title", null, locale),role.getName()}
 		, locale);
 	}

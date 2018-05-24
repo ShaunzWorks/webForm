@@ -18,4 +18,6 @@ public final class YgdrasilConst {
 	
 	public static String DATE_FORMART = "yyyy-MM-dd HH:mm";
 	
+	public static String CUSTOMER_IMAGE_PATH = "/staticResources/customerResources/images/";
+	
 }

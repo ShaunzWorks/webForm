@@ -1,5 +1,7 @@
 package com.shaunz.webform.web.image.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.shaunz.webform.web.image.entity.Image;
@@ -17,4 +19,6 @@ public interface ImageMapper {
     int updateByPrimaryKeySelective(Image record);
 
     int updateByPrimaryKey(Image record);
+    
+    List<Image> queryList();
 }

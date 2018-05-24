@@ -70,7 +70,7 @@ Shaunz.generateTable = function(param){
 						var operationBtnId = 'tableRow_'+objs[i].id+'_'+operations[k];
 						bodyHtml += '<div id="'+operationBtnId+'" class="col-md-1"><span class="';
 						bodyHtml += tableIconBtn[operations[k]];
-						bodyHtml += '"></span></div> &nbsp';
+						bodyHtml += '" data-toggle="tooltip" data-placement="bottom" title="'+operations[k]+'"></span></div> &nbsp';
 						
 					}
 					bodyHtml += '</div>';
@@ -136,13 +136,12 @@ Shaunz.generateTable = function(param){
 				$('#'+param.target).DataTable();
 			}
 			
-			
 			if(TableParam.needOpration){
 				for(i=0;i<objs.length;i++){
 					var methods = TableParam.methods;
 					for(k=0;k<methods.length;k++){
 						var operationBtnId = 'tableRow_'+objs[i].id+'_'+operations[k];
-						$('#'+operationBtnId).bind('click',objs[i],methods[k]);
+						$('#'+param.target).on('click','#'+operationBtnId,objs[i],methods[k]);
 					}
 				}
 			}
@@ -213,6 +212,29 @@ Shaunz.submitForm = function(form,requestUrl,requestType){
 		});
 };
 
+Shaunz.SubmitMultipartForm = function(form,requestURL,requestType){
+	var formData = new FormData(form);
+	$.ajax({
+	      url : requestURL,
+	      type : requestType,
+	      data : formData,
+	      cache : false,
+	      contentType : false,
+	      processData : false,
+	      success:function(data,status){
+				var result = jQuery.parseJSON(data);
+				if(result.result == 'success'){
+					Shaunz.showSuccess('Success',result.message);
+				} else {
+					Shaunz.showError('Error',result.message);
+				}
+			},
+		error:function(e){
+				Shaunz.showError('Error',e);
+			}
+	});
+}
+
 Shaunz.ajaxRequest = function(params,requestUrl,requestType){
 	$.ajax({
 		url:requestUrl,
@@ -253,4 +275,88 @@ Shaunz.showDetail = function(functionId,ObjId){
             }
         }]
     });
-}
+};
+
+(function ( $ ) {
+    $.fn.imagePicker = function( options ) {
+        // Define plugin options
+        var settings = $.extend({
+            // Input name attribute
+            name: "",
+            // Classes for styling the input
+            class: "form-control btn btn-default btn-block",
+            // Icon which displays in center of input
+            icon: "glyphicon glyphicon-plus",
+            preview: false,
+          	src: ""
+        }, options );
+        
+        // Create an input inside each matched element
+        return this.each(function() {
+            $(this).html(create_btn(this, settings));
+        });
+ 
+    };
+ 
+    // Private function for creating the input element
+    function create_btn(that, settings) {
+        // The actual file input which stays hidden
+        var picker_btn_input = $('<input type="file" name="'+settings.name+'" />');
+        
+   		// File load listener
+        picker_btn_input.change(function() {
+            if ($(this).prop('files')[0]) {
+                // Use FileReader to get file
+                var reader = new FileReader();
+                
+                // Create a preview once image has loaded
+                reader.onload = function(e) {
+                    var preview = create_preview(that, e.target.result, settings,picker_btn_input);
+                    $(that).html(preview);
+                }
+                
+                // Load image
+                reader.readAsDataURL(picker_btn_input.prop('files')[0]);
+            }                
+        });
+   		
+      	if(settings.preview){
+      		settings.preview = false;
+	    	var preview = create_preview(that, settings.src, settings,picker_btn_input);
+	    	return preview;
+      	}
+   		
+   		// The input icon element
+        var picker_btn_icon = $('<i class="'+settings.icon+'"></i>');
+        // The actual element displayed
+        var picker_btn = $('<div class="'+settings.class+' img-upload-btn"></div>')
+            .append(picker_btn_icon)
+            .append(picker_btn_input);
+            
+        return picker_btn
+    };
+    
+    // Private function for creating a preview element
+    function create_preview(that, src, settings, input) {
+            // The preview image
+            var picker_preview_image = $('<img src="'+src+'" class="img-responsive img-rounded" />');
+            
+            // The remove image button
+            var picker_preview_remove = $('<button class="btn btn-link"><small>Remove</small></button>');
+            
+            // The preview element
+            var picker_preview = $('<div class="text-center"></div>')
+                .append(picker_preview_image)
+                .append(input)
+                .append(picker_preview_remove);
+
+            // Remove image listener
+            picker_preview_remove.click(function() {
+                var btn = create_btn(that, settings);
+                $(that).html(btn);
+            });
+            
+            return picker_preview;
+    };
+}( jQuery ));
+

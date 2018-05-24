@@ -80,6 +80,7 @@ public class AuthorContoller extends BaseController{
 	@ShaunzAuditLog(optType="update",functionId="14")
 	public String authorEdit(Author author,Locale locale){
 		boolean flag = authorService.updateByPrimaryKeySelective(author);
+		author.setOptFlag(flag);
 		return formSubmitResult(flag, "common.updateMsg", new Object[]{messageSource.getMessage("author.title", null, locale),author.getName()}
 		, locale);
 	}

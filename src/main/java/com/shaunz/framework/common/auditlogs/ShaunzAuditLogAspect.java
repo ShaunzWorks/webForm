@@ -9,7 +9,6 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -22,15 +21,16 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.shaunz.framework.authority.user.entity.User;
 import com.shaunz.framework.common.auditlogs.service.SystemLogService;
 import com.shaunz.framework.common.utils.IArrayListUtil;
-import com.shaunz.framework.core.BaseEntity;
 
 @Aspect
 @Component
@@ -42,7 +42,7 @@ public class ShaunzAuditLogAspect {
 	private User operator;
 	private List<Object> inputParams = new ArrayList<Object>();
 	private List<Object> outputParams = new ArrayList<Object>();
-	private Class<?>[] ignoreClasses = {BindingResult.class,Locale.class};
+	private Class<?>[] ignoreClasses = {BindingResult.class,Locale.class,MultipartFile.class,BeanPropertyBindingResult.class};
 	
 	@Pointcut("@annotation(com.shaunz.framework.common.auditlogs.ShaunzAuditLog)")
 	public void pointCut(){
