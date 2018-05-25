@@ -1,12 +1,14 @@
 package com.shaunz.webform.web.carousel.entity;
 
+import javax.persistence.Entity;
+
+import com.shaunz.framework.core.BaseEntity;
 import com.shaunz.webform.web.author.entity.Author;
 import com.shaunz.webform.web.button.entity.Button;
 import com.shaunz.webform.web.image.entity.Image;
 
-public class Carousel {
-    private String id;
-
+@Entity
+public class Carousel extends BaseEntity{
     private String name;
 
     private String header;
@@ -26,14 +28,8 @@ public class Carousel {
     private Button button;
     
     private Author author;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
+    
+    private String closeFlg;
 
     public String getName() {
         return name;
@@ -114,5 +110,12 @@ public class Carousel {
 	public void setAuthor(Author author) {
 		this.author = author;
 	}
-    
+
+	public String getCloseFlg() {
+		return closeFlg;
+	}
+
+	public void setCloseFlg(String closeFlg) {
+		this.closeFlg = closeFlg;
+	}
 }

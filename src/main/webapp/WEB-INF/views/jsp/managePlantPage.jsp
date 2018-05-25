@@ -14,6 +14,7 @@
     <link href="${webResPath}/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="${webResPath}/css/jquery-confirm.min.css" rel="stylesheet">
     <link href="${webResPath}/css/shaunz.css" rel="stylesheet">
+    <link href="${webResPath}/css/bootstrap3-wysihtml5.min.css" rel="stylesheet">
     <%@ include file="./common/jsReference.jsp"%>
   </head>
 	<script type="text/javascript" > 
@@ -51,6 +52,9 @@
 					$('#userSettings').fadeIn("slow");
 				}
 			});
+			$('#Dashboard').click(function(){
+				Shaunz.load('./mngpages/dashboard.html');
+			});
 		});
 	</script>
   <body>
@@ -68,7 +72,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
+            <li><a id="Dashboard" href="#">Dashboard</a></li>
             <li><a href="#">Help</a></li>
             <li></i><a id="userInterface" href="#"><i class="glyphicon glyphicon-user"></i> </a></li>
           </ul>

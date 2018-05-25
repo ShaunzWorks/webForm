@@ -24,9 +24,11 @@ import com.shaunz.framework.common.auditlogs.ShaunzAuditLog;
 import com.shaunz.framework.common.utils.MultipartFileUtil;
 import com.shaunz.framework.core.YgdrasilConst;
 import com.shaunz.framework.web.base.BaseController;
+import com.shaunz.webform.web.carousel.service.CarouselService;
 import com.shaunz.webform.web.home.entity.HomePage;
 import com.shaunz.webform.web.image.entity.Image;
 import com.shaunz.webform.web.image.service.ImageService;
+import com.shaunz.webform.web.marketinfo.service.MarketInfoService;
 
 @Controller
 public class ImageController extends BaseController{
@@ -34,6 +36,10 @@ public class ImageController extends BaseController{
 	SequenceGenerator sequenceGenerator;
 	@Autowired
 	ImageService imageService;
+	@Autowired
+	CarouselService carouselService;
+	@Autowired
+	MarketInfoService marketInfoService;
 	
 	@RequestMapping(value="/image/image_lst.html",method=RequestMethod.GET)
 	public String lstPage(){
@@ -135,7 +141,8 @@ public class ImageController extends BaseController{
 		HomePage homePage = null;
 		try {
 			homePage = (HomePage)request.getServletContext().getAttribute("homePageObject");
-			//TODO
+			homePage.setCarousels(carouselService.quaryAll());
+			homePage.setMarketInfos(marketInfoService.quaryAll());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}

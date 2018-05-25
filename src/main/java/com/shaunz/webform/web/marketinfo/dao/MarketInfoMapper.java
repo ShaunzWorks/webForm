@@ -2,8 +2,11 @@ package com.shaunz.webform.web.marketinfo.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.shaunz.webform.web.marketinfo.entity.MarketInfo;
 
+@Repository
 public interface MarketInfoMapper {
     int deleteByPrimaryKey(String id);
 
@@ -18,4 +21,6 @@ public interface MarketInfoMapper {
     int updateByPrimaryKey(MarketInfo record);
     
     List<MarketInfo> quaryAll();
+    
+    List<MarketInfo> queryList();
 }

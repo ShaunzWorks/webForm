@@ -277,6 +277,7 @@ Shaunz.showDetail = function(functionId,ObjId){
     });
 };
 
+//Picture chooser
 (function ( $ ) {
     $.fn.imagePicker = function( options ) {
         // Define plugin options

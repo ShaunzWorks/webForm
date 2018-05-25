@@ -20,7 +20,9 @@ import com.shaunz.framework.common.auditlogs.ShaunzAuditLog;
 import com.shaunz.framework.web.base.BaseController;
 import com.shaunz.webform.web.button.ButtonService;
 import com.shaunz.webform.web.button.entity.Button;
+import com.shaunz.webform.web.carousel.service.CarouselService;
 import com.shaunz.webform.web.home.entity.HomePage;
+import com.shaunz.webform.web.marketinfo.service.MarketInfoService;
 
 @Controller
 public class ButtonController extends BaseController{
@@ -28,6 +30,10 @@ public class ButtonController extends BaseController{
 	SequenceGenerator sequenceGenerator;
 	@Autowired
 	ButtonService buttonService;
+	@Autowired
+	CarouselService carouselService;
+	@Autowired
+	MarketInfoService marketInfoService;
 	
 	@RequestMapping(value="/button/button_lst.html",method=RequestMethod.GET)
 	public String lstPage(){
@@ -109,7 +115,8 @@ public class ButtonController extends BaseController{
 		HomePage homePage = null;
 		try {
 			homePage = (HomePage)request.getServletContext().getAttribute("homePageObject");
-			//TODO
+			homePage.setCarousels(carouselService.quaryAll());
+			homePage.setMarketInfos(marketInfoService.quaryAll());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}

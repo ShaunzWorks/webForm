@@ -115,6 +115,7 @@ CREATE TABLE public.tb_carousel
   button_id character varying(10),
   post_time character varying(20),
   author_id character varying(10),
+  close_flg character varying(1) default 'N',
   CONSTRAINT tb_carousel_pkey PRIMARY KEY (id),
   CONSTRAINT tb_carousel_author_id_fkey FOREIGN KEY (author_id)
       REFERENCES public.tb_author (id) MATCH SIMPLE
@@ -207,6 +208,7 @@ CREATE TABLE public.tb_market_info
   button_id character varying(10),
   post_time character varying(20),
   author_id character varying(10),
+  close_flg character varying(1) default 'N',
   CONSTRAINT tb_market_info_pkey PRIMARY KEY (id),
   CONSTRAINT tb_market_info_author_id_fkey FOREIGN KEY (author_id)
       REFERENCES public.tb_author (id) MATCH SIMPLE
@@ -476,8 +478,8 @@ INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,t
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('3', 'Role', '1', './mngpages/role_lst.html', 'N','tb_role');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('4', 'Home Page Management', '4', '#', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('5', 'Navigation Bar', '4', './navigationbar/navigationbar_lst.html', 'N','tb_navigation_bar');
-INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('6', 'Market', '4', '/marketMngmt.html', 'N');
-INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('7', 'Carousel', '4', '/carouselMngmt.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('6', 'Market', '4', './market/market_lst.html', 'N','tb_market_info');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('7', 'Carousel', '4', './carousel/carousel_lst.html', 'N','tb_carousel');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('8', 'Meta Element', '4', '#', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('9', 'Button', '8', './button/button_lst.html', 'N','tb_button');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('10', 'Image', '8', './image/image_lst.html', 'N','tb_image');

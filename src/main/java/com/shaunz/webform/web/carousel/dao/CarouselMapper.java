@@ -21,4 +21,6 @@ public interface CarouselMapper {
     int updateByPrimaryKey(Carousel record);
     
     List<Carousel> quaryAll();
+    
+    List<Carousel> queryList();
 }
