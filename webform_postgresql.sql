@@ -92,6 +92,7 @@ CREATE TABLE public.tb_button
   name character varying(100),
   url character varying(50),
   css_class character varying(50),
+  close_flg character varying(1) default 'N',
   CONSTRAINT tb_button_pkey PRIMARY KEY (id)
 )
 WITH (
@@ -478,7 +479,7 @@ INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,t
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('6', 'Market', '4', '/marketMngmt.html', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('7', 'Carousel', '4', '/carouselMngmt.html', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('8', 'Meta Element', '4', '#', 'N');
-INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('9', 'Button', '8', '/buttonMngmt.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('9', 'Button', '8', './button/button_lst.html', 'N','tb_button');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('10', 'Image', '8', './image/image_lst.html', 'N','tb_image');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('11', 'Audit', '11', '#', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('12', 'System Log', '11', './mngpages/syslog_lst.html', 'N','tb_sys_log');

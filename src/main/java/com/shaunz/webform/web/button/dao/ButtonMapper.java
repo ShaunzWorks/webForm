@@ -1,5 +1,7 @@
 package com.shaunz.webform.web.button.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.shaunz.webform.web.button.entity.Button;
@@ -17,4 +19,6 @@ public interface ButtonMapper {
     int updateByPrimaryKeySelective(Button record);
 
     int updateByPrimaryKey(Button record);
+    
+    List<Button> queryList();
 }

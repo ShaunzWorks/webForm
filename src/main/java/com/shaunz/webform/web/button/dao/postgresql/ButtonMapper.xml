@@ -6,9 +6,10 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="css_class" property="cssClass" jdbcType="VARCHAR" />
+    <result column="close_flg" property="closeFlg" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, url, css_class
+    id, name, url, css_class ,close_flg
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -41,6 +42,9 @@
       <if test="cssClass != null" >
         css_class,
       </if>
+      <if test="closeFlg != null" >
+        close_flg,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -54,6 +58,9 @@
       </if>
       <if test="cssClass != null" >
         #{cssClass,jdbcType=VARCHAR},
+      </if>
+      <if test="closeFlg != null" >
+        #{closeFlg,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -69,6 +76,9 @@
       <if test="cssClass != null" >
         css_class = #{cssClass,jdbcType=VARCHAR},
       </if>
+      <if test="closeFlg != null" >
+        close_flg = #{closeFlg,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -79,4 +89,10 @@
       css_class = #{cssClass,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="queryList" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_button
+    where close_flg = 'N' order by cast(id as integer) asc
+  </select>
 </mapper>

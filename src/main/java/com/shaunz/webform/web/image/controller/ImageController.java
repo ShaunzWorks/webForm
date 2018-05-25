@@ -55,8 +55,8 @@ public class ImageController extends BaseController{
 	@RequestMapping(value="/image",method=RequestMethod.GET)
 	@ResponseBody
 	public String lst(){
-		List<Image> authors = imageService.queryList();
-		return convertToJsonString(authors);
+		List<Image> images = imageService.queryList();
+		return convertToJsonString(images);
 	}
 	
 	@RequiresPermissions("10.add")
@@ -135,7 +135,7 @@ public class ImageController extends BaseController{
 		HomePage homePage = null;
 		try {
 			homePage = (HomePage)request.getServletContext().getAttribute("homePageObject");
-			//homePage.setNavigationBars(imageService.queryAllNavigationBar());
+			//TODO
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}

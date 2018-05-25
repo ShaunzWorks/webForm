@@ -1,21 +1,15 @@
 package com.shaunz.webform.web.button.entity;
 
-public class Button {
-    private String id;
+import com.shaunz.framework.core.BaseEntity;
 
+public class Button extends BaseEntity{
     private String name;
 
     private String url;
 
     private String cssClass;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
+    
+    private String closeFlg;
 
     public String getName() {
         return name;
@@ -40,4 +34,12 @@ public class Button {
     public void setCssClass(String cssClass) {
         this.cssClass = cssClass == null ? null : cssClass.trim();
     }
+
+	public String getCloseFlg() {
+		return closeFlg;
+	}
+
+	public void setCloseFlg(String closeFlg) {
+		this.closeFlg = closeFlg;
+	}
 }
