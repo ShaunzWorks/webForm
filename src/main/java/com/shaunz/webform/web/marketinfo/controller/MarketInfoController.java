@@ -45,7 +45,7 @@ public class MarketInfoController extends BaseController{
 		return new ModelAndView("market/market_edit",result);
 	}
 	
-	@RequiresPermissions("7.query")
+	@RequiresPermissions("6.query")
 	@RequestMapping(value="/market",method=RequestMethod.GET)
 	@ResponseBody
 	public String lst(){
@@ -53,10 +53,10 @@ public class MarketInfoController extends BaseController{
 		return convertToJsonString(marketInfos);
 	}
 	
-	@RequiresPermissions("7.add")
+	@RequiresPermissions("6.add")
 	@RequestMapping(value="/market",method=RequestMethod.POST)
 	@ResponseBody
-	@ShaunzAuditLog(optType="add",functionId="7")
+	@ShaunzAuditLog(optType="add",functionId="6")
 	public String add(MarketInfo marketInfo,BindingResult bindingResult,Locale locale){
 		Map<String, String> results = new HashMap<String, String>();
 		if(bindingResult.hasErrors()){
@@ -77,10 +77,10 @@ public class MarketInfoController extends BaseController{
 	
 	}
 	
-	@RequiresPermissions("7.update")
+	@RequiresPermissions("6.update")
 	@RequestMapping(value="/market",method=RequestMethod.PUT)
 	@ResponseBody
-	@ShaunzAuditLog(optType="update",functionId="7")
+	@ShaunzAuditLog(optType="update",functionId="6")
 	public String edit(MarketInfo marketInfo,Locale locale){
 		boolean flag = marketInfoService.updateByPrimaryKeySelective(marketInfo);
 		marketInfo.setOptFlag(flag);
@@ -91,10 +91,10 @@ public class MarketInfoController extends BaseController{
 		, locale);
 	}
 	
-	@RequiresPermissions("7.delete")
+	@RequiresPermissions("6.delete")
 	@RequestMapping(value="/market/{id}",method=RequestMethod.DELETE)
 	@ResponseBody
-	@ShaunzAuditLog(optType="delete",functionId="7")
+	@ShaunzAuditLog(optType="delete",functionId="6")
 	public String delete(@PathVariable("id") String id,Locale locale){
 		MarketInfo marketInfo = marketInfoService.selectByPrimaryKey(id);
 		boolean flag = marketInfoService.close(marketInfo);

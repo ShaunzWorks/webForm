@@ -107,4 +107,7 @@
   <select id="findObjBy" parameterType="string" resultType="java.util.Map">
     select * from ${tableNm} where id=#{1}
   </select>
+    <select id="queryObjLstBy" parameterType="string" resultType="java.util.Map">
+    select * from ${tableNm} where close_flg = 'N'
+  </select>
 </mapper>

@@ -258,6 +258,8 @@ Shaunz.showDetail = function(functionId,ObjId){
 	BootstrapDialog.show({
     	title: 'View Detail',
 		size: BootstrapDialog.SIZE_WIDE,
+		closable: false,
+		type: BootstrapDialog.TYPE_PRIMARY,
     	message: function(dialog) {
             var $message = $('<div></div>');
             var pageToLoad = dialog.getData('pageToLoad');
@@ -275,6 +277,46 @@ Shaunz.showDetail = function(functionId,ObjId){
             }
         }]
     });
+};
+
+Shaunz.preparePopChooseBox = function(inputIdFunctionMap){
+	$.each($('.pop-picker'),function(index){
+		var inputId = $($('.pop-picker')[index]).parent().prev().attr('id');
+		var selectedIds = $($('.pop-picker')[index]).parent().prev().val();
+		var functionId = inputIdFunctionMap[inputId];
+		$($('.pop-picker')[index]).parent().click({inputId: inputId, functionId: functionId, selectedIds: selectedIds},function(event){
+			BootstrapDialog.show({
+		    	title: 'View Detail',
+		    	type: BootstrapDialog.TYPE_PRIMARY,
+		    	closable: false,
+				size: BootstrapDialog.SIZE_WIDE,
+		    	message: function(dialog) {
+		            var $message = $('<div></div>');
+		            var pageToLoad = dialog.getData('pageToLoad');
+		            $message.load(pageToLoad);
+		            return $message;
+		        },
+		        data: {
+		            'pageToLoad': './choosePage.html?multiselect=false&functionId='+event.data.functionId+'&relatedInput='+event.data.inputId+'&selectedIds='+event.data.selectedIds
+		        },
+		        buttons: [{
+		            label: 'Submit',
+		            title: 'Submit',
+		            action: function(dialogItself){
+		            	$('#'+inputId).val($('#ChooseInput').val());
+		                dialogItself.close();
+		            }
+		        },
+		        {
+		        	label: 'Cancel',
+		            title: 'Cancel',
+		            action: function(dialogItself){
+		                dialogItself.close();
+		            }
+		        }]
+		    });
+		});
+	});
 };
 
 //Picture chooser

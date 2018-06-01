@@ -49,5 +49,15 @@ public class FunctionService extends BaseService{
 		}
 		return result;
 	}
+	
+	public List<Map<String, Object>> queryObjLstby(String functionId){
+		Function function = findFunctionbyId(functionId);
+		String tableNm = function.getTableNm();
+		List<Map<String, Object>> result = null;
+		if(IStringUtil.notBlank(tableNm)){
+			result = functionMapper.queryObjLstBy(tableNm);
+		}
+		return result;
+	}
 
 }

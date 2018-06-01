@@ -1,0 +1,26 @@
+<functions>
+	<function id="9" title="image">
+		<tableHeader>
+			# name url cssclass
+		</tableHeader>
+		<tableColumn>
+			id name url css_class
+		</tableColumn>
+	</function>
+	<function id="10" title="button">
+		<tableHeader>
+			# name url cssclass
+		</tableHeader>
+		<tableColumn>
+			id name url css_class
+		</tableColumn>
+	</function>
+	<function id="14" title="author">
+		<tableHeader>
+			# aliasNm gender email
+		</tableHeader>
+		<tableColumn>
+			id alias_nm gender email
+		</tableColumn>
+	</function>
+</functions>

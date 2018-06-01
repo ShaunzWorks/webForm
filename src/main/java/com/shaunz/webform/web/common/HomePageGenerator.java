@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 import org.springframework.stereotype.Service;
 
 import com.shaunz.framework.common.SourceTableGenerator;
+import com.shaunz.framework.web.base.BaseService;
 import com.shaunz.webform.web.carousel.dao.CarouselMapper;
 import com.shaunz.webform.web.carousel.entity.Carousel;
 import com.shaunz.webform.web.home.entity.HomePage;
@@ -18,7 +19,7 @@ import com.shaunz.webform.web.navigationbar.dao.NavigationBarMapper;
 import com.shaunz.webform.web.navigationbar.entity.NavigationBar;
 
 @Service
-public class HomePageGenerator {
+public class HomePageGenerator extends BaseService{
 
 	@Resource
 	private NavigationBarMapper navigationBarMapper;
@@ -58,6 +59,7 @@ public class HomePageGenerator {
 		
 		
 		servletContext.setAttribute("homePageObject", homePage);
+		logger.info("Set homePageObject into Servlet Context success!");
 	}
 	
 	private String getHomePageParameterBy(String name){

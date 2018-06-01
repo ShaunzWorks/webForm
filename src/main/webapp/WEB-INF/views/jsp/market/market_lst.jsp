@@ -1,7 +1,7 @@
 <%@ include file="../common/common.jsp"%>
 <html lang="en">
   <body>
-  		<h2 class="sub-header"><spring:message code="carousel.title"/></h2>
+  		<h2 class="sub-header"><spring:message code="market.title"/></h2>
   		<div class="row">
         	<div class="col-sm-3 col-md-2"><button class="btn btn-md btn-primary glyphicon glyphicon-plus" onClick="openNewAccountPage()"> <spring:message code="common.new"/></button></div>
         </div>
@@ -13,19 +13,19 @@
   </body>
   	<script type="text/javascript" >
 		var TableParam = {
-				header:['#','<spring:message code="carousel.name"/>','<spring:message code="carousel.header"/>','<spring:message code="carousel.postTime"/>'
-					,'<spring:message code="carousel.author"/>'],
+				header:['#','<spring:message code="market.name"/>','<spring:message code="market.header"/>','<spring:message code="market.postTime"/>'
+					,'<spring:message code="market.author"/>'],
 				column:['id','name','header','postTime','authorId'],
-				url:'./carousel',
+				url:'./market',
 				httpType:'GET',
 				target:'table',
 				needOpration:true,
 				operations:['detail','edit','delt'],
 				methods:[function(obj){
-					Shaunz.showDetail('7',obj.data.id);
+					Shaunz.showDetail('6',obj.data.id);
 				},
 				function(obj){
-					Shaunz.load("./carousel/carousel_edit.html?id="+obj.data.id);
+					Shaunz.load("./market/market_edit.html?id="+obj.data.id);
 				},
 				function(obj){
 					$.confirm({
@@ -35,8 +35,8 @@
 					        deleteUser: {
 					            text: 'Delete',
 					            action: function () {
-					            	Shaunz.ajaxRequest(null,'./carousel/'+obj.data.id,'DELETE');
-									Shaunz.load("./carousel/carousel_lst.html");
+					            	Shaunz.ajaxRequest(null,'./market/'+obj.data.id,'DELETE');
+									Shaunz.load("./market/market_lst.html");
 					            }
 					        },
 					        cancelAction: function () {
@@ -51,7 +51,7 @@
 		});
 		
 		openNewAccountPage = function(){
-			Shaunz.load("./carousel/carousel_add.html");
+			Shaunz.load("./market/market_add.html");
 		}
 		
 	</script>

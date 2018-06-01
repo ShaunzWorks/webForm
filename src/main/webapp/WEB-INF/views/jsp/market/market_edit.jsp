@@ -1,21 +1,22 @@
 <%@ include file="../common/common.jsp"%>
 <html lang="en">
   <body>
-  		<h2 class="sub-header"><spring:message code="carousel.title"/></h2>
-       	<form id="carouselAddForm" enctype="multipart/form-data">
+  		<h2 class="sub-header"><spring:message code="market.title"/></h2>
+       	<form id="marketEditForm" enctype="multipart/form-data">
        	  <div class="form-group row">
-		    <label for="name" class="col-sm-2 col-form-label"><spring:message code="carousel.name"/></label>
+		    <label for="name" class="col-sm-2 col-form-label"><spring:message code="market.name"/></label>
 		    <div class="input-group col-sm-6">
-		    	<input type="text" class="form-control" id="name" name="name" placeholder="<spring:message code="carousel.name.placeHolder"/>"/>
+		    	<input type="text" class="form-control" id="name" name="name" placeholder="<spring:message code="market.name.placeHolder"/>" value="${market.name}"/>
+		    	<input type="hidden" name="id" value="${market.id}"/>
 		    </div>
 		    <div class="col-sm-4">
 		    	<span></span>
 		    </div>
 		  </div>
 		  <div class="form-group row">
-		    <label for="header" class="col-sm-2 col-form-label"><spring:message code="carousel.header"/></label>
+		    <label for="cssClass" class="col-sm-2 col-form-label"><spring:message code="market.header"/></label>
 		    <div class="input-group col-sm-6">
-		    	<input type="text" class="form-control" id="header" name="header" placeholder="<spring:message code="carousel.header.placeHolder"/>"/>
+		    	<input type="text" class="form-control" id="header" name="header" placeholder="<spring:message code="market.header.placeHolder"/>" value="${market.header}"/>
 		    </div>
 		    <div class="col-sm-4">
 		    	<span></span>
@@ -23,9 +24,9 @@
 		  </div>
 		  
 		  <div class="form-group row">
-		    <label for="img_id" class="col-sm-2 col-form-label"><spring:message code="carousel.image"/></label>
+		    <label for="cssClass" class="col-sm-2 col-form-label"><spring:message code="market.image"/></label>
 		    <div class="input-group col-sm-6">
-		    	<input type="text" class="form-control" id="img_id" name="img_id" placeholder="<spring:message code="carousel.image.placeHolder"/>"/>
+		    	<input type="text" class="form-control" id="imgId" name="imgId" placeholder="<spring:message code="market.image.placeHolder"/>" value="${market.imgId}"/>
 		    	<span class="input-group-addon">
                     <span class="glyphicon glyphicon-th pop-picker"></span>
                 </span>
@@ -35,9 +36,9 @@
 		    </div>
 		  </div>
 		  <div class="form-group row">
-		    <label for="buttonId" class="col-sm-2 col-form-label"><spring:message code="carousel.button"/></label>
+		    <label for="cssClass" class="col-sm-2 col-form-label"><spring:message code="market.button"/></label>
 		    <div class="input-group col-sm-6">
-		    	<input type="text" class="form-control" id="buttonId" name="buttonId" placeholder="<spring:message code="carousel.button.placeHolder"/>"/>
+		    	<input type="text" class="form-control" id="buttonId" name="buttonId" placeholder="<spring:message code="market.button.placeHolder"/>" value="${market.buttonId}"/>
 		    	<span class="input-group-addon">
                     <span class="glyphicon glyphicon-th pop-picker"></span>
                 </span>
@@ -47,9 +48,9 @@
 		    </div>
 		  </div>
 		  <div class="form-group row">
-		    <label for="authorId" class="col-sm-2 col-form-label"><spring:message code="carousel.author"/></label>
+		    <label for="cssClass" class="col-sm-2 col-form-label"><spring:message code="market.author"/></label>
 		    <div class="input-group col-sm-6">
-		    	<input type="text" class="form-control" id="authorId" name="authorId" placeholder="<spring:message code="carousel.author.placeHolder"/>"/>
+		    	<input type="text" class="form-control" id="authorId" name="authorId" placeholder="<spring:message code="market.author.placeHolder"/>" value="${market.authorId}"/>
 		    	<span class="input-group-addon">
                     <span class="glyphicon glyphicon-th pop-picker"></span>
                 </span>
@@ -60,9 +61,9 @@
 		  </div>
 		  
   		  <div class="form-group row">
-		  	<label for="postTime" class="col-sm-2 col-form-label"><spring:message code="carousel.postTime"/></label>
+		  	<label for="postTime" class="col-sm-2 col-form-label"><spring:message code="market.postTime"/></label>
             <div class='input-group date col-sm-6' id='datetimepickerPostTime'>
-               	<input type="text" class="form-control" id="postTime" name="postTime"/>
+               	<input type="text" class="form-control" id="postTime" name="postTime" placeholder="<spring:message code="market.header.placeHolder"/>" value="${market.postTime}"/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -73,9 +74,9 @@
           </div>
 		  <br/>
 		  <div class="form-group row">
-		  	<label for="cssClass" class="col-sm-2 col-form-label"><spring:message code="carousel.content"/></label>
+		  	<label for="cssClass" class="col-sm-2 col-form-label"><spring:message code="market.content"/></label>
 		  	<div class="input-group col-sm-6">
-	  		    <textarea id="content" name ="content" class="form-control" rows="10" placeholder="<spring:message code="carousel.content.placeHolder"/>"></textarea>
+	  		    <textarea id="content" name ="content" class="form-control" rows="10" placeholder="<spring:message code="market.content.placeHolder"/>" value="${market.content}"></textarea>
 		  	</div>
 		  	<div class="col-sm-4">
 		    	<span></span>
@@ -94,36 +95,28 @@
   	<script type="text/javascript" >
   	var inputIdFunctionMap = {
   			'buttonId':'9',
-  			'img_id':'10',
+  			'imgId':'10',
   			'authorId':'14'
   	}
+  	
   	$(function () {
   		Shaunz.preparePopChooseBox(inputIdFunctionMap);
   		$('#datetimepickerPostTime').datetimepicker({
             useCurrent: true 
         });
   		$('#content').wysihtml5();
-        $('#carouselAddForm').validate({
+  		/*
+        $('#marketEditForm').validate({
         	debug: true,
-        	onfocusout: false,
+        	onfocusout: true,
         	rules: {
 				name: {
+					required: true,
+					minlength: 2,
 					maxlength: 100
 				},
 				header: {
-					maxlength: 50
-				},
-				img_id: {
-					maxlength: 10
-				},
-				buttonId: {
-					maxlength: 10
-				},
-				authorId: {
-					maxlength: 10
-				},
-				content:{
-					maxlength: 2000
+					required: true
 				}
 			},
 			messages: {
@@ -139,14 +132,13 @@
 			    error.addClass("text-danger").insertAfter(nextElement);
 			},
 			submitHandler:function(form){
-				
-				Shaunz.submitForm(form,'./carousel','POST');
+				Shaunz.submitForm(form,'./market','PUT');
 				form.reset();
 			}
-  		});
+  		});*/
         
         $('#goBack').click(function(){
-        	Shaunz.load('./carousel/carousel_lst.html');
+        	Shaunz.load('./market/market_lst.html');
         });
     });
 	</script>
