@@ -67,7 +67,7 @@
 
     <div class="container marketing">
       <c:set var = "carouselsIndex" value = "1"/>
-      	<c:forEach items = "${applicationScope.homePageObject.marketInfos}" var = "marketInfo">
+      	<c:forEach items = "${applicationScope.homePageObject.marketInfos}" var = "marketInfo" varStatus="loop">
       		<c:if test="${carouselsIndex % 3 == 1}"><div class="row"></c:if>
 	      		<div class="col-lg-4">
 	      			<c:choose>
@@ -80,7 +80,7 @@
 		          <p>${marketInfo.content}</p>
 		          <p><a class="${marketInfo.button.cssClass}" href="${marketInfo.button.url}?marketInfoId=${marketInfo.id}" role="button">${marketInfo.button.name} &raquo;</a></p>
 		        </div><!-- /.col-lg-4 -->
-	        <c:if test="${carouselsIndex % 3 == 0}"></div><!-- /.row --></c:if>
+	        <c:if test="${(carouselsIndex % 3 == 0) or (loop.last)}"></div><!-- /.row --></c:if>
 	        <c:set var = "carouselsIndex" value = "${carouselsIndex + 1}"/>
       	</c:forEach>
       <%@ include file="./common/copyright.jsp"%>

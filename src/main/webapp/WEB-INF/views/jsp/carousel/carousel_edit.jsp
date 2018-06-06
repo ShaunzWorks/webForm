@@ -28,7 +28,7 @@
 		    <div class="input-group col-sm-6">
 		    	<input type="text" class="form-control" id="img_id" name="img_id" placeholder="<spring:message code="carousel.image.placeHolder"/>" value="${carousel.img_id}"/>
 		    	<span class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
+                    <span class="glyphicon glyphicon-th  pop-picker"></span>
                 </span>
 		    </div>
 		    <div class="col-sm-4">
@@ -40,7 +40,7 @@
 		    <div class="input-group col-sm-6">
 		    	<input type="text" class="form-control" id="buttonId" name="buttonId" placeholder="<spring:message code="carousel.button.placeHolder"/>" value="${carousel.buttonId}"/>
 		    	<span class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
+                    <span class="glyphicon glyphicon-th  pop-picker"></span>
                 </span>
 		    </div>
 		    <div class="col-sm-4">
@@ -52,7 +52,7 @@
 		    <div class="input-group col-sm-6">
 		    	<input type="text" class="form-control" id="authorId" name="authorId" placeholder="<spring:message code="carousel.author.placeHolder"/>" value="${carousel.authorId}"/>
 		    	<span class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
+                    <span class="glyphicon glyphicon-th  pop-picker"></span>
                 </span>
 		    </div>
 		    <div class="col-sm-4">
@@ -93,22 +93,38 @@
         <br/>
   </body>
   	<script type="text/javascript" >
+  	var inputIdFunctionMap = {
+  			'buttonId':'9',
+  			'img_id':'10',
+  			'authorId':'14'
+  	}
   	$(function () {
+  		Shaunz.preparePopChooseBox(inputIdFunctionMap);
   		$('#datetimepickerPostTime').datetimepicker({
             useCurrent: true 
         });
   		$('#content').wysihtml5();
         $('#carouselEditForm').validate({
-        	debug: true,
+        	debug: false,
         	onfocusout: true,
         	rules: {
-				name: {
-					required: true,
-					minlength: 2,
+        		name: {
 					maxlength: 100
 				},
 				header: {
-					required: true
+					maxlength: 50
+				},
+				img_id: {
+					maxlength: 10
+				},
+				buttonId: {
+					maxlength: 10
+				},
+				authorId: {
+					maxlength: 10
+				},
+				content:{
+					maxlength: 2000
 				}
 			},
 			messages: {
@@ -125,7 +141,6 @@
 			},
 			submitHandler:function(form){
 				Shaunz.submitForm(form,'./carousel','PUT');
-				form.reset();
 			}
   		});
         

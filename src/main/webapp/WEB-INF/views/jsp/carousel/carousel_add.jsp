@@ -104,7 +104,7 @@
         });
   		$('#content').wysihtml5();
         $('#carouselAddForm').validate({
-        	debug: true,
+        	debug: false,
         	onfocusout: false,
         	rules: {
 				name: {

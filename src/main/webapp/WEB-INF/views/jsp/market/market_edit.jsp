@@ -76,7 +76,7 @@
 		  <div class="form-group row">
 		  	<label for="cssClass" class="col-sm-2 col-form-label"><spring:message code="market.content"/></label>
 		  	<div class="input-group col-sm-6">
-	  		    <textarea id="content" name ="content" class="form-control" rows="10" placeholder="<spring:message code="market.content.placeHolder"/>" value="${market.content}"></textarea>
+	  		    <textarea id="content" name ="content" class="form-control" rows="10" placeholder="<spring:message code="market.content.placeHolder"/>" value="${market.content}">${market.content}</textarea>
 		  	</div>
 		  	<div class="col-sm-4">
 		    	<span></span>
@@ -105,7 +105,7 @@
             useCurrent: true 
         });
   		$('#content').wysihtml5();
-  		/*
+  		
         $('#marketEditForm').validate({
         	debug: true,
         	onfocusout: true,
@@ -135,7 +135,7 @@
 				Shaunz.submitForm(form,'./market','PUT');
 				form.reset();
 			}
-  		});*/
+  		});
         
         $('#goBack').click(function(){
         	Shaunz.load('./market/market_lst.html');
