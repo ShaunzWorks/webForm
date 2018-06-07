@@ -1,8 +1,11 @@
 package com.shaunz.webform.web.dropdownlist.entity;
 
-public class DropDownList {
-    private String id;
+import javax.persistence.Entity;
 
+import com.shaunz.framework.core.BaseEntity;
+
+@Entity
+public class DropDownList extends BaseEntity{
     private String name;
 
     private String url;
@@ -10,14 +13,8 @@ public class DropDownList {
     private String type;
 
     private String parentId;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
+    
+    private String closeFlg;
 
     public String getName() {
         return name;
@@ -50,4 +47,13 @@ public class DropDownList {
     public void setParentId(String parentId) {
         this.parentId = parentId == null ? null : parentId.trim();
     }
+
+	public String getCloseFlg() {
+		return closeFlg;
+	}
+
+	public void setCloseFlg(String closeFlg) {
+		this.closeFlg = closeFlg;
+	}
+    
 }

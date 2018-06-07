@@ -144,6 +144,7 @@ CREATE TABLE public.tb_dropdown_list
   url character varying(50),
   type character varying(20),
   parent_id character varying(10),
+  close_flg character varying(1) default 'N',
   CONSTRAINT tb_dropdown_list_pkey PRIMARY KEY (id),
   CONSTRAINT tb_dropdown_list_parent_id_fkey FOREIGN KEY (parent_id)
       REFERENCES public.tb_navigation_bar (id) MATCH SIMPLE
@@ -487,6 +488,7 @@ INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) 
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('12', 'System Log', '11', './mngpages/syslog_lst.html', 'N','tb_sys_log');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('13', 'Function', '1', './mngpages/function_lst.html', 'N','tb_function');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('14', 'Author', '4', './author/author_lst.html', 'N','tb_author');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('15', 'Dropdown List', '4', './dropdownlist/dropdownlist_lst.html', 'N','tb_dropdown_list');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('1', 'First slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'first-slide');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('2', 'Second slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'second-slide');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('3', 'Third slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'third-slide');
