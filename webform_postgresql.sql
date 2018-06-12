@@ -54,6 +54,7 @@ CREATE TABLE public.tb_blog_dtl
   content character varying(2000),
   post_time character varying(20),
   author_id character varying(10),
+  close_flg character varying(1) default 'N',
   CONSTRAINT tb_blog_dtl_pkey PRIMARY KEY (id),
   CONSTRAINT tb_blog_dtl_author_id_fkey FOREIGN KEY (author_id)
       REFERENCES public.tb_author (id) MATCH SIMPLE
@@ -489,6 +490,8 @@ INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,t
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('13', 'Function', '1', './mngpages/function_lst.html', 'N','tb_function');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('14', 'Author', '4', './author/author_lst.html', 'N','tb_author');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('15', 'Dropdown List', '4', './dropdownlist/dropdownlist_lst.html', 'N','tb_dropdown_list');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('16', 'Blog', '4', './blog/blog_lst.html', 'N','tb_blog_dtl');
+
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('1', 'First slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'first-slide');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('2', 'Second slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'second-slide');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('3', 'Third slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'third-slide');

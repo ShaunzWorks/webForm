@@ -19,12 +19,15 @@
 				httpType:'GET',
 				target:'table',
 				needOpration:true,
-				operations:['detail','edit','delt'],
+				operations:['detail','edit','relate','delt'],
 				methods:[function(obj){
 					Shaunz.showDetail('15',obj.data.id);
 				},
 				function(obj){
 					Shaunz.load("./dropdownlist/dropdownlist_edit.html?id="+obj.data.id);
+				},
+				function(obj){
+					Shaunz.load("./dropdownlist/dropdownlist_blog.html?id="+obj.data.id);
 				},
 				function(obj){
 					$.confirm({

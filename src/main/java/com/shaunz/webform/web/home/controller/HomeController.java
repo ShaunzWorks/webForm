@@ -22,6 +22,7 @@ public class HomeController extends BaseController{
 	private static final String PAGE_TYPE_NAVBAR = "tb_navigation_bar";
 	private static final String PAGE_TYPE_DROPDOWNLST = "tb_dropdown_list";
 	private static final String PAGE_TYPE_MARKET = "tb_market_info";
+	private static final String PAGE_TYPE_CAROUSEL = "tb_carousel";
 	
 	@Resource
 	private HomeService homeService;
@@ -55,6 +56,15 @@ public class HomeController extends BaseController{
 		resultMap.put("dropDownLstId", dropDownLstId);
 		resultMap.put("blogs", blogs);
 		return new ModelAndView("blog",resultMap);
+	}
+	
+	@RequestMapping(value="/carousel.html",method=RequestMethod.GET)
+	public ModelAndView carouselPage(String carouselId) {
+		List<Blog> blogs = homeService.selectByPageId(PAGE_TYPE_CAROUSEL, carouselId);
+		Map<String, Object> resultMap = generateResultMap();
+		resultMap.put("marketInfoId", carouselId);
+		resultMap.put("blogs", blogs);
+		return new ModelAndView("blogWithRightSideBar",resultMap);
 	}
 	
 	@RequestMapping(value="/marketInfo.html",method=RequestMethod.GET)

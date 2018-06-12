@@ -17,20 +17,27 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shaunz.framework.common.SequenceGenerator;
 import com.shaunz.framework.common.auditlogs.ShaunzAuditLog;
+import com.shaunz.framework.common.utils.IArrayListUtil;
 import com.shaunz.framework.web.base.BaseController;
+import com.shaunz.webform.web.blogmap.entity.BlogMap;
+import com.shaunz.webform.web.blogmap.service.BlogMapService;
 import com.shaunz.webform.web.dropdownlist.entity.DropDownList;
 import com.shaunz.webform.web.dropdownlist.service.DropDownListService;
 import com.shaunz.webform.web.home.entity.HomePage;
+import com.shaunz.webform.web.navigationbar.entity.NavigationBar;
 import com.shaunz.webform.web.navigationbar.service.NavigationBarService;
 
 @Controller
 public class DropDownListController extends BaseController{
+	private static final String PAGE_TYPE_DROPDOWNLST = "tb_dropdown_list";
 	@Autowired
 	SequenceGenerator sequenceGenerator;
 	@Autowired
 	DropDownListService dropDownListService;
 	@Autowired
 	NavigationBarService navigationBarService;
+	@Autowired
+	BlogMapService blogMapService;
 	
 	@RequestMapping(value="/dropdownlist/dropdownlist_lst.html",method=RequestMethod.GET)
 	public String lstPage(){
@@ -46,6 +53,26 @@ public class DropDownListController extends BaseController{
 		DropDownList dropDownList = dropDownListService.selectByPrimaryKey(id);
 		result.put("dropdownlist", dropDownList);
 		return new ModelAndView("dropdownlist/dropdownlist_edit",result);
+	}
+	@RequestMapping(value="/dropdownlist/dropdownlist_blog.html",method=RequestMethod.GET)
+	public ModelAndView blogPage(String id){
+		Map<String, Object> result = new HashMap<String, Object>();
+		DropDownList dropDownList = dropDownListService.selectByPrimaryKey(id);
+		result.put("dropDownList", dropDownList);
+		String selectedBlogIds = "";
+		BlogMap blogMap = new BlogMap(dropDownList.getId(),PAGE_TYPE_DROPDOWNLST,null,null);
+		List<BlogMap> choosedBlogMaps = blogMapService.queryList(blogMap);
+		if(!IArrayListUtil.isBlankList(choosedBlogMaps)){
+			for (int i = 0; i < choosedBlogMaps.size(); i++) {
+				blogMap = choosedBlogMaps.get(i);
+				selectedBlogIds += blogMap.getBlogId();
+				if(i != choosedBlogMaps.size() -1){
+					selectedBlogIds += ",";
+				}
+			}
+		}
+		result.put("selectedBlogIds", selectedBlogIds);
+		return new ModelAndView("dropdownlist/dropdownlist_blog",result);
 	}
 	
 	@RequiresPermissions("15.query")
@@ -91,6 +118,18 @@ public class DropDownListController extends BaseController{
 			refreshHomepage();
 		}
 		return formSubmitResult(flag, "common.updateMsg", new Object[]{messageSource.getMessage("dropdownlist.title", null, locale),dropDownList.getName()}
+		, locale);
+	}
+	
+	@RequiresPermissions("15.update")
+	@RequestMapping(value="/dropdownlist/relate",method=RequestMethod.POST)
+	@ResponseBody
+	@ShaunzAuditLog(optType="update",functionId="5")
+	public String relate(String id,String blogIds,Locale locale){
+		DropDownList dropDownList = dropDownListService.selectByPrimaryKey(id);
+		String[] blogIdArr = blogIds.split(",");
+		boolean flag = blogMapService.blogRelate(blogIdArr, PAGE_TYPE_DROPDOWNLST, dropDownList.getId());
+		return formSubmitResult(flag, "common.grantMsg", new Object[]{messageSource.getMessage("navigationbar.title", null, locale),dropDownList.getName()}
 		, locale);
 	}
 	

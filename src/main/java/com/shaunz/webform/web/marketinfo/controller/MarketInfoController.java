@@ -17,17 +17,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shaunz.framework.common.SequenceGenerator;
 import com.shaunz.framework.common.auditlogs.ShaunzAuditLog;
+import com.shaunz.framework.common.utils.IArrayListUtil;
 import com.shaunz.framework.web.base.BaseController;
+import com.shaunz.webform.web.blogmap.entity.BlogMap;
+import com.shaunz.webform.web.blogmap.service.BlogMapService;
 import com.shaunz.webform.web.home.entity.HomePage;
 import com.shaunz.webform.web.marketinfo.entity.MarketInfo;
 import com.shaunz.webform.web.marketinfo.service.MarketInfoService;
 
 @Controller
 public class MarketInfoController extends BaseController{
+	private static final String PAGE_TYPE_MARKET = "tb_market_info";
 	@Autowired
 	SequenceGenerator sequenceGenerator;
 	@Autowired
 	MarketInfoService marketInfoService;
+	@Autowired
+	private BlogMapService blogMapService;
 	
 	@RequestMapping(value="/market/market_lst.html",method=RequestMethod.GET)
 	public String lstPage(){
@@ -43,6 +49,26 @@ public class MarketInfoController extends BaseController{
 		MarketInfo marketInfo = marketInfoService.selectByPrimaryKey(id);
 		result.put("market", marketInfo);
 		return new ModelAndView("market/market_edit",result);
+	}
+	@RequestMapping(value="/market/market_blog.html",method=RequestMethod.GET)
+	public ModelAndView blogPage(String id){
+		Map<String, Object> result = new HashMap<String, Object>();
+		MarketInfo marketInfo = marketInfoService.selectByPrimaryKey(id);
+		result.put("marketInfo", marketInfo);
+		String selectedBlogIds = "";
+		BlogMap blogMap = new BlogMap(marketInfo.getId(),PAGE_TYPE_MARKET,null,null);
+		List<BlogMap> choosedBlogMaps = blogMapService.queryList(blogMap);
+		if(!IArrayListUtil.isBlankList(choosedBlogMaps)){
+			for (int i = 0; i < choosedBlogMaps.size(); i++) {
+				blogMap = choosedBlogMaps.get(i);
+				selectedBlogIds += blogMap.getBlogId();
+				if(i != choosedBlogMaps.size() -1){
+					selectedBlogIds += ",";
+				}
+			}
+		}
+		result.put("selectedBlogIds", selectedBlogIds);
+		return new ModelAndView("market/market_blog",result);
 	}
 	
 	@RequiresPermissions("6.query")
@@ -88,6 +114,18 @@ public class MarketInfoController extends BaseController{
 			refreshHomepage();
 		}
 		return formSubmitResult(flag, "common.updateMsg", new Object[]{messageSource.getMessage("market.title", null, locale),marketInfo.getName()}
+		, locale);
+	}
+	
+	@RequiresPermissions("6.update")
+	@RequestMapping(value="/market/relate",method=RequestMethod.POST)
+	@ResponseBody
+	@ShaunzAuditLog(optType="update",functionId="6")
+	public String relate(String id,String blogIds,Locale locale){
+		MarketInfo marketInfo = marketInfoService.selectByPrimaryKey(id);
+		String[] blogIdArr = blogIds.split(",");
+		boolean flag = blogMapService.blogRelate(blogIdArr, PAGE_TYPE_MARKET, marketInfo.getId());
+		return formSubmitResult(flag, "common.grantMsg", new Object[]{messageSource.getMessage("navigationbar.title", null, locale),marketInfo.getName()}
 		, locale);
 	}
 	

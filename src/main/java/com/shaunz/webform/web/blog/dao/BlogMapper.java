@@ -19,4 +19,8 @@ public interface BlogMapper {
     int updateByPrimaryKey(Blog record);
     
     List<Blog> selectByPageId(Map<String, String> map);
+    
+    List<Blog> queryList();
+    
+    List<Blog> queryAll();
 }

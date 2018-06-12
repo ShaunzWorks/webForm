@@ -20,12 +20,15 @@
 				httpType:'GET',
 				target:'table',
 				needOpration:true,
-				operations:['detail','edit','delt'],
+				operations:['detail','edit','relate','delt'],
 				methods:[function(obj){
 					Shaunz.showDetail('5',obj.data.id);
 				},
 				function(obj){
 					Shaunz.load("./navigationbar/navigationbar_edit.html?id="+obj.data.id);
+				},
+				function(obj){
+					Shaunz.load("./navigationbar/navigationbar_blog.html?id="+obj.data.id);
 				},
 				function(obj){
 					$.confirm({

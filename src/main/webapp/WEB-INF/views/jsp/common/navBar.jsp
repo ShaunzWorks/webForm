@@ -14,7 +14,11 @@
 								<a href="${applicationScope.homePageObject.homeUrl}">${naviBar.name}</a>
 							</c:when>
 							<c:otherwise>
-								<a href="${naviBar.url}?navBarId=${naviBar.id}">${naviBar.name}</a>
+								<a href="${naviBar.url}
+								<c:if test = "${fn:startsWith(naviBar.url, '.')}">
+							     	?navBarId=${naviBar.id}
+							    </c:if>
+								">${naviBar.name}</a>
 							</c:otherwise>
 						</c:choose>
 					</li>
@@ -26,7 +30,11 @@
 		               	<c:forEach items = "${naviBar.downLists}" var = "downList">
 		               		<c:choose>
 								<c:when test="${downList.type eq 'normal'}">
-									<li><a href="${downList.url}?dropDownLstId=${downList.id}">${downList.name}</a></li>
+									<li><a href="${downList.url}
+									<c:if test = "${fn:startsWith(downList.url, '.')}">
+								     	?dropDownLstId=${downList.id}
+								    </c:if>
+									">${downList.name}</a></li>
 								</c:when>
 								<c:when test="${downList.type eq 'separator'}">
 									<li role="separator" class="divider"></li>

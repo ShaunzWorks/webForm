@@ -42,7 +42,12 @@
 		            <h1>${carousel.header}</h1>
 		            <p>${carousel.content}</p>
 		            <c:if test = "${not empty carousel.button}">
-		            	<p><a class="${carousel.button.cssClass}" href="${carousel.button.url}" role="button">${carousel.button.name}</a></p>
+		            	<p><a class="${carousel.button.cssClass}" href="${carousel.button.url}
+		            	<c:if test = "${fn:startsWith(carousel.button.url, '.')}">
+					     	?carouselId=${carousel.id}
+					    </c:if>
+		            	" role="button">${carousel.button.name}</a></p>
+		            	
 		            </c:if>
 		          </div>
 		        </div>
@@ -78,7 +83,11 @@
     				</c:choose>
 		          <h2>${marketInfo.header}</h2>
 		          <p>${marketInfo.content}</p>
-		          <p><a class="${marketInfo.button.cssClass}" href="${marketInfo.button.url}?marketInfoId=${marketInfo.id}" role="button">${marketInfo.button.name} &raquo;</a></p>
+		          <p><a class="${marketInfo.button.cssClass}" href="${marketInfo.button.url}
+		          <c:if test = "${fn:startsWith(marketInfo.button.url, '.')}">
+		          	?marketInfoId=${marketInfo.id}
+		          </c:if>
+		          " role="button">${marketInfo.button.name} &raquo;</a></p>
 		        </div><!-- /.col-lg-4 -->
 	        <c:if test="${(carouselsIndex % 3 == 0) or (loop.last)}"></div><!-- /.row --></c:if>
 	        <c:set var = "carouselsIndex" value = "${carouselsIndex + 1}"/>

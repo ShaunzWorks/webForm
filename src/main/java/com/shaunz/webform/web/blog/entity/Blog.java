@@ -1,10 +1,12 @@
 package com.shaunz.webform.web.blog.entity;
 
+import javax.persistence.Entity;
+
+import com.shaunz.framework.core.BaseEntity;
 import com.shaunz.webform.web.author.entity.Author;
 
-public class Blog {
-    private String id;
-
+@Entity
+public class Blog extends BaseEntity{
     private String name;
 
     private String headerType;
@@ -18,14 +20,8 @@ public class Blog {
     private String authorId;
     
     private Author author;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
+    
+    private String closeFlg;
 
     public String getName() {
         return name;
@@ -82,5 +78,12 @@ public class Blog {
 	public void setAuthor(Author author) {
 		this.author = author;
 	}
-    
+
+	public String getCloseFlg() {
+		return closeFlg;
+	}
+
+	public void setCloseFlg(String closeFlg) {
+		this.closeFlg = closeFlg;
+	}
 }

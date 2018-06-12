@@ -17,18 +17,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shaunz.framework.common.SequenceGenerator;
 import com.shaunz.framework.common.auditlogs.ShaunzAuditLog;
+import com.shaunz.framework.common.utils.IArrayListUtil;
 import com.shaunz.framework.web.base.BaseController;
+import com.shaunz.webform.web.blogmap.entity.BlogMap;
+import com.shaunz.webform.web.blogmap.service.BlogMapService;
 import com.shaunz.webform.web.carousel.entity.Carousel;
 import com.shaunz.webform.web.carousel.service.CarouselService;
 import com.shaunz.webform.web.home.entity.HomePage;
+import com.shaunz.webform.web.navigationbar.entity.NavigationBar;
 
 @Controller
 public class CarouselController extends BaseController{
-
+	private static final String PAGE_TYPE_CAROUSEL = "tb_carousel";	
 	@Autowired
 	SequenceGenerator sequenceGenerator;
 	@Autowired
 	CarouselService carouselService;
+	@Autowired
+	BlogMapService blogMapService;
 	
 	@RequestMapping(value="/carousel/carousel_lst.html",method=RequestMethod.GET)
 	public String lstPage(){
@@ -44,6 +50,26 @@ public class CarouselController extends BaseController{
 		Carousel carousel = carouselService.selectByPrimaryKey(id);
 		result.put("carousel", carousel);
 		return new ModelAndView("carousel/carousel_edit",result);
+	}
+	@RequestMapping(value="/carousel/carousel_blog.html",method=RequestMethod.GET)
+	public ModelAndView blogPage(String id){
+		Map<String, Object> result = new HashMap<String, Object>();
+		Carousel carousel = carouselService.selectByPrimaryKey(id);
+		result.put("carousel", carousel);
+		String selectedBlogIds = "";
+		BlogMap blogMap = new BlogMap(carousel.getId(),PAGE_TYPE_CAROUSEL,null,null);
+		List<BlogMap> choosedBlogMaps = blogMapService.queryList(blogMap);
+		if(!IArrayListUtil.isBlankList(choosedBlogMaps)){
+			for (int i = 0; i < choosedBlogMaps.size(); i++) {
+				blogMap = choosedBlogMaps.get(i);
+				selectedBlogIds += blogMap.getBlogId();
+				if(i != choosedBlogMaps.size() -1){
+					selectedBlogIds += ",";
+				}
+			}
+		}
+		result.put("selectedBlogIds", selectedBlogIds);
+		return new ModelAndView("carousel/carousel_blog",result);
 	}
 	
 	@RequiresPermissions("7.query")
@@ -89,6 +115,18 @@ public class CarouselController extends BaseController{
 			refreshHomepage();
 		}
 		return formSubmitResult(flag, "common.updateMsg", new Object[]{messageSource.getMessage("carousel.title", null, locale),carousel.getName()}
+		, locale);
+	}
+	
+	@RequiresPermissions("7.update")
+	@RequestMapping(value="/carousel/relate",method=RequestMethod.POST)
+	@ResponseBody
+	@ShaunzAuditLog(optType="update",functionId="7")
+	public String relate(String id,String blogIds,Locale locale){
+		Carousel carousel = carouselService.selectByPrimaryKey(id);
+		String[] blogIdArr = blogIds.split(",");
+		boolean flag = blogMapService.blogRelate(blogIdArr, PAGE_TYPE_CAROUSEL, carousel.getId());
+		return formSubmitResult(flag, "common.grantMsg", new Object[]{messageSource.getMessage("navigationbar.title", null, locale),carousel.getName()}
 		, locale);
 	}
 	
