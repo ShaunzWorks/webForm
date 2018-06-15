@@ -48,7 +48,7 @@
   		if(srcUrl.indexOf("/") == 0){
   			srcUrl = '${ctxPath}' +srcUrl;
   		}
-  		$('.img-picker').imagePicker({name: 'file',preview: true,src:srcUrl});
+  		$('.img-picker').imageUploader({name: 'file',preview: true,src:srcUrl});
         $('#imageEditForm').validate({
         	debug: true,
         	onfocusout: true,

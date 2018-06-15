@@ -321,7 +321,7 @@ Shaunz.preparePopChooseBox = function(inputIdFunctionMap){
 
 //Picture chooser
 (function ( $ ) {
-    $.fn.imagePicker = function( options ) {
+    $.fn.imageUploader = function( options ) {
         // Define plugin options
         var settings = $.extend({
             // Input name attribute

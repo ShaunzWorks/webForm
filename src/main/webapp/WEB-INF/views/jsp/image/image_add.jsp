@@ -13,8 +13,12 @@
 		    </div>
 		  </div>
 		  <div class="form-group row">
-		    <label for="cssClass" class="col-sm-2 col-form-label"><spring:message code="image.cssclass"/></label>
-		    <div class="input-group col-sm-6">
+		    <label for="cssClass" class="col-sm-2 col-form-label">
+		    	<spring:message code="image.cssclass"/>
+		    	<span class="glyphicon glyphicon-question-sign" 
+		    		data-toggle="tooltip" data-placement="right" title="CSS type: img-circle is used for market and first-slide,second-slide,third-slide,forth-slide are used for carousel. You also can use other css type you know in bootstrap"></span>
+		    </label>
+		    <div class="input-group col-sm-6" >
 		    	<input type="text" class="form-control" id="cssClass" name="cssClass" placeholder="<spring:message code="image.cssclass.placeHolder"/>"/>
 		    </div>
 		    <div class="col-sm-4">
@@ -43,7 +47,7 @@
   	<script type="text/javascript" >
   	
   	$(function () {
-  		$('.img-picker').imagePicker({name: 'file'});
+  		$('.img-picker').imageUploader({name: 'file'});
         $('#imageAddForm').validate({
         	debug: true,
         	onfocusout: true,

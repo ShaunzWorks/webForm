@@ -91,3 +91,8 @@
     display: block; 
 }
 /*Image picker end*/
+.image_picker_image {
+    max-width: 200px;
+    max-height: 150px;
+    background-color: #FF0000;
+}

@@ -15,6 +15,7 @@
     <link href="${webResPath}/css/jquery-confirm.min.css" rel="stylesheet">
     <link href="${webResPath}/css/shaunz.css" rel="stylesheet">
     <link href="${webResPath}/css/bootstrap3-wysihtml5.min.css" rel="stylesheet">
+    <link href="${webResPath}/css/image-picker.css" rel="stylesheet">
     <%@ include file="./common/jsReference.jsp"%>
   </head>
 	<script type="text/javascript" > 

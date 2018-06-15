@@ -491,7 +491,9 @@ INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,t
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('14', 'Author', '4', './author/author_lst.html', 'N','tb_author');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('15', 'Dropdown List', '4', './dropdownlist/dropdownlist_lst.html', 'N','tb_dropdown_list');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('16', 'Blog', '4', './blog/blog_lst.html', 'N','tb_blog_dtl');
-
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('17', 'File management', '17', '#', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('18', 'Images', '17', './file/image_lst.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('19', 'Documents', '17', './file/document_lst.html', 'N');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('1', 'First slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'first-slide');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('2', 'Second slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'second-slide');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('3', 'Third slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'third-slide');
