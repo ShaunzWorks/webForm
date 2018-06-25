@@ -65,7 +65,7 @@
 		  <div class="form-group row">
 		  	<label for="cssClass" class="col-sm-2 col-form-label"><spring:message code="blog.content"/></label>
 		  	<div class="input-group col-sm-6">
-	  		    <textarea id="content" name ="content" class="form-control" rows="20" placeholder="<spring:message code="blog.content.placeHolder"/>" value="${blog.content}">${blog.content}</textarea>
+	  		    <textarea id="content" name ="content" class="form-control" rows="20" placeholder="<spring:message code="blog.content.placeHolder"/>" value="">${blog.content}</textarea>
 		  	</div>
 		  	<div class="col-sm-4">
 		    	<span></span>

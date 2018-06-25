@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
@@ -366,7 +367,7 @@ public class MultipartFileUtil{
 	   */
 	  public static void zipFile(final List<File> files, final File targetZipFile) throws IOException {
 	    try {
-	      FileOutputStream   fos = new FileOutputStream(targetZipFile);
+	      FileOutputStream  fos = new FileOutputStream(targetZipFile);
 	      ZipOutputStream zos = new ZipOutputStream(fos);
 	      byte[] buffer = new byte[128];
 	      for (int i = 0; i < files.size(); i++) {
@@ -388,5 +389,29 @@ public class MultipartFileUtil{
 	    } catch (FileNotFoundException e) {
 	      logger.error(e.getMessage());
 	    }
+	  }
+	  
+	  public static void download(HttpServletRequest request,HttpServletResponse response,File outputFile) throws IOException{
+		  String mimeType = ((HttpServletRequest)request).getServletContext().getMimeType(outputFile.getPath());
+          
+          if (mimeType == null) {
+              mimeType = "application/octet-stream";
+          }
+
+          response.setContentType(mimeType);
+          response.addHeader("Content-Disposition", "attachment; filename=" + outputFile.getName());
+          response.setContentLength((int) outputFile.length());
+
+          OutputStream os = response.getOutputStream();
+          FileInputStream fis = new FileInputStream(outputFile);
+          byte[] buffer = new byte[4096];
+          int b = -1;
+
+          while ((b = fis.read(buffer)) != -1) {
+              os.write(buffer, 0, b);
+          }
+
+          fis.close();
+          os.close();
 	  }
 }

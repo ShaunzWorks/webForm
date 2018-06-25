@@ -6,15 +6,9 @@ package com.shaunz.framework.core;
  *
  */
 public final class YgdrasilConst {
-	/***
-	 * xss检测例外的url
-	 */
-	public static String XSS_EXCLUED_URL="index.do";
+	public static String XSS_EXCLUED_URL="index";
 
-	/***
-	 * xss检测例外有攻击的url后的跳转路径
-	 */
-	public static String XSS_REDIRECT_URL="index.do";
+	public static String XSS_REDIRECT_URL="index";
 	
 	public static String DATE_FORMART = "yyyy-MM-dd HH:mm";
 	

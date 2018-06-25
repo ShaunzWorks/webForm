@@ -1,11 +1,7 @@
 package com.shaunz.webform.web.file.controller;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,27 +9,20 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.shaunz.framework.common.auditlogs.ShaunzAuditLog;
 import com.shaunz.framework.common.utils.IArrayListUtil;
 import com.shaunz.framework.common.utils.IStringUtil;
 import com.shaunz.framework.common.utils.MultipartFileUtil;
 import com.shaunz.framework.core.YgdrasilConst;
 import com.shaunz.framework.web.base.BaseController;
-import com.shaunz.webform.web.image.entity.Image;
 
 @Controller
 public class FileController extends BaseController{
@@ -87,12 +76,13 @@ public class FileController extends BaseController{
     @ResponseBody
     public void downloadImage(String fileNms,String path,HttpServletResponse response) throws Exception {
 		String webRootPath = ((HttpServletRequest)request).getServletContext().getRealPath("/");
+		webRootPath = webRootPath.substring(0,webRootPath.length()-1);
 		String imageDir = webRootPath+YgdrasilConst.CUSTOMER_IMAGE_PATH+(path.equals("/")?"":path);
 		String[] fileNmArr = fileNms.split(",");
 		List<File> images = new ArrayList<File>();
 		if(!IArrayListUtil.isBlankArray(fileNmArr)){
 			for (int i = 0; i < fileNmArr.length; i++) {
-				String imagePath = imageDir+fileNmArr;
+				String imagePath = imageDir+fileNmArr[i];
 				File image = new File(imagePath);
 				if(image.exists()){
 					images.add(image);
@@ -105,33 +95,60 @@ public class FileController extends BaseController{
 			if(images.size() ==1){
 				outputFile = images.get(0);
 			} else if(images.size() > 1){
+				outputFile.createNewFile();
 				MultipartFileUtil.zipFile(images, outputFile);
+				MultipartFileUtil.download(request, response, outputFile);
 			}
-            String mimeType = ((HttpServletRequest)request).getServletContext().getMimeType(outputFile.getPath());
-            
-            if (mimeType == null) {
-                mimeType = "application/octet-stream";
-            }
-
-            response.setContentType(mimeType);
-            response.addHeader("Content-Disposition", "attachment; filename=" + outputFile.getName());
-            response.setContentLength((int) outputFile.length());
-
-            OutputStream os = response.getOutputStream();
-            FileInputStream fis = new FileInputStream(outputFile);
-            byte[] buffer = new byte[4096];
-            int b = -1;
-
-            while ((b = fis.read(buffer)) != -1) {
-                os.write(buffer, 0, b);
-            }
-
-            fis.close();
-            os.close();
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
     }
+	
+	@RequestMapping(value="/file/image",method=RequestMethod.DELETE)
+	@ResponseBody
+	public String deleteImage(String fileNms,String path,Locale locale){
+		boolean flag = false;
+		List<String> failedLst = new ArrayList<String>();
+		String webRootPath = ((HttpServletRequest)request).getServletContext().getRealPath("/");
+		webRootPath = webRootPath.substring(0,webRootPath.length()-1);
+		String imageDir = webRootPath+YgdrasilConst.CUSTOMER_IMAGE_PATH+(path.equals("/")?"":path);
+		String[] fileNmArr = fileNms.split(",");
+		if(!IArrayListUtil.isBlankArray(fileNmArr)){
+			for (int i = 0; i < fileNmArr.length; i++) {
+				String imagePath = imageDir+fileNmArr[i];
+				File image = new File(imagePath);
+				if(image.exists()){
+					boolean deleted = image.delete();
+					if(!deleted){
+						failedLst.add(image.getName());
+					}
+				}
+			}
+		}
+		if(IArrayListUtil.isBlankList(failedLst)){
+			flag = true;
+		} else {
+			fileNms = failedLst.toArray().toString();
+		}
+		return formSubmitResult(flag, "common.deleteMsg", new Object[]{messageSource.getMessage("image.title", null, locale),fileNms}
+		, locale);
+	}
+	
+	@RequestMapping(value="/file/folder",method=RequestMethod.POST)
+	@ResponseBody
+	public String createFolder(String name,String path,Locale locale){
+		boolean flag = false;
+		String webRootPath = ((HttpServletRequest)request).getServletContext().getRealPath("/");
+		webRootPath = webRootPath.substring(0,webRootPath.length()-1);
+		String imageDir = webRootPath+YgdrasilConst.CUSTOMER_IMAGE_PATH+(path.equals("/")?"":path);
+		File folder = new File(imageDir+name);
+		if(folder.isDirectory()&&!folder.exists()){
+			flag = folder.mkdir();
+		}
+		
+		return formSubmitResult(flag, "common.deleteMsg", new Object[]{messageSource.getMessage("image.title", null, locale),name}
+		, locale);
+	}
 	
 	private List<Map<String, String>> listFilesForFolder(File folder,String webRootPath,String folderPath){
 		List<Map<String, String>> imageLst = new ArrayList<Map<String,String>>();

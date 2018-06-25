@@ -28,12 +28,11 @@ public class XssFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 
 		String url = req.getRequestURI();
-		System.out.println(url);
 		url = url.substring(url.lastIndexOf("/") + 1, url.length());
 		if (url == null || url.equals("")) {
 			res.sendRedirect(req.getContextPath() + redirecturl);
 		} else {
-			String []excludeUrls=excludeUrl.split(",");
+			String [] excludeUrls=excludeUrl.split(",");
 			for (int i = 0; i < excludeUrls.length; i++) {
 				if (url.equals(excludeUrl)) {
 					chain.doFilter(request, response);

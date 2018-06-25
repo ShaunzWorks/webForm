@@ -17,6 +17,7 @@
 <script src="${webResPath}/js/image-picker.min.js"></script>
 <script src="${webResPath}/js/masonry.pkgd.min.js"></script>
 <script src="${webResPath}/js/imagesloaded.pkgd.min.js"></script>
+<script src="${webResPath}/js/jquery.fileDownload.js"></script>
 <script src="${webResPath}/js/shaunz.js"></script>
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="${projectResPath}/js/holder.min.js"></script>

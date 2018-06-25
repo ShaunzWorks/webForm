@@ -96,3 +96,8 @@
     max-height: 150px;
     background-color: #FF0000;
 }
+.drop_zone {
+  border: 5px solid blue;
+  width:  200px;
+  height: 100px;
+}
