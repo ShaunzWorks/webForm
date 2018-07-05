@@ -28,7 +28,7 @@ import com.shaunz.framework.authority.role.entity.Role;
 import com.shaunz.framework.authority.role.service.RoleService;
 import com.shaunz.framework.authority.user.entity.User;
 import com.shaunz.framework.authority.user.service.UserService;
-import com.shaunz.framework.common.SourceTableGenerator;
+import com.shaunz.framework.common.source.service.SourceService;
 import com.shaunz.framework.common.utils.IStringUtil;
 
 @Component
@@ -41,7 +41,7 @@ public class ShaunzRealm extends AuthorizingRealm{
 	@Autowired
 	AuthorityService authorityService;
 	@Autowired
-	SourceTableGenerator sourceTableGenerator;
+	SourceService sourceTableGenerator;
 	
 	@Autowired
     public ShaunzRealm(@Qualifier("shiroEncacheManager") CacheManager cacheManager) {

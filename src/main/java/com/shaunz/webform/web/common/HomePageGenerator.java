@@ -8,7 +8,7 @@ import javax.servlet.ServletContext;
 
 import org.springframework.stereotype.Service;
 
-import com.shaunz.framework.common.SourceTableGenerator;
+import com.shaunz.framework.common.source.service.SourceService;
 import com.shaunz.framework.web.base.BaseService;
 import com.shaunz.webform.web.carousel.dao.CarouselMapper;
 import com.shaunz.webform.web.carousel.entity.Carousel;
@@ -25,7 +25,7 @@ public class HomePageGenerator extends BaseService{
 	private NavigationBarMapper navigationBarMapper;
 	
 	@Resource
-	private SourceTableGenerator sourceTableGenerator;
+	private SourceService sourceTableGenerator;
 	
 	@Resource
 	private CarouselMapper carouselMapper;

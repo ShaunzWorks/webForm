@@ -1,23 +1,19 @@
-package com.shaunz.framework.common;
+package com.shaunz.framework.common.source.service;
 
 import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.shaunz.framework.common.source.dao.SourceMapper;
 import com.shaunz.framework.common.source.entity.Source;
-
-
-
+import com.shaunz.framework.common.utils.IStringUtil;
+import com.shaunz.framework.web.base.BaseService;
 
 @Service
-public class SourceTableGenerator {
-	private Logger logger = Logger.getLogger(SourceTableGenerator.class);
-	
+public class SourceService extends BaseService{
 	@Resource
 	private SourceMapper sourceMapper;
 	private static HashMap<String, HashMap<String,Source>> sourceTables;
@@ -26,7 +22,7 @@ public class SourceTableGenerator {
 		return sourceMapper.quaryAll();
 	}
 	
-	public SourceTableGenerator(){
+	public SourceService(){
 		
 	}
 	
@@ -75,5 +71,18 @@ public class SourceTableGenerator {
 	
 	public String getHomePageParameterby(String name){
 		return getSourceValueBy("homepage",name);
+	}
+	
+	public String getSystemParameterBy(String name){
+		return getSourceValueBy("System",name);
+	}
+	
+	public boolean updateSource(String groupNm,String name,String value){
+		Source source = sourceTables.get(groupNm).get(name);
+		if(source != null && IStringUtil.notBlank(source.getId())){
+			source.setValue(value);
+			return sourceMapper.updateByPrimaryKey(source) == 1;
+		}
+		return false;
 	}
 }

@@ -18,7 +18,7 @@ import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.context.event.ContextStoppedEvent;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.shaunz.framework.common.SourceTableGenerator;
+import com.shaunz.framework.common.source.service.SourceService;
 import com.shaunz.framework.common.utils.JavaXmlBindUtil;
 import com.shaunz.framework.jaxb.functionfield.FunctionFieldsXml;
 import com.shaunz.webform.web.common.HomePageGenerator;
@@ -29,7 +29,7 @@ public class ShaunzApplicationListener implements ApplicationListener<Applicatio
 	@Resource
 	private HomePageGenerator homePageGenerator;
 	@Resource
-	private SourceTableGenerator sourceTableGenerator;
+	private SourceService sourceTableGenerator;
 	@Override
 	public void onApplicationEvent(ApplicationEvent event) {
 		

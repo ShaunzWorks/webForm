@@ -491,9 +491,11 @@ INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,t
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('14', 'Author', '4', './author/author_lst.html', 'N','tb_author');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('15', 'Dropdown List', '4', './dropdownlist/dropdownlist_lst.html', 'N','tb_dropdown_list');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('16', 'Blog', '4', './blog/blog_lst.html', 'N','tb_blog_dtl');
-INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('17', 'File management', '17', '#', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('17', 'File Management', '17', '#', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('18', 'Images', '17', './file/image_lst.html', 'N');
 INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('19', 'Documents', '17', './file/document_lst.html', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg) VALUES ('20', 'System Management', '20', '#', 'N');
+INSERT INTO webform.public.tb_function("id", "name", parent_id, url, close_flg,tb_nm) VALUES ('21', 'System Parameters', '20', './systemparam_lst.html', 'N','tb_source');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('1', 'First slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'first-slide');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('2', 'Second slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'second-slide');
 INSERT INTO webform.public.tb_image("id", "name", url, css_class) VALUES ('3', 'Third slide', 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', 'third-slide');
@@ -542,6 +544,7 @@ INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", cl
 INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", close_flg) VALUES ('7', 'homepage', 'signin_url', 'value', './signIn.html', 'N');
 INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", close_flg) VALUES ('8', 'homepage', 'signup_url', 'value', './signUp.html', 'N');
 INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", close_flg) VALUES ('9', 'System', 'MaxSignAttemptsTime', 'value', '5', 'N');
+INSERT INTO webform.public.tb_source("id", group_nm, "name", "type", "value", close_flg) VALUES ('10', 'System', 'AccountAutoLock', 'value', 'yes', 'N');
 INSERT INTO webform.public.tb_user("id", login_name, "password", org_path, alias_nm, gender, email, close_flg, lock_up, start_time, end_time) VALUES ('1', 'admin', 'admin', '1', 'admin', 'Male', 'dengxiong90@foxmail.com', 'N', 'N', null, null);
 INSERT INTO webform.public.tb_user("id", login_name, "password", org_path, alias_nm, gender, email, close_flg, lock_up, start_time, end_time) VALUES ('2', 'zhangsan', 'admin', '1', 'admin', 'Male', 'zhangsan@foxmail.com', 'N', 'N', null, to_timestamp('14-03-2018 16:40:38', 'dd-mm-yyyy hh24:mi:ss'));
 INSERT INTO webform.public.tb_user("id", login_name, "password", org_path, alias_nm, gender, email, close_flg, lock_up, start_time, end_time) VALUES ('3', 'lisi', 'admin', '1', 'admin', 'Male', 'lisi@foxmail.com', 'N', 'N', null, to_timestamp('14-03-2018 16:40:38', 'dd-mm-yyyy hh24:mi:ss'));
