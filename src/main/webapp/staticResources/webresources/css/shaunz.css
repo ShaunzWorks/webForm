@@ -3,8 +3,8 @@
     height: auto;
     min-height: 100px;
     position:absolute;
-    bottom: 10px;
-    right: 10px;
+    top: calc(100% - 10px - height);
+    left: calc(100% - 350px);
     text-align: left;
     word-wrap: break-word;
 }

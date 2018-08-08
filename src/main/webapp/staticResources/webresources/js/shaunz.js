@@ -165,16 +165,17 @@ Shaunz.alert = function(type,title,info){
 		if(lastDiv.height() > 100){
 			height = lastDiv.height();
 		}
-		newDiv.css({top: position.top-(height+2), left: position.left});
+		console.log('top:' + position.top)
+		newDiv.css({top: position.top-(height+2)});
 		newDiv.insertAfter(lastDiv);
 	} else {
 		$('body').append(newDiv);
 	}
 	window.setTimeout(function() {
-	    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+	    $(".alter-box").fadeTo(500, 0).slideUp(500, function(){
 	        $(this).remove(); 
 	    });
-	}, 4000);
+	}, 5000);
 };
 
 Shaunz.showSuccess = function(title,info){

@@ -328,6 +328,7 @@ CREATE TABLE public.tb_source
   type character varying(20),
   value character varying(100),
   close_flg character varying(1),
+  validator character varying(20) default '0',
   CONSTRAINT tb_source_pkey PRIMARY KEY (id)
 )
 WITH (

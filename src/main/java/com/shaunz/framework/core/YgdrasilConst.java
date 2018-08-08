@@ -12,6 +12,10 @@ public final class YgdrasilConst {
 	
 	public static String DATE_FORMART = "yyyy-MM-dd HH:mm";
 	
+	public static String SUCCESS = "Success";
+	
+	public static String FAILED = "Failed";
+	
 	public static String CUSTOMER_IMAGE_PATH = "/staticResources/customerResources/images/";
 	
 	public static String CUSTOMER_DOWNLOAD_TMP_FOLDER = "/staticResources/customerResources/tmp/";

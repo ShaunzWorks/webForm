@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shaunz.framework.common.source.entity.Source;
 import com.shaunz.framework.common.source.service.SourceService;
+import com.shaunz.framework.common.utils.IStringUtil;
+import com.shaunz.framework.core.YgdrasilConst;
 import com.shaunz.framework.web.base.BaseController;
 
 @Controller
@@ -41,8 +43,9 @@ public class SourceController extends BaseController{
 	@RequestMapping(value="/source/{groupNm}/{name}",method=RequestMethod.PUT)
 	@ResponseBody
 	public String edit(@PathVariable(value="groupNm") String groupNm,@PathVariable("name") String name,String value,Locale locale){
-		boolean flag = sourceTableGenerator.updateSource(groupNm, name, value);
+		String msg = sourceTableGenerator.updateSource(groupNm, name, value);
+		boolean flag = YgdrasilConst.SUCCESS.equals(msg);
 		return formSubmitResult(flag, "common.updateMsg", new Object[]{messageSource.getMessage("source.title", null, locale),name}
-		, locale);
+		, locale,IStringUtil.notBlank(msg)?msg:null);
 	}
 }

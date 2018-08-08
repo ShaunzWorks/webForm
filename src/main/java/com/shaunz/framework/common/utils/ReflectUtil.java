@@ -1,6 +1,8 @@
 package com.shaunz.framework.common.utils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Reflect code tool
@@ -74,5 +76,54 @@ public class ReflectUtil {
 			field.set(obj, value);
 			field.setAccessible(false);
 		}
+	}
+	
+	/**
+	 * Get Method object of the specified method name
+	 * @param obj
+	 * @param fieldName
+	 * @return
+	 */
+	public static Method getMethodByMethodName(Object obj, String methodName,Class<?>... parameterTypes) {
+		Class<?> superClass = obj.getClass();
+		try {
+			return superClass.getDeclaredMethod(methodName, parameterTypes);
+		} catch (NoSuchMethodException e) {
+			
+		} catch (SecurityException e) {
+			
+		}
+		return null;
+	}
+	
+	/**
+	 * Get Method object of the specified method name
+	 * @param obj
+	 * @param fieldName
+	 * @return
+	 */
+	public static Method[] getAllMethods(Object obj) {
+		Class<?> superClass = obj.getClass();
+		try {
+			return superClass.getDeclaredMethods();
+		} catch (SecurityException e) {
+			
+		}
+		return null;
+	}
+	
+	/**
+	 * Call the Method of the specified method name with parameters provided.
+	 * @param obj
+	 * @param methodNm
+	 * @param parameters
+	 * @return
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T callMethod(Method method,Object obj,Object... parameters) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		return (T)method.invoke(obj, parameters);
 	}
 }

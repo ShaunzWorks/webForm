@@ -5,17 +5,21 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shaunz.framework.common.source.dao.SourceMapper;
 import com.shaunz.framework.common.source.entity.Source;
 import com.shaunz.framework.common.utils.IStringUtil;
+import com.shaunz.framework.core.YgdrasilConst;
 import com.shaunz.framework.web.base.BaseService;
 
 @Service
 public class SourceService extends BaseService{
 	@Resource
 	private SourceMapper sourceMapper;
+	@Autowired
+	private SourceValidator sourceValidator;
 	private static HashMap<String, HashMap<String,Source>> sourceTables;
 	
 	private List<Source> retrieveWholeSourceTable(){
@@ -77,12 +81,19 @@ public class SourceService extends BaseService{
 		return getSourceValueBy("System",name);
 	}
 	
-	public boolean updateSource(String groupNm,String name,String value){
+	public String updateSource(String groupNm,String name,String value){
 		Source source = sourceTables.get(groupNm).get(name);
 		if(source != null && IStringUtil.notBlank(source.getId())){
-			source.setValue(value);
-			return sourceMapper.updateByPrimaryKey(source) == 1;
+			String validateMsg = sourceValidator.validate(source);
+			if(IStringUtil.isBlank(validateMsg)){
+				source.setValue(value);
+				if(sourceMapper.updateByPrimaryKey(source) == 1){
+					return YgdrasilConst.SUCCESS;
+				}
+			} else {
+				return validateMsg;
+			}
 		}
-		return false;
+		return YgdrasilConst.FAILED;
 	}
 }

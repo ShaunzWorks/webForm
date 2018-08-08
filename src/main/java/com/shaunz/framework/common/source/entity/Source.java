@@ -1,8 +1,11 @@
 package com.shaunz.framework.common.source.entity;
 
-public class Source {
-    private String id;
-    
+import javax.persistence.Entity;
+
+import com.shaunz.framework.core.BaseEntity;
+
+@Entity
+public class Source extends BaseEntity{
     private String groupNm;
 
     private String name;
@@ -12,14 +15,8 @@ public class Source {
     private String value;
 
     private String closeFlg;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
+    
+    private String validator;
     
     public String getGroupNm() {
 		return groupNm;
@@ -60,4 +57,14 @@ public class Source {
     public void setCloseFlg(String closeFlg) {
         this.closeFlg = closeFlg == null ? null : closeFlg.trim();
     }
+
+	public String getValidator() {
+		return validator;
+	}
+
+	public void setValidator(String validator) {
+		this.validator = validator;
+	}
+    
+    
 }

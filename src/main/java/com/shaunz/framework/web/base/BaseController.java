@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.shaunz.framework.authority.user.entity.User;
+import com.shaunz.framework.common.utils.IStringUtil;
 import com.shaunz.framework.core.YgdrasilConst;
 
 /**
@@ -119,14 +120,25 @@ public class BaseController {
 	}
 	
 	protected String formSubmitResult(boolean flag,String msgKey,Object[] params,Locale locale){
+		return formSubmitResult(flag, msgKey, params, locale, null);
+	}
+	
+	protected String formSubmitResult(boolean flag,String msgKey,Object[] params,Locale locale,String otherMsg){
 		Map<String, String> results = new HashMap<String, String>();
 		List<Object> paramsLst = new ArrayList<Object>(Arrays.asList(params));
+		String operateFlag = "";
 		if(flag){
 			results.put("result", "success");
-			paramsLst.add(messageSource.getMessage("common.success",null,locale));
+			operateFlag = messageSource.getMessage("common.success",null,locale);
 		} else {
 			results.put("result", "failed");
-			paramsLst.add(messageSource.getMessage("common.failed",null,locale));
+			operateFlag = messageSource.getMessage("common.failed",null,locale);
+			
+		}
+		if(IStringUtil.notBlank(otherMsg)){
+			paramsLst.add(operateFlag+":\n"+otherMsg);
+		} else {
+			paramsLst.add(operateFlag);
 		}
 		results.put("message",messageSource.getMessage(msgKey,paramsLst.toArray(),locale));
 		return convertToJsonString(results);
