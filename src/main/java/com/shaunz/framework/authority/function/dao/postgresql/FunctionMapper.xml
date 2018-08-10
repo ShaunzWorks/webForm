@@ -103,6 +103,7 @@
 		inner join tb_user_role usr_rol on usr_rol.role_id = auth.role_id
 		where usr_rol.user_id = #{usrId,jdbcType=VARCHAR}
 	  	and close_flg = 'N'
+	   	order by name
   </select>
   <select id="findObjBy" parameterType="string" resultType="java.util.Map">
     select * from ${tableNm} where id=#{1}

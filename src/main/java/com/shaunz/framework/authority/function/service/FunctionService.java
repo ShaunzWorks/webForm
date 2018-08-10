@@ -22,9 +22,12 @@ public class FunctionService extends BaseService{
 		return functionMapper.queryAll();
 	}
 	
-	public TreeMenu generateMngmtTree(String usrId){
-		List<Function> allAuthorizedFunctions = functionMapper.queryAllAuthorizedFunctionByUsrId(usrId);
-		List<BootStrapTreeViewNode> treeNodes = TreeMenu.changeFunctionLstToTreeNodes(allAuthorizedFunctions);
+	public List<Function> queryAllAuthorizedFunctionByUsrId(String usrId){
+		return functionMapper.queryAllAuthorizedFunctionByUsrId(usrId);
+	}
+	
+	public TreeMenu generateMngmtTree(List<Function> functions){
+		List<BootStrapTreeViewNode> treeNodes = TreeMenu.changeFunctionLstToTreeNodes(functions);
 		TreeMenu treeMenu = new TreeMenu(treeNodes);
 		if(treeMenu.isValidTree()){
 			treeMenu.setShowBorder(false);

@@ -48,7 +48,6 @@
   			});
   			objs = [];
   		});
-  		
     });
   	
   	function createSystemParam(name,value,groupNm,type){

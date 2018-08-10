@@ -30,9 +30,11 @@ public class FunctionController extends BaseController{
 
 	@RequestMapping(value="/functions",method=RequestMethod.GET)
 	@ResponseBody
-	public String generateMngmtTree(){
+	public String generateMngmtTree(Locale locale){
 		User user = getUser();
-		TreeMenu treeMenu = functionService.generateMngmtTree(user.getId());
+		List<Function> allAuthorizedFunctions = functionService.queryAllAuthorizedFunctionByUsrId(user.getId());
+		allAuthorizedFunctions = functionNmI18n(allAuthorizedFunctions,locale);
+		TreeMenu treeMenu = functionService.generateMngmtTree(allAuthorizedFunctions);
 		return convertToJsonString(treeMenu);
 	}
 	
@@ -70,6 +72,16 @@ public class FunctionController extends BaseController{
 	public String chooseLst(@PathVariable("functionId")long functionId){
 		List<Map<String, Object>> list = functionService.queryObjLstby(""+functionId);
 		return convertToJsonString(list);
+	}
+	
+	private List<Function> functionNmI18n(List<Function> functions,Locale locale){
+		if (!IArrayListUtil.isBlankList(functions)) {
+			for (int i = 0; i < functions.size(); i++) {
+				Function function = functions.get(i);
+				function.setName(messageSource.getMessage("menuTree."+function.getName(), null, locale));
+			}
+		}
+		return functions;
 	}
 	
 	private List<String> getTableColumn(String functionId){

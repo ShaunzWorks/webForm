@@ -1,4 +1,13 @@
 var Shaunz = new Object;
+jQuery.i18n.properties({
+	    name:'messages', 
+	    path:'/staticResources/webresources/i18n/', 
+	    mode:'both',
+	  	async: false,
+	  	callback: function() {
+	  		console.log('Loaded Language: ' + jQuery.i18n.browserLang());
+	  	}
+});
 var tableIconBtn = {
 		edit:'glyphicon glyphicon-edit text-success',
 		detail:'glyphicon glyphicon-zoom-in text-info',
@@ -33,12 +42,12 @@ Shaunz.generateTable = function(param){
 	if(param.selectable){
 		headerHtml += '<th></th>';
 	}
-	for(i = 0;i<TableParam.header.length;i++){
+	for(i = 0;i<param.header.length;i++){
 		headerHtml += '<th>';
-		headerHtml += TableParam.header[i];
+		headerHtml += param.header[i];
 		headerHtml += '</th>';
 	}
-	if(TableParam.needOpration){
+	if(param.needOpration){
 		headerHtml += '<th>Oprations</th>';
 	}
 	headerHtml += "</tr></thead>";
@@ -58,19 +67,24 @@ Shaunz.generateTable = function(param){
 					var tdContent = '-';
 					if(objs[i][param.column[j]]){
 						tdContent = objs[i][param.column[j]];
+						if(param.translate){
+							if(param.translate.includes(param.column[j])){
+								tdContent = jQuery.i18n.prop('frontPage.'+param.column[j]+'.'+tdContent);
+							}
+						}
 					}
 					bodyHtml = bodyHtml+"<td>"+tdContent+"</td>"; 
 				}
-				if(TableParam.needOpration){
+				if(param.needOpration){
 					bodyHtml += '<td>';
-					var operations = TableParam.operations;
-					var methods = TableParam.methods;
+					var operations = param.operations;
+					var methods = param.methods;
 					bodyHtml += '<div class="row">';
 					for(k=0;k<operations.length;k++){
 						var operationBtnId = 'tableRow_'+objs[i].id+'_'+operations[k];
 						bodyHtml += '<div id="'+operationBtnId+'" class="col-md-1"><span class="';
 						bodyHtml += tableIconBtn[operations[k]];
-						bodyHtml += '" data-toggle="tooltip" data-placement="bottom" title="'+operations[k]+'"></span></div> &nbsp';
+						bodyHtml += '" data-toggle="tooltip" data-placement="bottom" title="'+jQuery.i18n.prop('frontPage.'+operations[k])+'"></span></div> &nbsp';
 						
 					}
 					bodyHtml += '</div>';
@@ -136,9 +150,9 @@ Shaunz.generateTable = function(param){
 				$('#'+param.target).DataTable();
 			}
 			
-			if(TableParam.needOpration){
+			if(param.needOpration){
 				for(i=0;i<objs.length;i++){
-					var methods = TableParam.methods;
+					var methods = param.methods;
 					for(k=0;k<methods.length;k++){
 						var operationBtnId = 'tableRow_'+objs[i].id+'_'+operations[k];
 						$('#'+param.target).on('click','#'+operationBtnId,objs[i],methods[k]);
@@ -257,7 +271,7 @@ Shaunz.ajaxRequest = function(params,requestUrl,requestType){
 
 Shaunz.showDetail = function(functionId,ObjId){
 	BootstrapDialog.show({
-    	title: 'View Detail',
+    	title: jQuery.i18n.prop('frontPage.viewDetail'),
 		size: BootstrapDialog.SIZE_WIDE,
 		closable: false,
 		type: BootstrapDialog.TYPE_PRIMARY,
@@ -271,8 +285,8 @@ Shaunz.showDetail = function(functionId,ObjId){
             'pageToLoad': './mngpages/detail.html?functionId='+functionId+'&objId='+ObjId
         },
         buttons: [{
-            label: 'Close',
-            title: 'Close this dialog',
+            label: jQuery.i18n.prop('frontPage.close'),
+            title: jQuery.i18n.prop('frontPage.closeDialog'),
             action: function(dialogItself){
                 dialogItself.close();
             }
@@ -287,7 +301,7 @@ Shaunz.preparePopChooseBox = function(inputIdFunctionMap){
 		var functionId = inputIdFunctionMap[inputId];
 		$($('.pop-picker')[index]).parent().click({inputId: inputId, functionId: functionId, selectedIds: selectedIds},function(event){
 			BootstrapDialog.show({
-		    	title: 'View Detail',
+		    	title: jQuery.i18n.prop('frontPage.viewDetail'),
 		    	type: BootstrapDialog.TYPE_PRIMARY,
 		    	closable: false,
 				size: BootstrapDialog.SIZE_WIDE,
@@ -301,16 +315,16 @@ Shaunz.preparePopChooseBox = function(inputIdFunctionMap){
 		            'pageToLoad': './choosePage.html?multiselect=false&functionId='+event.data.functionId+'&relatedInput='+event.data.inputId+'&selectedIds='+event.data.selectedIds
 		        },
 		        buttons: [{
-		            label: 'Submit',
-		            title: 'Submit',
+		            label: jQuery.i18n.prop('frontPage.submit'),
+		            title: jQuery.i18n.prop('frontPage.submit'),
 		            action: function(dialogItself){
 		            	$('#'+inputId).val($('#ChooseInput').val());
 		                dialogItself.close();
 		            }
 		        },
 		        {
-		        	label: 'Cancel',
-		            title: 'Cancel',
+		        	label: jQuery.i18n.prop('frontPage.cancel'),
+		            title: jQuery.i18n.prop('frontPage.cancel'),
 		            action: function(dialogItself){
 		                dialogItself.close();
 		            }

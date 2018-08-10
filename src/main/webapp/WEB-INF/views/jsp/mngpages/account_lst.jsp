@@ -16,6 +16,7 @@
 				header:['#','<spring:message code="user.aliasNm"/>','<spring:message code="user.gender"/>','<spring:message code="user.email"/>',
 					'<spring:message code="user.startTime"/>','<spring:message code="user.endTime"/>'],
 				column:['id','aliasNm','gender','email','startTime','endTime'],
+				translate:['gender'],
 				url:'./user',
 				httpType:'GET',
 				target:'table',
