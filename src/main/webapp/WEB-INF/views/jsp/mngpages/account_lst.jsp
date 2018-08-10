@@ -3,12 +3,11 @@
   <body>
   		<h2 class="sub-header"><spring:message code="user.title"/></h2>
   		<div class="row">
-        	<div class="col-sm-3 col-md-2"><button class="btn btn-md btn-primary glyphicon glyphicon-plus" onClick="openNewAccountPage()"> <spring:message code="common.new"/></button></div>
+        	<div class="col-sm-3 col-md-2"><button class="btn btn-md btn-primary glyphicon glyphicon-plus"> <spring:message code="common.new"/></button></div>
         </div>
         <br/>
         <div class="table-responsive">
-          <table id="table" class="table table-striped" style="width:100%">
-          </table>
+			<table id="table" class="table table-striped"></table>
         </div>
   </body>
   	<script type="text/javascript" >
@@ -32,31 +31,17 @@
 					Shaunz.load("./mngpages/account_grant.html?userId="+obj.data.id);
 				},
 				function(obj){
-					$.confirm({
-					    title: 'Delete ' + obj.data.aliasNm +' ?',
-					    autoClose: 'cancelAction|8000',
-					    buttons: {
-					        deleteUser: {
-					            text: 'Delete',
-					            action: function () {
-					            	Shaunz.ajaxRequest(null,'./user/'+obj.data.id,'DELETE');
-									Shaunz.load("./mngpages/account_lst.html");
-					            }
-					        },
-					        cancelAction: function () {
-					        	
-					        }
-					    }
-					});
+					Shaunz.deleteConfirmBox(obj.data.aliasNm,function () {
+		            	Shaunz.ajaxRequest(null,'./user/'+obj.data.id,'DELETE');
+						Shaunz.load("./mngpages/account_lst.html");
+		            },function(){});
 				}]
 		};
 		$(function(){
 			Shaunz.generateTable(TableParam);
+			$('button.glyphicon-plus').click(function(){
+				Shaunz.load("./mngpages/account_add.html");
+			});
 		});
-		
-		openNewAccountPage = function(){
-			Shaunz.load("./mngpages/account_add.html");
-		}
-		
 	</script>
 </html>

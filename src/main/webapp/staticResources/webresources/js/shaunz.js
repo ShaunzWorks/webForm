@@ -334,6 +334,20 @@ Shaunz.preparePopChooseBox = function(inputIdFunctionMap){
 	});
 };
 
+Shaunz.deleteConfirmBox = function(aliasNm,deleteFunc,cancelFunc){
+	$.confirm({
+	    title: jQuery.i18n.prop('frontPage.delt')+' ' + aliasNm +' ?',
+	    autoClose: 'cancelAction|8000',
+	    buttons: {
+	        deleteUser: {
+	            text: jQuery.i18n.prop('frontPage.delt'),
+	            action: deleteFunc
+	        },
+	        cancelAction: cancelFunc
+	    }
+	});
+};
+
 //Picture chooser
 (function ( $ ) {
     $.fn.imageUploader = function( options ) {
@@ -417,4 +431,5 @@ Shaunz.preparePopChooseBox = function(inputIdFunctionMap){
             return picker_preview;
     };
 }( jQuery ));
+
 
