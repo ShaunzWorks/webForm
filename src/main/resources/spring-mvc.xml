@@ -12,7 +12,13 @@
 	<!-- @AspectJ -->
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
     <!-- Spring mvc annotation support like @Controller -->  
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+    	<mvc:message-converters register-defaults="true">
+    		<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+    			<property name="supportedMediaTypes" value="text/html;charset=UTF-8"></property>
+    		</bean>
+    	</mvc:message-converters>
+    </mvc:annotation-driven>
     <mvc:resources mapping="/staticResources/**" location="/staticResources/"/>  
     <context:component-scan base-package="com.shaunz.*.*.*.controller" />  
     <!-- Avoid IE download file when ajax deal with json result -->  
